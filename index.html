@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>私房手路菜｜線上預訂</title>
+    <title>美鳳的家 私房菜｜線上預訂</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500&family=Noto+Serif+TC:wght@600;900&display=swap" rel="stylesheet">
     
@@ -152,8 +152,6 @@
         .ticker-wrapper { flex: 1; overflow: hidden; white-space: nowrap; position: relative; mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); }
         .ticker-text { display: inline-block; padding-left: 100%; animation: scroll-left 12s linear infinite; color: #FFF; font-weight: bold; font-size: 1rem; letter-spacing: 1px; }
         @keyframes scroll-left { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
-        .video-popup-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; }
-        .video-popup-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
         
         /* 公告欄 (貼心提醒) */
         .notice-section {
@@ -472,7 +470,7 @@
             { id: 28, name: "客家小炒", price: 380, category: "蔬菜類", image: "veg1.jpg" },
             { id: 29, name: "蛋酥白菜滷", price: 380, category: "蔬菜類", image: "veg3.jpg" },
             { id: 30, name: "雞油燜筍", price: 280, category: "蔬菜類", image: "veg2.jpg" },
-            { id: 31, name: "干貝絲長年菜", price: 280, category: "蔬菜類", image: "veg4.jpg" },        
+            { id: 31, name: "干貝絲長年菜", price: 280, category: "蔬菜類", image: "veg4.jpg" },         
             { id: 32, name: "蘿蔔糕(只能冷藏寄送)", price: 100, category: "甜點類", image: "cake.jpg" },
             { id: 33, name: "芝麻湯圓(只能冷凍寄送)", price: 150, category: "甜點類", image: "sweet1.jpg" },
             { id: 34, name: "花生湯圓(只能冷凍寄送)", price: 150, category: "甜點類", image: "sweet1.jpg" },
@@ -544,29 +542,40 @@
             }
         }
 
-        // 🌟 播放影片的函式 (改良版：增加備用連結與參數調整)
+        // 🌟 播放影片的函式 (改良版：方案一)
         function playInterviewVideo() {
             Swal.fire({
                 title: '📺 美鳳的家 - 媒體專訪',
+                // 使用您提供的截圖，並加上一個假的播放按鈕，點擊後跳轉去 YouTube
                 html: `
-                    <div class="video-popup-container">
-                        <iframe src="https://www.youtube.com/embed/vDXSZDidzGA?rel=0" 
-                                title="YouTube video player" 
-                                frameborder="0" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                                referrerpolicy="strict-origin-when-cross-origin"
-                                allowfullscreen>
-                        </iframe>
+                    <div style="position: relative; cursor: pointer;" onclick="window.open('https://www.youtube.com/watch?v=vDXSZDidzGA', '_blank')">
+                        <img src="image_1.jpg" style="width: 100%; border-radius: 8px; display: block; box-shadow: 0 4px 8px rgba(0,0,0,0.2);" alt="媒體專訪截圖">
+
+                        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+                                    background: rgba(0,0,0,0.7); color: white; border-radius: 50%; width: 64px; height: 64px;
+                                    display: flex; align-items: center; justify-content: center; font-size: 32px; 
+                                    border: 3px solid white; box-shadow: 0 0 15px rgba(0,0,0,0.5); transition: transform 0.2s;">
+                            ▶
+                        </div>
+                        <div style="position: absolute; bottom: 10px; right: 10px; background: rgba(0,0,0,0.8); color: #fff; padding: 2px 6px; border-radius: 4px; font-size: 12px;">
+                            點擊觀看
+                        </div>
                     </div>
-                    <div style="margin-top: 15px; font-size: 0.95em; color: #555;">
-                        看不到影片？
-                        <a href="https://www.youtube.com/watch?v=vDXSZDidzGA" target="_blank" style="color: #8E1E20; text-decoration: underline; font-weight: bold;">
-                            點此直接前往 YouTube 觀看 ➔
+
+                    <div style="margin-top: 20px; text-align: left; background: #f9f9f9; padding: 15px; border-radius: 8px; border-left: 4px solid #8E1E20;">
+                        <p style="margin: 0; font-size: 1em; color: #333; line-height: 1.6;">
+                            感謝 <strong>台視新聞</strong> 專題報導！<br>
+                            因電視台版權設定，無法直接在網頁播放，<br>
+                            請點擊上方圖片前往 YouTube 觀看完整內容 🎬
+                        </p>
+                        <a href="https://www.youtube.com/watch?v=vDXSZDidzGA" target="_blank" 
+                           style="display: block; margin-top: 10px; text-align: center; color: #fff; background: #c4302b; padding: 10px; border-radius: 50px; text-decoration: none; font-weight: bold;">
+                           👉 前往 YouTube 觀看
                         </a>
                     </div>
                 `,
-                width: 800, 
-                padding: '1em',
+                width: 600, 
+                padding: '1.5em',
                 background: '#fff',
                 showConfirmButton: false, 
                 showCloseButton: true,
