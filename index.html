@@ -277,11 +277,11 @@
             animation: shakeCart 0.3s ease-in-out;
         }
 
-        /* 🆕 修改：雙重免運進度條樣式 */
+        /* 雙重免運進度條樣式 */
         .shipping-progress-container {
             margin-bottom: 20px;
             background: #fff8f8;
-            padding: 15px 15px 10px 15px; /* 稍微增加 Padding */
+            padding: 15px 15px 10px 15px; 
             border-radius: 8px;
             border: 1px dashed #eecaca;
         }
@@ -670,6 +670,21 @@
                 <textarea id="custNote" placeholder="例如：管理室代收、避開中午時段..."></textarea>
             </div>
 
+            <div style="margin-top: 20px; border-top: 2px dashed #eee; padding-top: 15px;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 5px; color: #555;">
+                    <span>商品小計：</span>
+                    <span>$<span id="checkoutSubtotal">0</span></span>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 10px; color: #555;">
+                    <span>運費：</span>
+                    <span>$<span id="checkoutShipping">0</span></span>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; font-size: 1.2em; font-weight: bold; color: #333;">
+                    <span>總金額：</span>
+                    <span style="color: #d63031; font-size: 1.4em;">$<span id="checkoutTotal">0</span></span>
+                </div>
+            </div>
+
             <button class="submit-btn" onclick="submitOrder()">送出訂單</button>
         </div>
     </div>
@@ -799,6 +814,39 @@
                 addrContainer.style.display = 'none';
                 addrInput.value = '親自取貨'; 
             }
+            
+            // 🆕 新增：當選擇取貨方式改變時，重新計算總金額 (因為運費變了)
+            calculateFinalTotal();
+        }
+
+        // 🆕 新增：計算最終總金額 (商品 + 運費)
+        function calculateFinalTotal() {
+            const subtotal = parseInt(document.getElementById("totalPrice").innerText || 0);
+            const delivery = document.getElementById("custDelivery").value;
+            let shipping = 0;
+
+            if (delivery === '7-11冷凍店到店') {
+                // 滿 2000 免運，否則 100
+                if (subtotal < 2000) shipping = 100;
+            } else if (delivery === '黑貓宅配') {
+                // 滿 3000 免運，否則 200
+                if (subtotal < 3000) shipping = 200;
+            } else {
+                // 自取免運
+                shipping = 0;
+            }
+
+            const finalTotal = subtotal + shipping;
+
+            // 更新 UI
+            if(document.getElementById("checkoutSubtotal")) document.getElementById("checkoutSubtotal").innerText = subtotal;
+            if(document.getElementById("checkoutShipping")) document.getElementById("checkoutShipping").innerText = shipping;
+            if(document.getElementById("checkoutTotal")) document.getElementById("checkoutTotal").innerText = finalTotal;
+
+            // 更新 TaiwanPay 顯示金額
+            if(document.getElementById("qrPayAmount")) {
+                 document.getElementById("qrPayAmount").innerText = finalTotal;
+            }
         }
 
         function updatePaymentInput() {
@@ -824,7 +872,7 @@
                 bankContainer.style.display = 'block'; 
                 bankLabel.innerText = "台灣Pay/轉帳帳號 末五碼";
                 last5Input.placeholder = "請輸入付款帳號/卡號末五碼";
-                document.getElementById('qrPayAmount').innerText = document.getElementById('totalPrice').innerText;
+                // 這裡的金額會在 calculateFinalTotal 更新，先不用手動設
             } 
             else {
                 last5Input.value = "";
@@ -913,9 +961,11 @@
                 return; 
             }
             document.getElementById("checkoutModal").style.display = "flex";
-            document.getElementById('qrPayAmount').innerText = document.getElementById('totalPrice').innerText;
+            
+            // 🆕 確保打開視窗時，計算並更新總金額
             updateAddressInput(); 
             updatePaymentInput();
+            calculateFinalTotal(); 
         }
         function closeCheckoutForm() { document.getElementById("checkoutModal").style.display = "none"; }
 
@@ -955,7 +1005,7 @@
             const floatBar = document.getElementById("floatBar");
             const floatTotal = document.getElementById("floatTotal");
             
-            /* 🆕 修改：取得兩個進度條與文字元件 */
+            /* 取得兩個進度條與文字元件 */
             const bar711 = document.getElementById("bar711");
             const diff711 = document.getElementById("diff711");
             const barCat = document.getElementById("barCat");
@@ -987,7 +1037,7 @@
             countEl.innerText = count;
             if(floatTotal) floatTotal.innerText = total;
 
-            /* 🆕 修改：雙重免運門檻計算邏輯 */
+            /* 雙重免運門檻計算邏輯 */
             
             // 1. 計算 7-11 ($2000)
             const threshold711 = 2000;
@@ -1015,6 +1065,11 @@
             } else {
                 diffCat.innerHTML = `還差 $${thresholdCat - total}`;
                 diffCat.style.color = "#8E1E20";
+            }
+            
+            // 🆕 當購物車金額改變時，如果結帳視窗開著，也要更新總金額
+            if(document.getElementById("checkoutModal").style.display === "flex") {
+                calculateFinalTotal();
             }
         }
 
@@ -1058,16 +1113,25 @@
             btn.innerText = "⏳ 訂單傳送中...";
             btn.disabled = true;
 
+            // 🆕 修改：取得最終總金額與運費
+            const subtotal = document.getElementById("checkoutSubtotal").innerText;
+            const shipping = document.getElementById("checkoutShipping").innerText;
+            const finalTotal = document.getElementById("checkoutTotal").innerText;
+
             let orderDetails = "🛒 購買清單：\n";
-            let totalPrice = document.getElementById("totalPrice").innerText;
             cart.forEach(item => {
                 orderDetails += `${item.name} x ${item.quantity} = $${item.price * item.quantity}\n`;
             });
-            orderDetails += `💰 總金額：$${totalPrice}`;
+            // 🆕 修改：訂單明細加上運費與總金額
+            orderDetails += `------------------\n`;
+            orderDetails += `商品小計：$${subtotal}\n`;
+            orderDetails += `運費：$${shipping}\n`;
+            orderDetails += `💰 總金額：$${finalTotal}`;
 
             const payload = {
                 message: orderDetails,
-                customer: { name, mobile, phone, address, delivery, payment, last5, date, note, total: totalPrice }
+                // 🆕 修改：傳送給 Google Sheet 的 total 欄位改為最終金額
+                customer: { name, mobile, phone, address, delivery, payment, last5, date, note, total: finalTotal }
             };
 
             fetch(googleScriptUrl, {
