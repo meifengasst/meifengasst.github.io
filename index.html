@@ -16,6 +16,7 @@
             --accent-color: #D4AF37;  /* 金色 */
             --text-color: #4A4A4A;    /* 深灰 */
             --white: #ffffff; 
+            --error-color: #d63031;   /* 錯誤紅 */
         }
         
         /* --- 🧧 背景設定 --- */
@@ -91,7 +92,7 @@
             left: 0;
             width: 100%;
             z-index: 1000;
-            background: rgba(142, 30, 32, 0.95); /* 深紅半透明背景 */
+            background: rgba(142, 30, 32, 0.95);
             padding: 10px 0;
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
             backdrop-filter: blur(5px);
@@ -113,7 +114,6 @@
             letter-spacing: 1px;
         }
 
-        /* Sticky 狀態下的按鈕樣式調整 */
         .sticky-nav .cat-btn {
             padding: 6px 16px;
             font-size: 1rem;
@@ -147,7 +147,7 @@
             align-items: flex-start; 
         }
         
-        /* --- 1. 左側欄位 --- */
+        /* --- 左側欄位 --- */
         .left-column {
             flex: 0.7;
             display: flex;
@@ -161,7 +161,6 @@
             padding-right: 5px;
         }
 
-        /* Logo */
         .site-logo-container { text-align: center; margin-bottom: 20px; }
         .site-logo {
             width: 160px; 
@@ -208,7 +207,7 @@
         .highlight-red { color: #d63031; font-weight: bold; }
         .bank-info { background: #fff; padding: 10px; border-radius: 8px; border: 1px dashed var(--primary-color); font-family: monospace; font-size: 1.1em; color: #333; margin-top: 5px; word-break: break-all; }
 
-        /* --- 2. 商品列表 --- */
+        /* --- 商品列表 --- */
         .product-list { 
             flex: 3; 
             display: grid; 
@@ -249,7 +248,7 @@
         button.add-btn { background: linear-gradient(135deg, #8E1E20 0%, #a02d2f 100%); color: white; border: none; padding: 15px; border-radius: 8px; cursor: pointer; width: 100%; font-weight: bold; font-size: 1.1em; box-shadow: 0 4px 6px rgba(142, 30, 32, 0.2); transition: 0.2s; }
         button.add-btn:hover { filter: brightness(1.1); transform: scale(0.98); }
         
-        /* --- 3. 購物車 --- */
+        /* --- 購物車 --- */
         .cart-section { 
             flex: 0.7; 
             background: rgba(255, 255, 255, 0.95); 
@@ -267,17 +266,15 @@
             padding-right: 5px;
         }
         
-        /* 加入購物車的回饋感動畫 (Shake Effect) */
+        /* 購物車動畫 */
         @keyframes shakeCart {
             0% { transform: scale(1); border-color: var(--primary-color); }
             50% { transform: scale(1.02); border-color: #FFD700; box-shadow: 0 0 15px #FFD700; }
             100% { transform: scale(1); border-color: var(--primary-color); }
         }
-        .cart-animate {
-            animation: shakeCart 0.3s ease-in-out;
-        }
+        .cart-animate { animation: shakeCart 0.3s ease-in-out; }
 
-        /* 雙重免運進度條樣式 */
+        /* 免運進度條 */
         .shipping-progress-container {
             margin-bottom: 20px;
             background: #fff8f8;
@@ -322,7 +319,7 @@
         .btn-google { background-color: #DB4437; } 
         .social-btn svg { width: 24px; height: 24px; margin-right: 10px; fill: white; }
 
-        /* --- 店家資訊區塊 --- */
+        /* --- 店家資訊 --- */
         .shop-info { margin-bottom: 20px; font-size: 0.9rem; color: #555; text-align: center; background: #fafafa; padding: 15px; border-radius: 8px; border: 1px solid #eee; }
         .shop-info h3 { font-size: 1.1rem; color: #333; margin-top: 0; margin-bottom: 15px; font-family: 'Noto Serif TC', serif; border-bottom: 1px dashed #ccc; padding-bottom: 5px; }
         .info-item { margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px; text-align: left; }
@@ -335,7 +332,7 @@
         .float-total { color: #FFD700; font-size: 1.3em; font-weight: bold; font-family: 'Noto Serif TC', serif; }
         .float-btn { background: linear-gradient(135deg, #2D6A4F 0%, #40916C 100%); color: white; border: none; padding: 10px 25px; border-radius: 50px; font-weight: bold; font-size: 1.1em; cursor: pointer; }
 
-        /* 回到頂部按鈕 (Back to Top) */
+        /* 回到頂部按鈕 */
         #backTopBtn {
             display: none; 
             position: fixed;
@@ -374,6 +371,24 @@
         .submit-btn { width: 100%; background: var(--primary-color); color: white; border: none; padding: 15px; font-size: 1.2em; border-radius: 8px; cursor: pointer; font-weight: bold; margin-top: 10px; }
         .submit-btn:hover { background: #a02d2f; }
         @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
+
+        /* 🔥 修改處：表單驗證錯誤樣式 */
+        .input-error {
+            border: 2px solid var(--error-color) !important;
+            background-color: #fff0f0;
+            box-shadow: 0 0 5px rgba(214, 48, 49, 0.3);
+        }
+        /* 震動動畫 */
+        @keyframes shakeInput {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            50% { transform: translateX(5px); }
+            75% { transform: translateX(-5px); }
+            100% { transform: translateX(0); }
+        }
+        .shake-animation {
+            animation: shakeInput 0.4s ease-in-out;
+        }
 
         /* --- 台灣 Pay QR Code 樣式 --- */
         .qr-code-container {
@@ -456,7 +471,6 @@
     </header>
 
     <div class="container">
-        
         <div class="left-column">
             <div class="site-logo-container">
                 <img src="image_14.png" alt="美鳳的家 Logo" class="site-logo">
@@ -505,7 +519,6 @@
                     Copyright © 2026 美鳳的家 版權所有
                 </div>
             </div>
-
         </div>
 
         <div class="product-list" id="productList"></div>
@@ -554,32 +567,6 @@
                     Google 地圖/評論
                 </a>
             </div>
-
-            <div class="notice-section">
-                <h3>💡 貼心提醒</h3>
-                <div class="notice-item"><span class="notice-title">⏳ 取貨時間</span>為保新鮮，取貨日最快只能選 <strong class="highlight-red">3 天後</strong>。</div>
-                <div class="notice-item"><span class="notice-title">❄️ 包裝方式</span>全採用<strong>「真空冷凍包裝」</strong>，幫您保留最原汁原味的一刻！</div>
-                <div class="notice-item"><span class="notice-title">🚚 運費優惠</span>
-                    <ul style="padding-left: 20px; margin: 5px 0;"><li><strong>7-11 冷凍店到店</strong><br>滿 $2000 免運 (未滿以上酌收運費$100)</li><li><strong>黑貓宅配</strong><br>滿 $3000 免運 (未滿以上酌收運費$200)</li></ul>
-                    <div style="margin-top:10px; font-size:0.95em; background:#fff0f0; padding:10px; border-radius:8px; border-left:4px solid #d63031; line-height:1.5;"><strong style="color:#d63031;">⚠️ 特別注意：</strong><br>7-11 門市代收金額<br><strong>不得超過 $2000</strong>！<br>超過金額的朋友會通知麻煩<strong>轉帳至下方美鳳帳號</strong>。</div>
-                </div>
-                <div class="notice-item"><span class="notice-title">💰 付款方式</span>可選「貨到付款」、「匯款」或「台灣Pay掃碼」。</div>
-                
-                <div class="notice-item">
-                    <span class="notice-title">🔄 訂單修改說明</span>
-                    <div style="margin-top:5px; line-height:1.6; background: rgba(255,255,255,0.6); padding:10px; border-radius:8px;">
-                        <strong style="color: var(--primary-color);">Q：下單後可以修改訂單內容嗎？</strong><br>
-                        A：為確保庫存數量準確及出貨效率，訂單成立後<span class="highlight-red">無法直接修改</span>內容。
-                        <ul style="padding-left: 20px; margin: 8px 0; color: #333;">
-                            <li style="margin-bottom:5px;"><strong>若尚未出貨：</strong> 請直接聯絡客服取消該筆訂單，並重新下單購買您需要的商品。</li>
-                            <li style="margin-bottom:5px;"><strong>若已出貨：</strong> 需待收到商品後，依照退換貨流程辦理。</li>
-                            <li><strong>若僅需修改收件資訊：</strong> 請盡速聯繫官方 LINE/客服信箱，若包裹尚未寄出我們將盡力協助變更。</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="notice-item"><span class="notice-title">🏦 匯款帳戶資訊</span><div class="bank-info"><strong>美鳳的家</strong><br>合作金庫 (006)<br>帳號：<span style="color:#8E1E20; font-weight:bold;">0180717681001</span><br>統編：72466723</div></div>
-            </div>
         </div>
     </div>
 
@@ -601,12 +588,12 @@
             
             <div class="form-group">
                 <label class="required">姓名</label>
-                <input type="text" id="custName" placeholder="請問怎麼稱呼您？">
+                <input type="text" id="custName" placeholder="請問怎麼稱呼您？" oninput="removeError(this)">
             </div>
             
             <div class="form-group">
                 <label class="required">手機號碼  </label>
-                <input type="tel" id="custMobile" placeholder="09xx-xxx-xxx">
+                <input type="tel" id="custMobile" placeholder="09xx-xxx-xxx" oninput="removeError(this)">
             </div>
 
             <div class="form-group">
@@ -616,7 +603,7 @@
 
             <div class="form-group">
                 <label class="required">收貨方式</label>
-                <select id="custDelivery" onchange="updateAddressInput()">
+                <select id="custDelivery" onchange="updateAddressInput(); removeError(this)">
                     <option value="黑貓宅配">🚛 黑貓宅配</option>
                     <option value="7-11冷凍店到店">🏪 7-11 冷凍店到店</option>
                     <option value="到店自取">🏠 到店自取</option>
@@ -625,12 +612,12 @@
 
             <div class="form-group" id="addressContainer">
                 <label id="addressLabel" class="required">收貨地址 (宅配請務必填寫)</label>
-                <input type="text" id="custAddress" placeholder="請填寫完整的收件地址">
+                <input type="text" id="custAddress" placeholder="請填寫完整的收件地址" oninput="removeError(this)">
             </div>
 
             <div class="form-group">
                 <label class="required">付款方式</label>
-                <select id="custPayment" onchange="updatePaymentInput()">
+                <select id="custPayment" onchange="updatePaymentInput(); removeError(this)">
                     <option value="貨到付款">貨到付款</option>
                     <option value="匯款">匯款 (需填後五碼)</option>
                     <option value="台灣Pay">💳 台灣Pay (掃碼支付)</option>
@@ -659,12 +646,12 @@
 
             <div class="form-group" id="bankInfoContainer" style="display:none;">
                 <label class="required" id="bankInfoLabel">匯款帳號後五碼</label>
-                <input type="text" id="custLast5Digits" placeholder="請輸入您的帳號後五碼">
+                <input type="text" id="custLast5Digits" placeholder="請輸入您的帳號後五碼" oninput="removeError(this)">
             </div>
 
             <div class="form-group">
                 <label class="required">希望到貨/自取日期</label>
-                <input type="date" id="custDate">
+                <input type="date" id="custDate" oninput="removeError(this)">
             </div>
 
             <div class="form-group">
@@ -687,7 +674,7 @@
                 </div>
             </div>
 
-            <button class="submit-btn" onclick="submitOrder()">送出訂單</button>
+            <button class="submit-btn" onclick="validateAndSubmit()">送出訂單</button>
         </div>
     </div>
 
@@ -701,7 +688,6 @@
         const products = [
             { id: 37, name: "富貴吉祥 6600 桌菜組 (約10人份)", price: 6600, category: "6600桌菜", image: "6600.jpg" },
             { id: 38, name: "幸福團圓 3800 桌菜組 (約6人份)", price: 3800, category: "3800桌菜", image: "3800.jpg" },
-            
             { id: 1, name: "櫻花蝦米糕", price: 450, category: "飯類", image: "rice.jpg" },
             { id: 2, name: "客家豬腳", price: 780, category: "肉類", image: "pork.jpg" },
             { id: 3, name: "虎皮蹄膀", price: 750, category: "肉類", image: "meat2.jpg" },
@@ -770,9 +756,7 @@
             updatePaymentInput();
         };
 
-        /* 處理捲動事件 (Sticky Bar & Back to Top) */
         window.onscroll = function() {
-            // 1. 回到頂部按鈕邏輯
             const backTopBtn = document.getElementById("backTopBtn");
             if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
                 backTopBtn.style.display = "flex";
@@ -780,10 +764,8 @@
                 backTopBtn.style.display = "none";
             }
 
-            // 2. Sticky 分類選單邏輯
             const header = document.getElementById("mainHeader");
             const catWrapper = document.getElementById("catWrapper");
-            // 當捲動超過 Header 高度時，觸發 Sticky
             if (window.pageYOffset > header.offsetHeight) {
                 catWrapper.classList.add("sticky-nav");
             } else {
@@ -791,7 +773,6 @@
             }
         };
 
-        // 點擊回到頂部
         function topFunction() {
             window.scrollTo({top: 0, behavior: 'smooth'});
         }
@@ -817,35 +798,28 @@
                 addrInput.value = '親自取貨'; 
             }
             
-            // 當選擇取貨方式改變時，重新計算總金額 (因為運費變了)
             calculateFinalTotal();
         }
 
-        // 計算最終總金額 (商品 + 運費)
         function calculateFinalTotal() {
             const subtotal = parseInt(document.getElementById("totalPrice").innerText || 0);
             const delivery = document.getElementById("custDelivery").value;
             let shipping = 0;
 
             if (delivery === '7-11冷凍店到店') {
-                // 滿 2000 免運，否則 100
                 if (subtotal < 2000) shipping = 100;
             } else if (delivery === '黑貓宅配') {
-                // 滿 3000 免運，否則 200
                 if (subtotal < 3000) shipping = 200;
             } else {
-                // 自取免運
                 shipping = 0;
             }
 
             const finalTotal = subtotal + shipping;
 
-            // 更新 UI
             if(document.getElementById("checkoutSubtotal")) document.getElementById("checkoutSubtotal").innerText = subtotal;
             if(document.getElementById("checkoutShipping")) document.getElementById("checkoutShipping").innerText = shipping;
             if(document.getElementById("checkoutTotal")) document.getElementById("checkoutTotal").innerText = finalTotal;
 
-            // 更新 TaiwanPay 顯示金額
             if(document.getElementById("qrPayAmount")) {
                  document.getElementById("qrPayAmount").innerText = finalTotal;
             }
@@ -874,7 +848,6 @@
                 bankContainer.style.display = 'block'; 
                 bankLabel.innerText = "台灣Pay/轉帳帳號 末五碼";
                 last5Input.placeholder = "請輸入付款帳號/卡號末五碼";
-                // 這裡的金額會在 calculateFinalTotal 更新，先不用手動設
             } 
             else {
                 last5Input.value = "";
@@ -964,7 +937,6 @@
             }
             document.getElementById("checkoutModal").style.display = "flex";
             
-            // 確保打開視窗時，計算並更新總金額
             updateAddressInput(); 
             updatePaymentInput();
             calculateFinalTotal(); 
@@ -978,13 +950,11 @@
             saveCart(); 
             renderCart();
 
-            /* 加入購物車的回饋感 (震動動畫) */
             const cartSection = document.getElementById('cartSection');
             const floatBar = document.getElementById('floatBar');
             
-            // 移除再新增 class 以觸發動畫重播
             cartSection.classList.remove('cart-animate');
-            void cartSection.offsetWidth; // 強制瀏覽器重繪 (Reflow)
+            void cartSection.offsetWidth; 
             cartSection.classList.add('cart-animate');
 
             if(floatBar.style.display !== 'none') {
@@ -993,7 +963,6 @@
                 floatBar.classList.add('cart-animate');
             }
             
-            // 300ms 動畫結束後移除 class
             setTimeout(() => {
                 cartSection.classList.remove('cart-animate');
                 if(floatBar) floatBar.classList.remove('cart-animate');
@@ -1007,7 +976,6 @@
             const floatBar = document.getElementById("floatBar");
             const floatTotal = document.getElementById("floatTotal");
             
-            /* 取得兩個進度條與文字元件 */
             const bar711 = document.getElementById("bar711");
             const diff711 = document.getElementById("diff711");
             const barCat = document.getElementById("barCat");
@@ -1039,9 +1007,6 @@
             countEl.innerText = count;
             if(floatTotal) floatTotal.innerText = total;
 
-            /* 雙重免運門檻計算邏輯 */
-            
-            // 1. 計算 7-11 ($2000)
             const threshold711 = 2000;
             let progress711 = (total / threshold711) * 100;
             if (progress711 > 100) progress711 = 100;
@@ -1055,7 +1020,6 @@
                 diff711.style.color = "#8E1E20";
             }
 
-            // 2. 計算 宅配 ($3000)
             const thresholdCat = 3000;
             let progressCat = (total / thresholdCat) * 100;
             if (progressCat > 100) progressCat = 100;
@@ -1069,7 +1033,6 @@
                 diffCat.style.color = "#8E1E20";
             }
             
-            // 當購物車金額改變時，如果結帳視窗開著，也要更新總金額
             if(document.getElementById("checkoutModal").style.display === "flex") {
                 calculateFinalTotal();
             }
@@ -1083,6 +1046,64 @@
 
         function filterCategory(catName) { renderProducts(catName); }
 
+        /* 🔥 新增：移除錯誤樣式的輔助函式 */
+        function removeError(element) {
+            element.classList.remove('input-error');
+            element.classList.remove('shake-animation');
+        }
+
+        /* 🔥 新增：表單驗證與送出邏輯 */
+        function validateAndSubmit() {
+            let isValid = true;
+            
+            // 取得欄位
+            const nameEl = document.getElementById("custName");
+            const mobileEl = document.getElementById("custMobile");
+            const addressEl = document.getElementById("custAddress");
+            const dateEl = document.getElementById("custDate");
+            const last5El = document.getElementById("custLast5Digits");
+            const delivery = document.getElementById("custDelivery").value;
+            const payment = document.getElementById("custPayment").value;
+
+            // 輔助函式：標記錯誤
+            const markError = (el) => {
+                el.classList.add('input-error');
+                el.classList.add('shake-animation');
+                // 動畫結束後移除 shake class，這樣下次報錯還能再震動
+                setTimeout(() => el.classList.remove('shake-animation'), 500);
+                isValid = false;
+            };
+
+            // 1. 驗證姓名
+            if (!nameEl.value.trim()) markError(nameEl);
+
+            // 2. 驗證手機
+            if (!mobileEl.value.trim()) markError(mobileEl);
+
+            // 3. 驗證日期
+            if (!dateEl.value) markError(dateEl);
+
+            // 4. 條件驗證：地址 (非自取時必填)
+            if (delivery !== '到店自取') {
+                if (!addressEl.value.trim()) markError(addressEl);
+            }
+
+            // 5. 條件驗證：末五碼 (匯款/TaiwanPay 時必填)
+            if (payment === '匯款' || payment === '台灣Pay') {
+                if (!last5El.value.trim()) markError(last5El);
+            }
+
+            // 如果驗證失敗，停止送出
+            if (!isValid) {
+                // 可以選擇是否要顯示 Swal 提示，或僅靠紅框震動提示
+                // Swal.fire({ icon: 'warning', title: '資料不完整', text: '請檢查紅框標示的必填欄位！', confirmButtonColor: '#8E1E20' });
+                return;
+            }
+
+            // 驗證通過，執行送出
+            submitOrder();
+        }
+
         function submitOrder() {
             const name = document.getElementById("custName").value;
             const mobile = document.getElementById("custMobile").value;
@@ -1094,28 +1115,11 @@
             const payment = document.getElementById("custPayment").value;
             const last5 = document.getElementById("custLast5Digits").value;
 
-            // 欄位檢查
-            if(!name || !mobile || !date) { 
-                Swal.fire({ icon: 'warning', title: '資料不完整', text: '請填寫姓名、手機和取貨日期喔！', confirmButtonColor: '#8E1E20' });
-                return; 
-            }
-            
-            if (delivery !== '到店自取' && !address) { 
-                Swal.fire({ icon: 'warning', title: '資料不完整', text: '請填寫收貨地址或 7-11 店名！', confirmButtonColor: '#8E1E20' });
-                return; 
-            }
-
-            if ((payment === '匯款' || payment === '台灣Pay') && !last5) {
-                Swal.fire({ icon: 'warning', title: '資料不完整', text: '請填寫帳號/卡號末五碼，方便我們對帳喔！', confirmButtonColor: '#8E1E20' });
-                return;
-            }
-
             const btn = document.querySelector(".submit-btn");
             const originalText = btn.innerText;
             btn.innerText = "⏳ 訂單傳送中...";
             btn.disabled = true;
 
-            // 取得最終總金額與運費
             const subtotal = document.getElementById("checkoutSubtotal").innerText;
             const shipping = document.getElementById("checkoutShipping").innerText;
             const finalTotal = document.getElementById("checkoutTotal").innerText;
@@ -1124,7 +1128,6 @@
             cart.forEach(item => {
                 orderDetails += `${item.name} x ${item.quantity} = $${item.price * item.quantity}\n`;
             });
-            // 訂單明細加上運費與總金額
             orderDetails += `------------------\n`;
             orderDetails += `商品小計：$${subtotal}\n`;
             orderDetails += `運費：$${shipping}\n`;
@@ -1132,7 +1135,6 @@
 
             const payload = {
                 message: orderDetails,
-                // 傳送給 Google Sheet 的 total 欄位改為最終金額
                 customer: { name, mobile, phone, address, delivery, payment, last5, date, note, total: finalTotal }
             };
 
@@ -1142,7 +1144,6 @@
                 mode: "no-cors", 
                 headers: { "Content-Type": "text/plain" } 
             }).then(() => {
-                // 🔥 修改處：更改為更安心專業的文案
                 let successMsg = '訂單內容發送到您登記的手機簡訊中';
                 if(payment === '台灣Pay') {
                     successMsg = '訂單已送出，確認收到款項後會盡快安排出貨！';
