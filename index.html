@@ -241,6 +241,14 @@
         .btn-google { background-color: #DB4437; } 
         .social-btn svg { width: 24px; height: 24px; margin-right: 10px; fill: white; }
 
+        /* --- 🆕 店家資訊區塊 (右下角新增) --- */
+        .shop-info { margin-top: 30px; font-size: 0.9rem; color: #555; text-align: center; background: #fafafa; padding: 15px; border-radius: 8px; border: 1px solid #eee; }
+        .shop-info h3 { font-size: 1.1rem; color: #333; margin-top: 0; margin-bottom: 15px; font-family: 'Noto Serif TC', serif; border-bottom: 1px dashed #ccc; padding-bottom: 5px; }
+        .info-item { margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px; text-align: left; }
+        .info-item:last-of-type { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        .info-item strong { color: var(--primary-color); display: block; margin-bottom: 3px; font-size: 0.95em; }
+        .copyright-text { font-size: 0.8rem; color: #999; margin-top: 20px; text-align: center; border-top: 1px solid #eee; padding-top: 10px; }
+
         .mobile-floating-bar { display: none; position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(0, 0, 0, 0.95); padding: 15px 20px; box-shadow: 0 -5px 15px rgba(0,0,0,0.2); z-index: 9999; justify-content: space-between; align-items: center; box-sizing: border-box; transform: translateY(100%); transition: transform 0.3s ease-out; backdrop-filter: blur(10px); border-top: 1px solid #FFD700; }
         .mobile-floating-bar.show { transform: translateY(0); }
         .float-total { color: #FFD700; font-size: 1.3em; font-weight: bold; font-family: 'Noto Serif TC', serif; }
@@ -259,7 +267,7 @@
         .submit-btn:hover { background: #a02d2f; }
         @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
 
-        /* --- 🆕 新增：台灣 Pay QR Code 樣式 --- */
+        /* --- 台灣 Pay QR Code 樣式 --- */
         .qr-code-container {
             text-align: center;
             margin: 15px 0;
@@ -361,6 +369,7 @@
                         </ul>
                     </div>
                 </div>
+
                 <div class="notice-item"><span class="notice-title">🏦 匯款帳戶資訊</span><div class="bank-info"><strong>美鳳的家</strong><br>合作金庫 (006)<br>帳號：<span style="color:#8E1E20; font-weight:bold;">0180717681001</span><br>統編：72466723</div></div>
             </div>
         </div>
@@ -387,7 +396,42 @@
                     Google 地圖/評論
                 </a>
             </div>
-        </div>
+
+            <div class="shop-info">
+                <h3>ℹ️ 店家資訊 & 內用公告</h3>
+                
+                <div class="info-item">
+                    <strong>📍 地址</strong>
+                    苗栗縣三灣鄉和平街29號
+                </div>
+                
+                <div class="info-item">
+                    <strong>📞 內用預訂專線</strong>
+                    <a href="tel:037833931" style="color:#555; text-decoration:none;">037-833931</a>
+                </div>
+
+                <div class="info-item">
+                    <strong>⚠️ 內用訂位提醒</strong>
+                    <span style="color:#d63031;">中餐 11:00 後 / 晚餐 17:00 後</span><br>
+                    恕不再接新客人<br>
+                    <small style="color:#999;">(備料不及，無法提供最完善服務請見諒)</small>
+                </div>
+
+                <div class="info-item">
+                    <strong>💰 內用收費標準</strong>
+                    <small style="color:var(--primary-color); font-weight:bold;">(2026年元月後適用)</small>
+                    <ul style="padding-left:1.2em; margin:5px 0;">
+                        <li>身高 90cm 以下：<span style="color:#2D6A4F; font-weight:bold;">免費</span></li>
+                        <li>90-130cm：清潔費 $100/人</li>
+                        <li>130cm 以上：$550/人</li>
+                    </ul>
+                </div>
+
+                <div class="copyright-text">
+                    Copyright © 2026 美鳳的家 版權所有
+                </div>
+            </div>
+            </div>
     </div>
 
     <div class="mobile-floating-bar" id="floatBar">
