@@ -536,6 +536,8 @@
             <h2>📋 您的點餐單 <span id="cartCount" style="font-size:0.7em; background:var(--primary-color); color:white; padding:2px 8px; border-radius:10px; vertical-align:middle;">0</span></h2>
             <div id="cartItems"><p style="color: #999; text-align: center; padding: 20px;">客官，還沒點菜呢！</p></div>
             <div class="total">總計: $<span id="totalPrice">0</span></div>
+            <div style="text-align: right; font-size: 0.85rem; color: #888; margin-top: -5px; margin-bottom: 15px;">(運費於結帳時計算)</div>
+
             <button class="checkout-btn" onclick="openCheckoutForm()">前往結帳填寫資料</button>
 
             <div class="social-area">
@@ -815,11 +817,11 @@
                 addrInput.value = '親自取貨'; 
             }
             
-            // 🆕 新增：當選擇取貨方式改變時，重新計算總金額 (因為運費變了)
+            // 當選擇取貨方式改變時，重新計算總金額 (因為運費變了)
             calculateFinalTotal();
         }
 
-        // 🆕 新增：計算最終總金額 (商品 + 運費)
+        // 計算最終總金額 (商品 + 運費)
         function calculateFinalTotal() {
             const subtotal = parseInt(document.getElementById("totalPrice").innerText || 0);
             const delivery = document.getElementById("custDelivery").value;
@@ -962,7 +964,7 @@
             }
             document.getElementById("checkoutModal").style.display = "flex";
             
-            // 🆕 確保打開視窗時，計算並更新總金額
+            // 確保打開視窗時，計算並更新總金額
             updateAddressInput(); 
             updatePaymentInput();
             calculateFinalTotal(); 
@@ -1067,7 +1069,7 @@
                 diffCat.style.color = "#8E1E20";
             }
             
-            // 🆕 當購物車金額改變時，如果結帳視窗開著，也要更新總金額
+            // 當購物車金額改變時，如果結帳視窗開著，也要更新總金額
             if(document.getElementById("checkoutModal").style.display === "flex") {
                 calculateFinalTotal();
             }
@@ -1113,7 +1115,7 @@
             btn.innerText = "⏳ 訂單傳送中...";
             btn.disabled = true;
 
-            // 🆕 修改：取得最終總金額與運費
+            // 取得最終總金額與運費
             const subtotal = document.getElementById("checkoutSubtotal").innerText;
             const shipping = document.getElementById("checkoutShipping").innerText;
             const finalTotal = document.getElementById("checkoutTotal").innerText;
@@ -1122,7 +1124,7 @@
             cart.forEach(item => {
                 orderDetails += `${item.name} x ${item.quantity} = $${item.price * item.quantity}\n`;
             });
-            // 🆕 修改：訂單明細加上運費與總金額
+            // 訂單明細加上運費與總金額
             orderDetails += `------------------\n`;
             orderDetails += `商品小計：$${subtotal}\n`;
             orderDetails += `運費：$${shipping}\n`;
@@ -1130,7 +1132,7 @@
 
             const payload = {
                 message: orderDetails,
-                // 🆕 修改：傳送給 Google Sheet 的 total 欄位改為最終金額
+                // 傳送給 Google Sheet 的 total 欄位改為最終金額
                 customer: { name, mobile, phone, address, delivery, payment, last5, date, note, total: finalTotal }
             };
 
