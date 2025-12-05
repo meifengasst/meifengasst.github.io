@@ -1142,7 +1142,8 @@
                 mode: "no-cors", 
                 headers: { "Content-Type": "text/plain" } 
             }).then(() => {
-                let successMsg = '老闆會盡快聯絡您！';
+                // 🔥 修改處：更改為更安心專業的文案
+                let successMsg = '訂單內容發送到您登記的手機簡訊中';
                 if(payment === '台灣Pay') {
                     successMsg = '訂單已送出，確認收到款項後會盡快安排出貨！';
                 }
