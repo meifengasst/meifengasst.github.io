@@ -524,22 +524,37 @@
             else if (payment === '台灣Pay') { tpContainer.style.display = 'block'; bankContainer.style.display = 'block'; bankLabel.innerText = "台灣Pay/轉帳帳號 末五碼"; last5Input.placeholder = "請輸入付款帳號/卡號末五碼"; } 
             else { last5Input.value = ""; }
         }
-
-        function playInterviewVideo() {
-            const videoData = [
-                { id: "vDXSZDidzGA", title: "台視新聞專題報導 - 美鳳的家", desc: "感謝台視新聞專題報導！堅持手作好味道，給您最溫暖的年夜飯。" },
-                // 範例：新增影片時複製下方區塊並修改 id, title, desc
-                { id: "vDXSZDidzGA", title: "【範例影片】美食節目專訪", desc: "在地人推薦必吃！傳承三代的古早味，每一口都是回憶。" }
-            ];
-            let listHtml = '<div class="video-list-container">';
-            videoData.forEach(video => {
-                const thumbUrl = `https://img.youtube.com/vi/${video.id}/mqdefault.jpg`;
-                const linkUrl = `https://www.youtube.com/watch?v=${video.id}`;
-                listHtml += `<a href="${linkUrl}" target="_blank" class="video-item"><div class="video-thumb"><img src="${thumbUrl}" onerror="this.src='https://via.placeholder.com/120x90?text=Video'"></div><div class="video-info"><div class="video-title">${video.title}</div><div class="video-desc">${video.desc}</div></div></a>`;
-            });
-            listHtml += '</div>';
-            Swal.fire({ title: '📺 美鳳的家 - 媒體專訪', html: `<p style="font-size:0.9em; color:#666; margin-bottom:15px;">感謝各大媒體熱情推薦！點擊下方列表即可觀看精彩片段 🎬</p>${listHtml}`, width: 600, padding: '1.5em', background: '#fff', showConfirmButton: false, showCloseButton: true, footer: '<div style="font-size:0.8em; color:#999">註：點擊後將開啟 YouTube 觀看</div>' });
+ /* --- 🆕 媒體專訪功能 (列表版) --- */
+function playInterviewVideo() {
+    // 🎥 在這裡設定您的影片清單
+    const videoData = [
+        {
+            id: "vDXSZDidzGA",  // YouTube 影片 ID
+            title: "客家無菜單料理 創意美食撫慰人心",
+            desc: "尋找台灣感動力"
+        },
+        {
+            id: "M76_2Yu6zoo",   // 請換成您的第2個影片ID (例如: dQw4w9WgXcQ)
+            title: "苗栗三灣無菜單料理！超過十道客家媽媽的手路菜！", // 範例標題
+            desc: "youtuber:我是馬鈴薯小姐雁靈"
+        },
+        {
+            id: "YUifqRLUQGY&t=2343s",   // 請換成您的第3個影片ID
+            title: "天菜就醬吃", // 範例標題
+            desc: "食尚玩家"
+        },
+        {
+            id: "SHta9dzSySo",   // 請換成您的第3個影片ID
+            title: "稀有客家料理 好多創意料理超用心！", // 範例標題
+            desc: "youtuber:六一遛阿寬"
+        },
+        {
+            id: "oxEPNX4Af4M",   // 請換成您的第3個影片ID
+            title: "苗栗無菜單客家料理 多樣道地合菜!!", // 範例標題
+            desc: "youtuber:牛舌"
         }
+        // 若有更多影片，繼續往下複製即可...
+    ];
 
         function saveCart() { localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart)); }
 
@@ -634,6 +649,7 @@
     </script>
 </body>
 </html>
+
 
 
 
