@@ -125,6 +125,48 @@
         .checkout-btn { width: 100%; background: linear-gradient(135deg, #2D6A4F 0%, #40916C 100%); color: white; border: none; font-size: 1.2em; padding: 15px; margin-top: 20px; border-radius: 8px; cursor: pointer; font-weight: bold; box-shadow: 0 4px 10px rgba(45, 106, 79, 0.3); transition: 0.3s; }
         .checkout-btn:hover { filter: brightness(1.1); transform: translateY(-2px); }
 
+        /* --- 新增：購物車數量增減按鈕樣式 --- */
+        .qty-control {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 5px;
+            background: #f9f9f9;
+            padding: 2px 5px;
+            border-radius: 5px;
+            width: fit-content;
+        }
+        .qty-btn {
+            width: 24px;
+            height: 24px;
+            border: 1px solid #ddd;
+            background: #fff;
+            color: #555;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            transition: all 0.2s;
+            font-size: 1.1em;
+            padding: 0; /* 重置 padding */
+        }
+        .qty-btn:hover {
+            background: #e0e0e0;
+            color: #333;
+        }
+        .qty-btn.minus { color: #d63031; border-color: #fab1a0; }
+        .qty-btn.plus { color: #2D6A4F; border-color: #b8e994; }
+        .qty-display {
+            font-weight: bold;
+            font-family: monospace;
+            font-size: 1.1em;
+            color: #333;
+            min-width: 20px;
+            text-align: center;
+        }
+
         /* 購物車震動動畫 */
         @keyframes shakeCart { 0% { transform: scale(1); border-color: var(--primary-color); } 50% { transform: scale(1.02); border-color: #FFD700; box-shadow: 0 0 15px #FFD700; } 100% { transform: scale(1); border-color: var(--primary-color); } }
         .cart-animate { animation: shakeCart 0.3s ease-in-out; }
@@ -533,7 +575,7 @@
             if (savedCart) { try { cart = JSON.parse(savedCart); renderCart(); } catch(e) { console.error("購物車讀取失敗", e); } }
             renderProducts('全部'); updateAddressInput(); updatePaymentInput();
 
-            // 🔥 新增：載入時自動跳出公告視窗 (已優化手機版顯示：限制高度 + 內部捲軸)
+            // 🔥 載入時自動跳出公告視窗
             Swal.fire({
                 title: '📢 內用公告 & 年菜取貨',
                 html: `
@@ -633,38 +675,16 @@
             else { last5Input.value = ""; }
         }
 
-        /* --- 🆕 媒體專訪功能 (列表版) --- */
+        /* --- 媒體專訪功能 --- */
         function playInterviewVideo() {
-            // 🎥 1. 設定影片清單
             const videoData = [
-                {
-                    id: "vDXSZDidzGA",
-                    title: "客家無菜單料理 創意美食撫慰人心",
-                    desc: "台視:尋找台灣感動力"
-                },
-                {
-                    id: "M76_2Yu6zoo",
-                    title: "苗栗三灣無菜單料理！超過十道客家媽媽的手路菜！",
-                    desc: "youtuber:我是馬鈴薯小姐雁靈"
-                },
-                {
-                    id: "YUifqRLUQGY&t=2345s", 
-                    title: "天菜就醬吃",
-                    desc: "TVBS 42頻道:食尚玩家"
-                },
-                {
-                    id: "SHta9dzSySo",
-                    title: "稀有客家料理 好多創意料理超用心！",
-                    desc: "youtuber:六一遛阿寬"
-                },
-                {
-                    id: "oxEPNX4Af4M",
-                    title: "苗栗無菜單客家料理 多樣道地合菜!!",
-                    desc: "youtuber:牛舌"
-                }
+                { id: "vDXSZDidzGA", title: "客家無菜單料理 創意美食撫慰人心", desc: "台視:尋找台灣感動力" },
+                { id: "M76_2Yu6zoo", title: "苗栗三灣無菜單料理！超過十道客家媽媽的手路菜！", desc: "youtuber:我是馬鈴薯小姐雁靈" },
+                { id: "YUifqRLUQGY&t=2345s", title: "天菜就醬吃", desc: "TVBS 42頻道:食尚玩家" },
+                { id: "SHta9dzSySo", title: "稀有客家料理 好多創意料理超用心！", desc: "youtuber:六一遛阿寬" },
+                { id: "oxEPNX4Af4M", title: "苗栗無菜單客家料理 多樣道地合菜!!", desc: "youtuber:牛舌" }
             ];
             
-            // 🎥 2. 產生影片選單 HTML
             let videoListHtml = '<div class="video-list-container">';
             videoData.forEach(v => {
                 let safeId = v.id.split('&')[0]; 
@@ -682,7 +702,6 @@
             });
             videoListHtml += '</div>';
 
-            // 🎥 3. 透過 SweetAlert 顯示
             Swal.fire({
                 title: '🎥 美鳳的家 媒體專訪',
                 html: videoListHtml,
@@ -726,29 +745,104 @@
             setTimeout(() => { cartSection.classList.remove('cart-animate'); if(floatBar) floatBar.classList.remove('cart-animate'); }, 300);
         }
 
+        /* --- 🔄 修改後的 renderCart (支援加減按鈕) --- */
         function renderCart() {
-            const cartItemsEl = document.getElementById("cartItems"); const totalEl = document.getElementById("totalPrice"); const countEl = document.getElementById("cartCount"); const floatBar = document.getElementById("floatBar"); const floatTotal = document.getElementById("floatTotal");
-            const bar711 = document.getElementById("bar711"); const diff711 = document.getElementById("diff711"); const barCat = document.getElementById("barCat"); const diffCat = document.getElementById("diffCat");
-            cartItemsEl.innerHTML = ""; let total = 0; let count = 0;
-            if (cart.length === 0) { cartItemsEl.innerHTML = "<p style='color: #999; text-align: center; padding: 20px;'>客官，還沒點菜呢！</p>"; if(floatBar) floatBar.classList.remove("show"); } 
-            else {
-                if(floatBar) floatBar.classList.add("show"); 
+            const cartItemsEl = document.getElementById("cartItems");
+            const totalEl = document.getElementById("totalPrice");
+            const countEl = document.getElementById("cartCount");
+            const floatBar = document.getElementById("floatBar");
+            const floatTotal = document.getElementById("floatTotal");
+            
+            // 進度條相關元素
+            const bar711 = document.getElementById("bar711");
+            const diff711 = document.getElementById("diff711");
+            const barCat = document.getElementById("barCat");
+            const diffCat = document.getElementById("diffCat");
+
+            cartItemsEl.innerHTML = "";
+            let total = 0;
+            let count = 0;
+
+            if (cart.length === 0) {
+                cartItemsEl.innerHTML = "<p style='color: #999; text-align: center; padding: 20px;'>客官，還沒點菜呢！</p>";
+                if(floatBar) floatBar.classList.remove("show");
+            } else {
+                if(floatBar) floatBar.classList.add("show");
+                
                 cart.forEach((item, index) => {
-                    total += item.price * item.quantity; count += item.quantity;
-                    const itemEl = document.createElement("div"); itemEl.className = "cart-item";
-                    itemEl.innerHTML = `<div><div style="font-weight:bold; color:#333;">${item.name}</div><small style="color:#888">$${item.price} x ${item.quantity}</small></div><div><span style="font-weight:bold; color:var(--primary-color)">$${item.price * item.quantity}</span><button style="background:#eee; border:none; border-radius:50%; width:24px; height:24px; margin-left:10px; cursor:pointer; color:#888;" onclick="removeFromCart(${index})">×</button></div>`;
+                    total += item.price * item.quantity;
+                    count += item.quantity;
+
+                    const itemEl = document.createElement("div");
+                    itemEl.className = "cart-item";
+                    
+                    itemEl.innerHTML = `
+                        <div style="flex-grow:1;">
+                            <div style="font-weight:bold; color:#333; font-size:1.05em;">${item.name}</div>
+                            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:5px;">
+                                <div class="qty-control">
+                                    <button class="qty-btn minus" onclick="changeQuantity(${index}, -1)">−</button>
+                                    <span class="qty-display">${item.quantity}</span>
+                                    <button class="qty-btn plus" onclick="changeQuantity(${index}, 1)">+</button>
+                                </div>
+                                <div style="text-align:right;">
+                                    <div style="color:#888; font-size:0.85em;">單價 $${item.price}</div>
+                                    <div style="font-weight:bold; color:var(--primary-color); font-size:1.1em;">$${item.price * item.quantity}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <button style="background:transparent; border:none; margin-left:10px; cursor:pointer; color:#bbb; font-size:1.5em; line-height:1;" onclick="removeFromCart(${index})" title="刪除此項目">×</button>
+                    `;
                     cartItemsEl.appendChild(itemEl);
                 });
             }
-            totalEl.innerText = total; countEl.innerText = count; if(floatTotal) floatTotal.innerText = total;
 
-            let progress711 = (total / 2000) * 100; if (progress711 > 100) progress711 = 100; bar711.style.width = progress711 + "%";
-            if (total >= 2000) { diff711.innerHTML = "🎉 已達免運！"; diff711.style.color = "#2D6A4F"; } else { diff711.innerHTML = `還差 $${2000 - total}`; diff711.style.color = "#8E1E20"; }
+            totalEl.innerText = total;
+            countEl.innerText = count;
+            if(floatTotal) floatTotal.innerText = total;
 
-            let progressCat = (total / 3000) * 100; if (progressCat > 100) progressCat = 100; barCat.style.width = progressCat + "%";
-            if (total >= 3000) { diffCat.innerHTML = "🎉 已達免運！"; diffCat.style.color = "#2D6A4F"; } else { diffCat.innerHTML = `還差 $${3000 - total}`; diffCat.style.color = "#8E1E20"; }
+            // 更新運費進度條邏輯
+            let progress711 = (total / 2000) * 100; if (progress711 > 100) progress711 = 100;
+            bar711.style.width = progress711 + "%";
+            if (total >= 2000) { diff711.innerHTML = "🎉 已達免運！"; diff711.style.color = "#2D6A4F"; } 
+            else { diff711.innerHTML = `還差 $${2000 - total}`; diff711.style.color = "#8E1E20"; }
+
+            let progressCat = (total / 3000) * 100; if (progressCat > 100) progressCat = 100;
+            barCat.style.width = progressCat + "%";
+            if (total >= 3000) { diffCat.innerHTML = "🎉 已達免運！"; diffCat.style.color = "#2D6A4F"; } 
+            else { diffCat.innerHTML = `還差 $${3000 - total}`; diffCat.style.color = "#8E1E20"; }
             
+            // 如果結帳視窗開著，即時更新金額
             if(document.getElementById("checkoutModal").style.display === "flex") { calculateFinalTotal(); }
+        }
+
+        /* --- 🆕 新增：處理數量加減的邏輯 --- */
+        function changeQuantity(index, delta) {
+            const item = cart[index];
+            const newQty = item.quantity + delta;
+
+            if (newQty <= 0) {
+                // 如果數量變為 0，詢問是否刪除
+                Swal.fire({
+                    title: '要移除這道菜嗎？',
+                    text: item.name,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d63031',
+                    cancelButtonColor: '#aaa',
+                    confirmButtonText: '是的，移除',
+                    cancelButtonText: '按錯了'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        removeFromCart(index);
+                    }
+                });
+            } else {
+                // 正常增減
+                item.quantity = newQty;
+                saveCart();
+                renderCart();
+            }
         }
 
         function removeFromCart(index) { cart.splice(index, 1); saveCart(); renderCart(); }
@@ -760,30 +854,18 @@
             const nameEl = document.getElementById("custName"); const mobileEl = document.getElementById("custMobile"); const addressEl = document.getElementById("custAddress"); const dateEl = document.getElementById("custDate"); const last5El = document.getElementById("custLast5Digits"); const delivery = document.getElementById("custDelivery").value; const payment = document.getElementById("custPayment").value;
             const markError = (el) => { el.classList.add('input-error'); el.classList.add('shake-animation'); setTimeout(() => el.classList.remove('shake-animation'), 500); isValid = false; };
             
-            // --- 驗證姓名 ---
             if (!nameEl.value.trim()) markError(nameEl);
             
-            // --- 🔥 新增驗證：手機號碼格式檢查 ---
-            // 規則：移除 dash 後必須是 09 開頭且總長 10 碼
+            // 手機驗證
             const phonePattern = /^09\d{8}$/;
             const cleanPhone = mobileEl.value.replace(/-/g, "").trim();
             if (!mobileEl.value.trim() || !phonePattern.test(cleanPhone)) {
-                Swal.fire({
-                    icon: 'error',
-                    title: '手機號碼格式錯誤',
-                    text: '請輸入正確的台灣手機號碼 (例如 0912345678)',
-                    confirmButtonColor: '#8E1E20'
-                });
+                Swal.fire({ icon: 'error', title: '手機號碼格式錯誤', text: '請輸入正確的台灣手機號碼 (例如 0912345678)', confirmButtonColor: '#8E1E20' });
                 markError(mobileEl);
             }
             
-            // --- 驗證日期 ---
             if (!dateEl.value) markError(dateEl);
-            
-            // --- 驗證地址 ---
             if (delivery !== '到店自取') { if (!addressEl.value.trim()) markError(addressEl); }
-            
-            // --- 驗證末五碼 ---
             if (payment === '匯款' || payment === '台灣Pay') { if (!last5El.value.trim()) markError(last5El); }
             
             if (!isValid) return;
@@ -792,7 +874,6 @@
 
         function submitOrder() {
             const name = document.getElementById("custName").value; 
-            // 傳送給後端前，確保手機號碼是乾淨的 (但為了閱讀方便，這裡傳原始值，後端再處理也可以，這邊保留原始值)
             const mobile = document.getElementById("custMobile").value; 
             const phone = document.getElementById("custPhone").value; 
             const address = document.getElementById("custAddress").value; 
