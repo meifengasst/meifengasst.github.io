@@ -150,7 +150,7 @@
             font-weight: bold;
             transition: all 0.2s;
             font-size: 1.1em;
-            padding: 0; /* 重置 padding */
+            padding: 0;
         }
         .qty-btn:hover {
             background: #e0e0e0;
@@ -516,7 +516,7 @@
     </div>
 
     <script>
-        // ▼▼▼ 請務必將下方的網址換成你自己部屬的 Google Apps Script 網址 ▼▼▼
+        // ▼▼▼ 請務必將下方的網址換成您「新增部署」後產生的新網址 (以/exec結尾) ▼▼▼
         const googleScriptUrl = "https://script.google.com/macros/s/AKfycbzA_q2rnwAGdWSEhEY9Jbdeg2tKqZn9aVadtFOJeK3QHmWzx97B2OrtJbHksZQrNvOt/exec";
         // ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
 
@@ -745,7 +745,6 @@
             setTimeout(() => { cartSection.classList.remove('cart-animate'); if(floatBar) floatBar.classList.remove('cart-animate'); }, 300);
         }
 
-        /* --- 🔄 修改後的 renderCart (支援加減按鈕) --- */
         function renderCart() {
             const cartItemsEl = document.getElementById("cartItems");
             const totalEl = document.getElementById("totalPrice");
@@ -753,7 +752,6 @@
             const floatBar = document.getElementById("floatBar");
             const floatTotal = document.getElementById("floatTotal");
             
-            // 進度條相關元素
             const bar711 = document.getElementById("bar711");
             const diff711 = document.getElementById("diff711");
             const barCat = document.getElementById("barCat");
@@ -801,7 +799,6 @@
             countEl.innerText = count;
             if(floatTotal) floatTotal.innerText = total;
 
-            // 更新運費進度條邏輯
             let progress711 = (total / 2000) * 100; if (progress711 > 100) progress711 = 100;
             bar711.style.width = progress711 + "%";
             if (total >= 2000) { diff711.innerHTML = "🎉 已達免運！"; diff711.style.color = "#2D6A4F"; } 
@@ -812,17 +809,14 @@
             if (total >= 3000) { diffCat.innerHTML = "🎉 已達免運！"; diffCat.style.color = "#2D6A4F"; } 
             else { diffCat.innerHTML = `還差 $${3000 - total}`; diffCat.style.color = "#8E1E20"; }
             
-            // 如果結帳視窗開著，即時更新金額
             if(document.getElementById("checkoutModal").style.display === "flex") { calculateFinalTotal(); }
         }
 
-        /* --- 🆕 新增：處理數量加減的邏輯 --- */
         function changeQuantity(index, delta) {
             const item = cart[index];
             const newQty = item.quantity + delta;
 
             if (newQty <= 0) {
-                // 如果數量變為 0，詢問是否刪除
                 Swal.fire({
                     title: '要移除這道菜嗎？',
                     text: item.name,
@@ -838,7 +832,6 @@
                     }
                 });
             } else {
-                // 正常增減
                 item.quantity = newQty;
                 saveCart();
                 renderCart();
@@ -856,7 +849,6 @@
             
             if (!nameEl.value.trim()) markError(nameEl);
             
-            // 手機驗證
             const phonePattern = /^09\d{8}$/;
             const cleanPhone = mobileEl.value.replace(/-/g, "").trim();
             if (!mobileEl.value.trim() || !phonePattern.test(cleanPhone)) {
@@ -883,25 +875,35 @@
             const payment = document.getElementById("custPayment").value; 
             const last5 = document.getElementById("custLast5Digits").value;
             
-            const btn = document.querySelector(".submit-btn"); const originalText = btn.innerText; btn.innerText = "⏳ 訂單傳送中..."; btn.disabled = true;
-            const subtotal = document.getElementById("checkoutSubtotal").innerText; const shipping = document.getElementById("checkoutShipping").innerText; const finalTotal = document.getElementById("checkoutTotal").innerText;
+            const btn = document.querySelector(".submit-btn"); 
+            const originalText = btn.innerText; 
+            btn.innerText = "⏳ 訂單傳送中..."; 
+            btn.disabled = true;
+            
+            const subtotal = document.getElementById("checkoutSubtotal").innerText; 
+            const shipping = document.getElementById("checkoutShipping").innerText; 
+            const finalTotal = document.getElementById("checkoutTotal").innerText;
             
             let orderDetails = "🛒 購買清單：\n"; 
             cart.forEach(item => { orderDetails += `${item.name} x ${item.quantity} = $${item.price * item.quantity}\n`; });
             orderDetails += `------------------\n`;
             
-            // ▼▼▼ 修改處：如果客人有填寫備註，強制將備註加入到訂單明細字串中，確保 Email 內一定看得到 ▼▼▼
             if(note && note.trim() !== "") {
                 orderDetails += `📝 備註：${note}\n`;
                 orderDetails += `------------------\n`;
             }
-            // ▲▲▲ 修改結束 ▲▲▲
             
             orderDetails += `商品小計：$${subtotal}\n運費：$${shipping}\n💰 總金額：$${finalTotal}`;
             
             const payload = { message: orderDetails, customer: { name, mobile, phone, address, delivery, payment, last5, date, note, total: finalTotal } };
             
-            fetch(googleScriptUrl, { method: "POST", body: JSON.stringify(payload), mode: "no-cors", headers: { "Content-Type": "text/plain" } }).then(() => {
+            // ▼▼▼ 關鍵修正：加入 charset=utf-8 防止亂碼 ▼▼▼
+            fetch(googleScriptUrl, { 
+                method: "POST", 
+                body: JSON.stringify(payload), 
+                mode: "no-cors", 
+                headers: { "Content-Type": "text/plain; charset=utf-8" } 
+            }).then(() => {
                 let successMsg = '已收到您的訂單囉 有任何問題 歡迎與我們聯繫';
                 if(payment === '台灣Pay') { successMsg = '訂單已送出，確認收到款項後會盡快安排出貨！'; }
                 Swal.fire({ icon: 'success', title: '訂單已送出', text: successMsg, confirmButtonColor: '#2D6A4F' });
@@ -913,5 +915,3 @@
     </script>
 </body>
 </html>
-
-
