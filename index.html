@@ -886,8 +886,18 @@
             const btn = document.querySelector(".submit-btn"); const originalText = btn.innerText; btn.innerText = "⏳ 訂單傳送中..."; btn.disabled = true;
             const subtotal = document.getElementById("checkoutSubtotal").innerText; const shipping = document.getElementById("checkoutShipping").innerText; const finalTotal = document.getElementById("checkoutTotal").innerText;
             
-            let orderDetails = "🛒 購買清單：\n"; cart.forEach(item => { orderDetails += `${item.name} x ${item.quantity} = $${item.price * item.quantity}\n`; });
-            orderDetails += `------------------\n商品小計：$${subtotal}\n運費：$${shipping}\n💰 總金額：$${finalTotal}`;
+            let orderDetails = "🛒 購買清單：\n"; 
+            cart.forEach(item => { orderDetails += `${item.name} x ${item.quantity} = $${item.price * item.quantity}\n`; });
+            orderDetails += `------------------\n`;
+            
+            // ▼▼▼ 修改處：如果客人有填寫備註，強制將備註加入到訂單明細字串中，確保 Email 內一定看得到 ▼▼▼
+            if(note && note.trim() !== "") {
+                orderDetails += `📝 備註：${note}\n`;
+                orderDetails += `------------------\n`;
+            }
+            // ▲▲▲ 修改結束 ▲▲▲
+            
+            orderDetails += `商品小計：$${subtotal}\n運費：$${shipping}\n💰 總金額：$${finalTotal}`;
             
             const payload = { message: orderDetails, customer: { name, mobile, phone, address, delivery, payment, last5, date, note, total: finalTotal } };
             
@@ -903,6 +913,3 @@
     </script>
 </body>
 </html>
-
-
-
