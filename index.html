@@ -233,6 +233,10 @@
         .video-title { font-weight: bold; font-size: 1.1em; margin-bottom: 5px; color: #8E1E20; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
         .video-desc { font-size: 0.85em; color: #666; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 
+        /* 🔥 新增：流量統計區塊樣式 (精簡版) */
+        .stats-box { margin-top: 10px; padding-top: 10px; border-top: 1px dashed #ccc; display: flex; justify-content: center; gap: 15px; font-size: 0.9em; flex-wrap: wrap; }
+        .stats-item { background: #fff8e1; color: #8E1E20; padding: 2px 8px; border-radius: 4px; border: 1px solid #FFD700; font-weight: bold; }
+
         /* --- 手機版響應式設定 --- */
         @media (max-width: 1200px) { .product-list { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 1024px) { 
@@ -247,42 +251,6 @@
             .sticky-nav { padding: 15px 0; overflow-x: auto; white-space: nowrap; justify-content: flex-start; }
             .sticky-nav .category-bar { width: 100%; justify-content: start; padding-left: 15px; padding-right: 15px; }
         }
-
-/* --- 新增：底部流量統計樣式 --- */
-        .site-stats-container {
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px dashed #ccc;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            font-size: 0.95rem;
-            color: #666;
-            flex-wrap: wrap;
-        }
-        .stat-item {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        .stat-number {
-            font-family: 'Noto Serif TC', serif; /* 配合標題字體 */
-            font-weight: bold;
-            color: var(--primary-color); /* 深紅色 */
-            font-size: 1.1em;
-            background: #fff8e1; /* 淡黃色底 */
-            padding: 2px 8px;
-            border-radius: 4px;
-            border: 1px solid #FFD700; /* 金邊 */
-        }
-        /* 在手機版堆疊顯示，避免太擠 */
-        @media (max-width: 480px) {
-            .site-stats-container {
-                gap: 10px;
-                flex-direction: column;
-            }
-        }
-        
     </style>
 </head>
 <body>
@@ -359,18 +327,12 @@
                 </div>
 
                 <div class="copyright-text">Copyright © 2026 美鳳的家 版權所有</div>
-                
-                <div class="site-stats-container">
-                    <div class="stat-item">
-                        <span>🔥 今日賞味人數:</span>
-                        <span class="stat-number" id="busuanzi_value_site_uv">loading...</span>
-                    </div>
-                    <div class="stat-item">
-                        <span>👀 歷史累積瀏覽:</span>
-                        <span class="stat-number" id="busuanzi_value_site_pv">loading...</span>
-                    </div>
+
+                <div class="stats-box">
+                    <span class="stats-item">🔥 今日賞味人數: <span id="busuanzi_value_site_uv">loading..</span></span>
+                    <span class="stats-item">📊 歷史累積瀏覽: <span id="busuanzi_value_site_pv">loading..</span></span>
                 </div>
-                </div> </div>
+
             </div>
         </div>
 
@@ -562,6 +524,8 @@
             <button class="submit-btn" onclick="validateAndSubmit()">送出訂單</button>
         </div>
     </div>
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
     <script>
         // ▼▼▼ 請務必將下方的網址換成您「新增部署」後產生的新網址 (以/exec結尾) ▼▼▼
@@ -961,15 +925,5 @@
             });
         }
     </script>
-
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
- 
 </body>
 </html>
-
-
-
-
-
-
-
