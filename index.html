@@ -247,6 +247,42 @@
             .sticky-nav { padding: 15px 0; overflow-x: auto; white-space: nowrap; justify-content: flex-start; }
             .sticky-nav .category-bar { width: 100%; justify-content: start; padding-left: 15px; padding-right: 15px; }
         }
+
+/* --- 新增：底部流量統計樣式 --- */
+        .site-stats-container {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px dashed #ccc;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            font-size: 0.95rem;
+            color: #666;
+            flex-wrap: wrap;
+        }
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .stat-number {
+            font-family: 'Noto Serif TC', serif; /* 配合標題字體 */
+            font-weight: bold;
+            color: var(--primary-color); /* 深紅色 */
+            font-size: 1.1em;
+            background: #fff8e1; /* 淡黃色底 */
+            padding: 2px 8px;
+            border-radius: 4px;
+            border: 1px solid #FFD700; /* 金邊 */
+        }
+        /* 在手機版堆疊顯示，避免太擠 */
+        @media (max-width: 480px) {
+            .site-stats-container {
+                gap: 10px;
+                flex-direction: column;
+            }
+        }
+        
     </style>
 </head>
 <body>
@@ -915,6 +951,7 @@
     </script>
 </body>
 </html>
+
 
 
 
