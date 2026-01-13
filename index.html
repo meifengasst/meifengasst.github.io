@@ -970,29 +970,10 @@
             });
         }
     </script>
-    <script>
-    window.addEventListener('load', function() {
-        // 設定 3 秒後檢查
-        setTimeout(function() {
-            var uvSpan = document.getElementById("busuanzi_value_site_uv");
-            var pvSpan = document.getElementById("busuanzi_value_site_pv");
 
-            // 檢查是否還卡在 loading
-            if (uvSpan && (uvSpan.innerText.indexOf('loading') !== -1 || uvSpan.innerText === '')) {
-                console.log("⚠️ 計數器連線超時，啟動備用顯示方案");
-                
-                // 方案 A：改成顯示固定數字 (看起來像很多人)
-                uvSpan.innerText = "886";      // 假裝今日人數
-                pvSpan.innerText = "12,500+";  // 假裝累積人數
-                
-                // 方案 B：(如果您希望乾脆隱藏，就把下面這行註解打開)
-                // document.querySelector('.stats-box').style.display = 'none';
-            }
-        }, 3000); // 3000 毫秒 = 3 秒
-    });
-</script>
 </body>
 </html>
+
 
 
 
