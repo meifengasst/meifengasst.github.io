@@ -957,33 +957,27 @@
             if (!tickerEl) return;
 
             function updateTicker() {
-                const randomOrder = salesData[Math.floor(Math.random() * salesData.length)];
-                const timeAgo = Math.floor(Math.random() * 15) + 1;
-                
-                tickerEl.classList.remove("fade-update");
-                void tickerEl.offsetWidth; 
-                
-                // ✨ 修正重點：
-                // 1. "狂賀" 改成 "❤️ 感謝"
-                // 2. 把 "預訂了" 換行顯示 (display:block)，讓版面更整齊，不會擠在一起
-                tickerEl.innerHTML = `
-                    <div style="margin-bottom:2px;">❤️ 感謝 <strong>${randomOrder.city} ${randomOrder.name}</strong></div>
-                    <div style="font-size:0.9em; color:#666;">
-                       ${timeAgo}分鐘前 預訂了 <span style="color:#d63031; font-weight:bold;">${randomOrder.item}</span>
-                    </div>
-                `;
-                
-                tickerEl.classList.add("fade-update");
-            }
-
-            // 一開始先執行一次
-            updateTicker();
-
-            // 之後每 4.5 秒換一次
-            setInterval(updateTicker, 4500);
+            // 隨機挑選一筆訂單
+            const randomOrder = salesData[Math.floor(Math.random() * salesData.length)];
+            
+            // (原本計算時間的 timeAgo 變數已經刪除了)
+            
+            tickerEl.classList.remove("fade-update");
+            void tickerEl.offsetWidth; 
+            
+            // ✨ 修改重點：拿掉時間，只保留「預訂了」
+            tickerEl.innerHTML = `
+                <div style="margin-bottom:2px;">❤️ 感謝 <strong>${randomOrder.city} ${randomOrder.name}</strong></div>
+                <div style="font-size:0.9em; color:#666;">
+                   預訂了 <span style="color:#d63031; font-weight:bold;">${randomOrder.item}</span>
+                </div>
+            `;
+            
+            tickerEl.classList.add("fade-update");
         }
     </script>
 
 </body>
 </html>
+
 
