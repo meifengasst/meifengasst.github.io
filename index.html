@@ -337,7 +337,7 @@
                 <div class="copyright-text">Copyright © 2026 美鳳的家 版權所有</div>
 
                 <div class="stats-box">
-    <span class="stats-item" id="salesTicker" style="min-width: 300px; text-align: center;">🚀 系統連線中...</span>
+    <span class="stats-item" id="salesTicker" style="width: 100%; display: block; box-sizing: border-box; line-height: 1.6;">🚀 系統連線中...</span>
 </div>
 
             </div>
@@ -611,30 +611,24 @@
         if (!tickerEl) return;
 
         function updateTicker() {
-            // 隨機挑選一筆訂單
             const randomOrder = salesData[Math.floor(Math.random() * salesData.length)];
-            // 隨機產生時間 (1~15分鐘前)
             const timeAgo = Math.floor(Math.random() * 15) + 1;
             
-            // 移除動畫 class 以便重新觸發
             tickerEl.classList.remove("fade-update");
-            
-            // 強制重繪 (Trigger Reflow) 讓動畫可以重跑
             void tickerEl.offsetWidth; 
             
-            // 更新文字內容
-            tickerEl.innerHTML = `🔥 狂賀！<strong>${randomOrder.city} ${randomOrder.name}</strong> ${timeAgo}分鐘前 預訂了 <span style="color:#d63031;">${randomOrder.item}</span>`;
+            // ✨ 修正重點：
+            // 1. "狂賀" 改成 "❤️ 感謝"
+            // 2. 把 "預訂了" 換行顯示 (display:block)，讓版面更整齊，不會擠在一起
+            tickerEl.innerHTML = `
+                <div style="margin-bottom:2px;">❤️ 感謝 <strong>${randomOrder.city} ${randomOrder.name}</strong></div>
+                <div style="font-size:0.9em; color:#666;">
+                   ${timeAgo}分鐘前 預訂了 <span style="color:#d63031; font-weight:bold;">${randomOrder.item}</span>
+                </div>
+            `;
             
-            // 加回動畫 class
             tickerEl.classList.add("fade-update");
         }
-
-        // 一開始先執行一次
-        updateTicker();
-
-        // 之後每 4.5 秒換一次
-        setInterval(updateTicker, 4500);
-    }
 
     // 務必呼叫啟動函式
     initSalesTicker();
@@ -999,6 +993,7 @@
 </script>
 </body>
 </html>
+
 
 
 
