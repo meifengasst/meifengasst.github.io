@@ -251,6 +251,14 @@
             .sticky-nav { padding: 15px 0; overflow-x: auto; white-space: nowrap; justify-content: flex-start; }
             .sticky-nav .category-bar { width: 100%; justify-content: start; padding-left: 15px; padding-right: 15px; }
         }
+        /* --- 銷售跑馬燈特效 --- */
+.fade-update {
+    animation: fadeInText 0.5s ease-in-out;
+}
+@keyframes fadeInText {
+    0% { opacity: 0; transform: translateY(5px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
     </style>
 </head>
 <body>
@@ -329,9 +337,8 @@
                 <div class="copyright-text">Copyright © 2026 美鳳的家 版權所有</div>
 
                 <div class="stats-box">
-                    <span class="stats-item">🔥 今日賞味人數: <span id="busuanzi_value_site_uv">loading..</span></span>
-                    <span class="stats-item">📊 歷史累積瀏覽: <span id="busuanzi_value_site_pv">loading..</span></span>
-                </div>
+    <span class="stats-item" id="salesTicker" style="min-width: 300px; text-align: center;">🚀 系統連線中...</span>
+</div>
 
             </div>
         </div>
@@ -586,7 +593,51 @@
             const savedCart = localStorage.getItem(CART_STORAGE_KEY);
             if (savedCart) { try { cart = JSON.parse(savedCart); renderCart(); } catch(e) { console.error("購物車讀取失敗", e); } }
             renderProducts('全部'); updateAddressInput(); updatePaymentInput();
+            // --- 🔥 啟動銷售跑馬燈 (取代不蒜子) ---
+    function initSalesTicker() {
+        // 這裡設定要輪播的假資料，您可以自由新增更多
+        const salesData = [
+            { city: "台北", name: "陳小姐", item: "富貴吉祥 6600 桌菜組" },
+            { city: "新竹", name: "林先生", item: "幸福團圓 3800 桌菜組" },
+            { city: "苗栗", name: "張阿姨", item: "御品佛跳牆 x 2" },
+            { city: "台中", name: "吳小姐", item: "櫻花蝦米糕" },
+            { city: "桃園", name: "劉先生", item: "放養文昌鹹水母雞" },
+            { city: "竹南", name: "王大哥", item: "6600 桌菜組" },
+            { city: "板橋", name: "李小姐", item: "客家豬腳 + 筍乾" },
+            { city: "頭份", name: "黃先生", item: "藥膳醉大蝦" }
+        ];
 
+        const tickerEl = document.getElementById("salesTicker");
+        if (!tickerEl) return;
+
+        function updateTicker() {
+            // 隨機挑選一筆訂單
+            const randomOrder = salesData[Math.floor(Math.random() * salesData.length)];
+            // 隨機產生時間 (1~15分鐘前)
+            const timeAgo = Math.floor(Math.random() * 15) + 1;
+            
+            // 移除動畫 class 以便重新觸發
+            tickerEl.classList.remove("fade-update");
+            
+            // 強制重繪 (Trigger Reflow) 讓動畫可以重跑
+            void tickerEl.offsetWidth; 
+            
+            // 更新文字內容
+            tickerEl.innerHTML = `🔥 狂賀！<strong>${randomOrder.city} ${randomOrder.name}</strong> ${timeAgo}分鐘前 預訂了 <span style="color:#d63031;">${randomOrder.item}</span>`;
+            
+            // 加回動畫 class
+            tickerEl.classList.add("fade-update");
+        }
+
+        // 一開始先執行一次
+        updateTicker();
+
+        // 之後每 4.5 秒換一次
+        setInterval(updateTicker, 4500);
+    }
+
+    // 務必呼叫啟動函式
+    initSalesTicker();
             // 🔥 載入時自動跳出公告視窗
             Swal.fire({
                 title: '📢 內用公告 & 年菜取貨',
@@ -948,5 +999,6 @@
 </script>
 </body>
 </html>
+
 
 
