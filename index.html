@@ -986,6 +986,134 @@
     </script>
 
 </body>
+    <style>
+  /* 遮罩層：讓背景變暗 */
+  #cny-notice-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* 半透明黑 */
+    z-index: 9999; /* 確保在最上層 */
+    display: none; /* 預設隱藏，等網頁載入後顯示 */
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(2px); /* 背景模糊特效 */
+  }
+
+  /* 彈窗本體：喜氣紅金配色 */
+  #cny-notice-box {
+    background: #fff;
+    width: 90%;
+    max-width: 450px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    overflow: hidden;
+    animation: popIn 0.3s ease-out;
+    border: 2px solid #B71C1C; /* 美鳳紅 */
+  }
+
+  /* 標題區 */
+  .cny-header {
+    background-color: #B71C1C;
+    color: #FFD700; /* 金色字體 */
+    padding: 15px;
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+  }
+
+  /* 內容區 */
+  .cny-content {
+    padding: 25px 20px;
+    font-family: "Microsoft JhengHei", sans-serif;
+    color: #333;
+    line-height: 1.6;
+    font-size: 1.1rem;
+    text-align: center;
+  }
+
+  .cny-highlight {
+    color: #D32F2F;
+    font-weight: bold;
+    font-size: 1.25rem;
+    background-color: #FFF8E1;
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: inline-block;
+    margin: 10px 0;
+  }
+
+  /* 按鈕區 */
+  .cny-footer {
+    padding: 0 20px 20px 20px;
+    text-align: center;
+  }
+
+  .cny-btn {
+    background-color: #B71C1C;
+    color: white;
+    border: none;
+    padding: 12px 40px;
+    font-size: 1rem;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background 0.2s;
+    font-weight: bold;
+  }
+
+  .cny-btn:hover {
+    background-color: #8E1616;
+  }
+
+  /* 動畫效果 */
+  @keyframes popIn {
+    0% { transform: scale(0.8); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+</style>
+
+<div id="cny-notice-overlay">
+  <div id="cny-notice-box">
+    <div class="cny-header">
+      🐍 2026 新春預購公告
+    </div>
+    <div class="cny-content">
+      <p>親愛的顧客您好：</p>
+      <p>為配合物流作業，除了<strong>「到店自取」</strong>以外，<br>宅配與超商取貨訂單將於：</p>
+      
+      <div class="cny-highlight">
+        2/9 (一) 23:59 停止收單
+      </div>
+      
+      <p style="font-size: 0.95rem; color: #666;">
+        ⏳ 時間緊迫，想品嚐美鳳手藝的朋友<br>請把握最後下單機會喔！
+      </p>
+    </div>
+    <div class="cny-footer">
+      <button class="cny-btn" onclick="closeCnyNotice()">我知道了，馬上逛逛</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // 網頁載入完成後，自動顯示彈窗
+  window.addEventListener('load', function() {
+    // 檢查 sessionStorage，如果使用者這次瀏覽已經關過，就不再跳出 (避免煩人)
+    // 如果您希望每次重新整理都跳出來，請把下面這行 if 註解掉
+    if (!sessionStorage.getItem('cnyNoticeRead')) {
+      document.getElementById('cny-notice-overlay').style.display = 'flex';
+    }
+  });
+
+  // 關閉彈窗的功能
+  function closeCnyNotice() {
+    document.getElementById('cny-notice-overlay').style.display = 'none';
+    // 紀錄使用者已讀，本次瀏覽器開啟期間不再跳出
+    sessionStorage.setItem('cnyNoticeRead', 'true');
+  }
+</script>
 </html>
+
 
 
