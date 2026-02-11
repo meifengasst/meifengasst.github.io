@@ -1131,28 +1131,122 @@
   }
 </style>
 
+<style>
+  /* 遮罩層 */
+  #cny-notice-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); z-index: 9999;
+    display: none; justify-content: center; align-items: center;
+    backdrop-filter: blur(3px);
+  }
+  /* 彈窗本體 */
+  #cny-notice-box {
+    background: #fff; width: 90%; max-width: 480px;
+    border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    overflow: hidden; animation: popIn 0.3s ease-out;
+    border: 3px solid #8E1E20; /* 美鳳紅 */
+    position: relative;
+  }
+  .close-x {
+      position: absolute; top: 10px; right: 15px; font-size: 24px; cursor: pointer; color: white; font-weight: bold; z-index: 2;
+  }
+  /* 標題區：改成緊急通知的感覺 */
+  .cny-header {
+    background: linear-gradient(135deg, #B71C1C 0%, #8E1E20 100%);
+    color: #FFD700; padding: 15px; text-align: center;
+    font-size: 1.3rem; font-weight: bold; letter-spacing: 1px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  }
+  /* 內容區 */
+  .cny-content {
+    padding: 20px; font-family: "Microsoft JhengHei", sans-serif;
+    color: #333; line-height: 1.5; text-align: center;
+  }
+  /* 新品強調區塊 */
+  .new-arrival-box {
+      background: #FFF8E1; border: 2px dashed #D4AF37;
+      border-radius: 10px; padding: 10px; margin: 15px 0;
+      text-align: left; display: flex; align-items: center; gap: 10px;
+  }
+  .new-arrival-img {
+      width: 80px; height: 80px; object-fit: cover; border-radius: 5px; flex-shrink: 0;
+  }
+  /* 按鈕區 */
+  .cny-footer { padding: 0 20px 20px 20px; text-align: center; }
+  .cny-btn {
+    background: linear-gradient(135deg, #D4AF37 0%, #C5A028 100%);
+    color: #8E1E20; border: none; padding: 12px 30px;
+    font-size: 1.1rem; border-radius: 50px; cursor: pointer;
+    font-weight: bold; box-shadow: 0 4px 10px rgba(212, 175, 55, 0.4);
+    transition: transform 0.2s;
+  }
+  .cny-btn:active { transform: scale(0.95); }
+  @keyframes popIn { 0% { transform: scale(0.8); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+</style>
+
 <div id="cny-notice-overlay">
   <div id="cny-notice-box">
+    <div class="close-x" onclick="closeCnyNotice()">×</div>
     <div class="cny-header">
-      🐍 2026 新春預購公告
+      🚛 宅配截單通知 & 新品上市
     </div>
+    
     <div class="cny-content">
-      <p>親愛的顧客您好：</p>
-      <p>為配合物流作業，除了<strong>「到店自取」</strong>以外，<br>宅配與超商取貨訂單將於：</p>
+      <p style="margin-top:0;">親愛的朋友：<br>
+      <strong style="color:#d63031;">宅配/店到店 已於 2/9 截止收單</strong><br>
+      現在下單 <span style="background:#8E1E20; color:white; padding:2px 5px; border-radius:4px;">僅限到店自取</span> 喔！</p>
       
-      <div class="cny-highlight">
-        2/9 (一) 23:59 停止收單
+      <div class="new-arrival-box">
+          <img src="red_rice.jpg" class="new-arrival-img" alt="紅麴飯" onerror="this.src='https://via.placeholder.com/80?text=新品'">
+          <div>
+              <div style="color:#B71C1C; font-weight:bold; font-size:1.1rem;">🏮 紅麴養生飯 <small style="color:#666; font-weight:normal;">(新上市)</small></div>
+              <div style="font-size:0.9rem; margin-top:3px;">
+                  饌承百年古早味，拜祖先、敬天公首選！<br>
+                  <strong style="color:#d63031;">$250 / 盒</strong>
+              </div>
+          </div>
       </div>
-      
-      <p style="font-size: 0.95rem; color: #666;">
-        ⏳ 時間緊迫，想品嚐美鳳手藝的朋友<br>請把握最後下單機會喔！
+
+      <p style="font-size: 0.9rem; color: #666; margin-bottom:0;">
+        除夕圍爐、初九拜天公，就差這一味！<br>趕快預訂，來店裡順便帶回家。
       </p>
     </div>
+    
     <div class="cny-footer">
-      <button class="cny-btn" onclick="closeCnyNotice()">我知道了，馬上逛逛</button>
+      <button class="cny-btn" onclick="addRedRiceAndClose()">＋ 幫我加一盒紅麴飯</button>
+      <div style="margin-top:10px; font-size:0.9rem; text-decoration:underline; cursor:pointer; color:#999;" onclick="closeCnyNotice()">先不用，我看看別的</div>
     </div>
   </div>
 </div>
+
+<script>
+  // 網頁載入後顯示彈窗
+  window.addEventListener('load', function() {
+    // 這次把 sessionStorage 拿掉，因為很重要，希望每次重新整理都提醒客人現在只能自取
+    setTimeout(() => {
+        document.getElementById('cny-notice-overlay').style.display = 'flex';
+    }, 500); // 延遲0.5秒跳出比較有質感
+  });
+
+  function closeCnyNotice() {
+    document.getElementById('cny-notice-overlay').style.display = 'none';
+  }
+
+  // 🔥 點擊按鈕直接加入購物車並關閉視窗 (轉換率神器)
+  function addRedRiceAndClose() {
+      // 呼叫原本的加入購物車函式 (id: 39 是我們剛剛新增的紅麴飯)
+      addToCart(39); 
+      closeCnyNotice();
+      
+      // 跳個小提示
+      const Toast = Swal.mixin({
+          toast: true, position: 'top-end', showConfirmButton: false, timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => { toast.addEventListener('mouseenter', Swal.stopTimer); toast.addEventListener('mouseleave', Swal.resumeTimer); }
+      });
+      Toast.fire({ icon: 'success', title: '紅麴養生飯 已加入訂單！' });
+  }
+</script>
 
 <script>
   // 網頁載入完成後，自動顯示彈窗
@@ -1172,6 +1266,7 @@
   }
 </script>
 </html>
+
 
 
 
