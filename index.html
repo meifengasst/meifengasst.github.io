@@ -875,9 +875,42 @@
 
         function validateAndSubmit() {
             let isValid = true;
-            const nameEl = document.getElementById("custName"); const mobileEl = document.getElementById("custMobile"); const addressEl = document.getElementById("custAddress"); const dateEl = document.getElementById("custDate"); const last5El = document.getElementById("custLast5Digits"); const delivery = document.getElementById("custDelivery").value; const payment = document.getElementById("custPayment").value;
+            const nameEl = document.getElementById("custName"); 
+            const mobileEl = document.getElementById("custMobile"); 
+            const addressEl = document.getElementById("custAddress"); 
+            const dateEl = document.getElementById("custDate"); 
+            const last5El = document.getElementById("custLast5Digits"); 
+            const delivery = document.getElementById("custDelivery").value; 
+            const payment = document.getElementById("custPayment").value;
+            
             const markError = (el) => { el.classList.add('input-error'); el.classList.add('shake-animation'); setTimeout(() => el.classList.remove('shake-animation'), 500); isValid = false; };
             
+            // --- 🔥 B2C 獨家設計：特定商品物流限制檢查 (紅麴飯邏輯) ---
+            // 檢查購物車內是否有 id: 39 (紅麴養生飯)
+            const restrictedItem = cart.find(item => item.id === 39);
+            
+            // 如果有買紅麴飯，且運送方式「不是」到店自取
+            if (restrictedItem && delivery !== '到店自取') {
+                Swal.fire({
+                    icon: 'warning',
+                    title: '包含「限自取」商品',
+                    html: `
+                        <div style="text-align:left; font-size:0.95em;">
+                            客官不好意思！您的訂單中包含：<br>
+                            <strong style="color:#8E1E20;">● ${restrictedItem.name}</strong><br><br>
+                            因過年物流繁忙且保存期限較短(常溫3天)，<br>
+                            <span style="background:#fff0f0; color:#d63031; padding:2px 5px; font-weight:bold;">目前僅提供「到店自取」喔！</span><br><br>
+                            請修改運送方式，或先將該商品移除。<br>
+                            (年後將同步開放宅配服務)
+                        </div>
+                    `,
+                    confirmButtonText: '好的，我調整一下',
+                    confirmButtonColor: '#8E1E20'
+                });
+                return; // 阻止表單送出
+            }
+            // -------------------------------------------------------
+
             if (!nameEl.value.trim()) markError(nameEl);
             
             const phonePattern = /^09\d{8}$/;
@@ -1123,6 +1156,7 @@
   }
 </script>
 </html>
+
 
 
 
