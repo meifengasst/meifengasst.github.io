@@ -41,111 +41,78 @@
         }
         
      /* --- 🎨 官網頂部：富貴滿堂全寬美編版 --- */
+        /* --- 🎨 官網頂部：圖片看板模式 (使用 image_17.png) --- */
         header { 
             position: relative;
-            text-align: center; 
-            margin: 0; /* 滿版設計，拿掉邊距 */
-            padding: 50px 20px 40px 20px; 
-            width: 100%; /* 寬度 100% 填滿左右 */
-            box-sizing: border-box;
-            
-            /* 背景設定：中央是牌匾底色，左右漸層融合 */
-            background: 
-                radial-gradient(circle at center, #FFFDF8 0%, #F4EBE1 40%, #8E1E20 70%);
-            
-            /* 下方的立體邊界線 */
-            border-bottom: 5px solid #D4AF37; 
-            box-shadow: 0 5px 20px rgba(0,0,0,0.4);
-            overflow: hidden;
-        }
-
-        /* --- 左右兩側的裝飾物 (中國結/雲紋視覺) --- */
-        header::before, header::after {
-            content: "🧧"; /* 這裡可以換成圖片，現在先用圖示模擬 */
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 80px;
-            opacity: 0.2; /* 淡淡的背景裝飾感 */
-            font-family: serif;
-        }
-        header::before { left: 5%; } /* 左邊位置 */
-        header::after { right: 5%; }  /* 右邊位置 */
-
-        /* --- 中央的藝術牌匾設計 --- */
-        .plaque-content {
-            position: relative;
-            display: inline-block;
-            padding: 30px 60px;
-            background: #FFFDF8;
-            border: 3px solid #D4AF37;
-            border-radius: 8px;
-            box-shadow: 
-                0 0 0 6px #8E1E20, /* 深紅外框 */
-                0 0 0 8px #D4AF37, /* 最外層金線 */
-                0 10px 30px rgba(0,0,0,0.5);
-            z-index: 1;
-        }
-
-        h1 { 
-            font-family: 'Ma Shan Zheng', cursive, 'Noto Serif TC', serif; 
-            font-size: 5rem; 
-            color: #8E1E20; 
             margin: 0; 
-            letter-spacing: 10px; 
-            /* 更強烈的書法立體感 */
-            text-shadow: 
-                1px 1px 0px #D4AF37, 
-                2px 2px 0px #D4AF37, 
-                4px 4px 10px rgba(0,0,0,0.3);
+            width: 100%;
+            /* 設定最小高度，確保圖片有足夠空間顯示 (可依實際需求調整) */
+            min-height: 350px; 
+            
+            /* 🔥 核心：設定背景圖片 🔥 */
+            /* 請確保 image_17.png 已經上傳到您的網站目錄中 */
+            background-image: url('image_17.png'); 
+            background-size: cover; /* 讓圖片鋪滿整個區塊 */
+            background-position: center center; /* 圖片置中對齊 */
+            background-repeat: no-repeat;
+
+            /* 使用 Flex 佈局將按鈕對齊到下方 */
+            display: flex;
+            align-items: flex-end; 
+            justify-content: center;
+            padding-bottom: 30px; /* 按鈕距離底部的空間 */
+            
+            /* 底部加一條深紅線做收尾，提升質感 */
+            border-bottom: 4px solid #8E1E20;
         }
 
-        .sub-title {
-            font-family: 'Noto Serif TC', serif;
-            font-size: 1.5rem;
-            color: #4A4A4A;
-            font-weight: 900;
-            margin-top: 10px;
-            letter-spacing: 3px;
-        }
+        /* 確保舊的文字元素不會跑出來干擾 */
+        h1, .sub-title, .plaque-content { display: none !important; }
 
-        /* --- 分類按鈕區塊 --- */
+        /* 🔥 隱藏過年的桌菜按鈕 (維持不變) */
+        .cat-btn[onclick*="6600桌菜"],
+        .cat-btn[onclick*="3800桌菜"] { display: none !important; }
+
+        /* --- 按鈕樣式 (調整為適合花布背景的風格) --- */
         .category-wrapper { 
-            margin-top: 30px; 
-            position: relative; 
+            width: 92%; 
+            max-width: 900px;
             z-index: 2; 
         }
         .category-bar { 
             display: flex; 
             justify-content: center; 
-            gap: 15px; 
+            gap: 10px; 
             flex-wrap: wrap; 
         }
         .cat-btn { 
-            padding: 10px 25px; 
+            padding: 10px 24px; 
             font-size: 1.1rem; 
-            background: #fff; 
-            border: 2px solid #D4AF37;
-            color: #8E1E20;
-            border-radius: 5px; /* 方中帶圓的典雅感 */
-            font-weight: 600; 
+            /* 使用半透明白底，讓文字在花布上清晰可見 */
+            background: rgba(255, 255, 255, 0.85); 
+            border: 2px solid #8E1E20; /* 深紅邊框呼應字體 */
+            color: #8E1E20; /* 深紅文字 */
+            border-radius: 50px; 
+            font-weight: bold; 
             cursor: pointer; 
-            transition: 0.3s;
+            transition: all 0.3s ease;
+            font-family: 'Noto Serif TC', serif;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
+        
+        /* 按鈕選中與滑過的狀態 */
         .cat-btn.active, .cat-btn:hover {
-            background: #D4AF37;
-            color: #fff;
-            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
+            background: #8E1E20; /* 變成深紅底 */
+            color: #fff; /* 白字 */
+            border-color: #8E1E20;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
         }
 
-        /* 隱藏桌菜分類 (維持原邏輯) */
-        .cat-btn[onclick*="6600桌菜"],
-        .cat-btn[onclick*="3800桌菜"] { display: none !important; }
-
-        /* 手機版適應：縮小字體防止破版 */
+        /* 手機版微調 */
         @media (max-width: 768px) {
-            h1 { font-size: 3rem; letter-spacing: 5px; }
-            header::before, header::after { display: none; } /* 手機版拿掉側邊裝飾 */
+            header { min-height: 250px; } /* 手機版高度稍微縮小 */
+            .cat-btn { padding: 8px 16px; font-size: 1rem; }
         }
         /* --- 主要內容佈局 --- */
         .container { max-width: 96%; margin: 0 auto; display: flex; gap: 25px; position: relative; align-items: flex-start; }
@@ -342,11 +309,6 @@
     <div class="cny-background"></div>
     <div class="cny-overlay"></div>
     <header id="mainHeader">
-    <div class="plaque-content">
-        <h1>美鳳的家</h1>
-        <div class="sub-title">經典熱銷款 冰箱常備的安心美味🍜</div>
-    </div>
-    
     <div class="category-wrapper" id="catWrapper">
         <div class="category-bar">
             <button class="cat-btn active" onclick="filterCategory('全部')">全部</button>
@@ -361,7 +323,6 @@
         </div>
     </div>
 </header>
-
     <div class="container">
         
         <div class="left-column">
@@ -1210,6 +1171,7 @@
   }
 </script>
 </html>
+
 
 
 
