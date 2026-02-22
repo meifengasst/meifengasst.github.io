@@ -39,32 +39,38 @@
             background-color: transparent; pointer-events: none;
         }
         
-        /* --- 🎨 標題與導航樣式更新 --- */
+        /* --- 🎨 標題與導航樣式更新 (美編進化版) --- */
 header { 
     text-align: center; 
-    margin-bottom: 25px; 
-    padding: 30px 20px; 
-    background-color: #FDFBF7; /* 溫暖米白背景 */
-    border-bottom: 1px solid #eee; /* 清爽細邊線 */
-    border-radius: 0 0 15px 15px;
+    /* 將滿版改為置中的圓角浮動區塊 */
+    margin: 15px auto 25px auto; 
+    padding: 20px 15px; 
+    width: 92%;
+    max-width: 1200px;
+    background: rgba(253, 251, 247, 0.95); /* 微透明的米白色，透出微微背景 */
+    backdrop-filter: blur(8px); /* 讓透過去的背景帶有毛玻璃模糊感 */
+    border: 1px solid rgba(212, 175, 55, 0.4); /* 加上極細的淡金邊框提升質感 */
+    border-radius: 20px; /* 圓潤的邊角 */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15); /* 柔和的立體陰影 */
 }
 
 h1 { 
     font-family: 'Noto Serif TC', serif; 
     font-weight: 900; 
-    font-size: 2.8rem; 
+    font-size: 2.6rem; 
     margin: 0; 
     letter-spacing: 4px; 
     color: #8E1E20; /* 經典深紅色 */
-    text-shadow: none; /* 移除過年發光特效 */
+    text-shadow: none; 
 }
 
 /* 標題下方的副標題文字 */
 .sub-title {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     color: #555;
     font-weight: 500;
-    margin-top: 10px;
+    margin-top: 8px;
+    margin-bottom: 15px;
 }
 
 /* 🔥 隱藏桌菜按鈕 (過年再移除此段) */
@@ -792,14 +798,31 @@ h1 {
         function saveCart() { localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart)); }
 
         function renderProducts(filterCat) {
-            const productListEl = document.getElementById("productList"); productListEl.innerHTML = ""; 
-            const filteredProducts = filterCat === '全部' ? products : products.filter(p => p.category === filterCat);
+            const productListEl = document.getElementById("productList"); 
+            productListEl.innerHTML = ""; 
+            
+            // --- 🔧 在此過濾掉不想顯示的商品 ---
+            let filteredProducts = [];
+            
+            if (filterCat === '全部') {
+                // 如果是看「全部」，就排除掉過年專屬的桌菜
+                filteredProducts = products.filter(p => p.category !== '6600桌菜' && p.category !== '3800桌菜');
+            } else {
+                // 如果點選特定分類，就照常顯示
+                filteredProducts = products.filter(p => p.category === filterCat);
+            }
+
             filteredProducts.forEach(product => {
-                const div = document.createElement("div"); div.className = "product-card";
+                const div = document.createElement("div"); 
+                div.className = "product-card";
                 div.innerHTML = `<div class="product-img-box" onclick="openImageModal('${product.image}')" title="點擊放大"><img src="${product.image}" alt="${product.name}" onerror="this.src='https://via.placeholder.com/300?text=圖片準備中'"></div><div class="card-content"><div><span class="product-cat">${product.category}</span><div class="product-name">${product.name}</div></div><div><div class="price">$${product.price}</div><button class="add-btn" onclick="addToCart(${product.id})">＋ 加入訂單</button></div></div>`;
                 productListEl.appendChild(div);
             });
-            document.querySelectorAll('.cat-btn').forEach(btn => { btn.classList.remove('active'); if(btn.innerText === filterCat) btn.classList.add('active'); });
+            
+            document.querySelectorAll('.cat-btn').forEach(btn => { 
+                btn.classList.remove('active'); 
+                if(btn.innerText === filterCat) btn.classList.add('active'); 
+            });
         }
 
         function openImageModal(src) { 
@@ -1154,6 +1177,7 @@ h1 {
   }
 </script>
 </html>
+
 
 
 
