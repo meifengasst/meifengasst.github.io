@@ -40,86 +40,83 @@
             background-color: transparent; pointer-events: none;
         }
         
-        /* --- 🎨 頂部牌匾 頂級精緻版 --- */
+        /* --- 🎨 標題區塊：改成圖片背景模式 --- */
         header { 
             position: relative;
             text-align: center; 
             margin: 25px auto 40px auto; 
-            padding: 45px 20px 35px 20px; 
-            width: 92%;
-            max-width: 1000px;
+            width: 94%;
+            max-width: 1100px;
+            /* 設定高度，確保圖片完整顯示 (可依實際圖片比例微調) */
+            aspect-ratio: 21 / 9; 
+            min-height: 250px; 
             
-            /* 1. 質感宣紙底色：加入極淡的直紋理，讓白底不無聊 */
-            background: 
-                linear-gradient(90deg, rgba(212,175,55,0.03) 1px, transparent 1px) 0 0 / 20px 20px,
-                linear-gradient(to bottom, #FFFDF8, #F4EBE1);
-            
-            border-radius: 12px;
-            
-            /* 2. 多層次立體畫框 (重點！利用陰影做出多層邊框) */
-            border: 1px solid #D4AF37; /* 最外層細金邊 */
-            box-shadow: 
-                0 15px 35px rgba(0,0,0,0.3), /* 讓整個牌匾浮在背景上的大陰影 */
-                inset 0 0 0 5px #FFFDF8,     /* 畫框的內部留白 */
-                inset 0 0 0 9px #8E1E20,     /* 深紅色的主粗框 */
-                inset 0 0 0 11px #D4AF37;    /* 最內層的精緻金線 */
+            /* 🔥 核心：設定背景圖片 🔥 */
+            /* 請將下面的 '你的圖片網址.png' 換成你實際上傳後的圖片連結 */
+            background-image: url('你的圖片網址.png'); 
+            background-size: contain; /* 確保圖片完整顯示不裁切 */
+            background-position: center top;
+            background-repeat: no-repeat;
+
+            /* 移除原本的邊框和陰影，因為圖片裡都有了 */
+            border: none;
+            box-shadow: none;
+            background-color: transparent;
+            border-radius: 0;
+            padding: 0;
+
+            /* 使用 Flex 來對齊底部的隱形按鈕 */
+            display: flex;
+            align-items: flex-end; /* 靠底部對齊 */
+            justify-content: center;
+            padding-bottom: 2%; /* 微調底部距離，對準圖片上的按鈕位置 */
         }
 
-        /* --- 標題字體：立體金邊浮雕效果 --- */
-        h1 { 
-            font-family: 'Ma Shan Zheng', 'Noto Serif TC', serif; 
-            font-weight: normal; 
-            font-size: 3.8rem; /* 微調大小，讓比例更優雅 */
-            margin: 0 0 12px 0; 
-            letter-spacing: 6px; 
-            color: #8E1E20; 
-            /* 利用多重陰影做出立體、鑲金邊的感覺 */
-            text-shadow: 
-                1px 1px 0px #FFF, 
-                2px 2px 0px #D4AF37, 
-                4px 4px 8px rgba(0,0,0,0.2);
-        }
+        /* 原本的文字樣式都可以刪除了，因為 HTML 裡已經沒有文字 */
+        h1, .sub-title { display: none; }
 
-        /* --- 副標題：典雅細緻 --- */
-        .sub-title {
-            font-family: 'Noto Serif TC', serif;
-            font-size: 1.25rem;
-            color: #4A4A4A;
-            font-weight: 600;
-            margin-bottom: 25px;
-            letter-spacing: 2px;
-        }
-
-        /* 🔥 隱藏過年的桌菜按鈕 */
+        /* 🔥 隱藏過年的桌菜按鈕 (保持不變) */
         .cat-btn[onclick*="6600桌菜"],
         .cat-btn[onclick*="3800桌菜"] { 
             display: none !important; 
         }
 
-        /* --- 按鈕精緻化：改為符合牌匾風格的典雅設計 --- */
-        .category-wrapper { position: relative; z-index: 2; margin-top: 5px; }
-        .category-bar { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+        /* --- 按鈕透明化：變成隱形的可點擊區域 --- */
+        .category-wrapper { 
+            width: 90%; /* 控制按鈕區塊寬度，對齊圖片設計 */
+            margin-bottom: 15px; /* 向上推一點，對準圖片 */
+        }
+        .category-bar { 
+            display: flex; 
+            justify-content: space-between; /* 讓按鈕平均分散對齊圖片 */
+            gap: 5px; 
+            flex-wrap: nowrap; /* 強制不換行 */
+        }
         .cat-btn { 
-            padding: 8px 22px; 
-            font-size: 1.05rem; 
-            border: 1px solid rgba(142,30,32,0.3); /* 淡淡的紅框 */
-            color: #8E1E20; 
-            background: #fff; 
-            border-radius: 6px; /* 拿掉大圓角，改為更有質感的微圓角 */
-            cursor: pointer; 
-            transition: all 0.3s; 
-            font-weight: 600; 
-            font-family: 'Noto Serif TC', serif;
-            letter-spacing: 1px;
+            /* 讓按鈕變透明，只保留位置和點擊功能 */
+            padding: 10px 5px; 
+            font-size: 1rem; 
+            border: none;
+            background: transparent; /* 透明背景 */
+            color: transparent;      /* 透明文字 (因為圖片上有了) */
+            cursor: pointer;
+            flex-grow: 1; /* 讓每個按鈕平均佔滿空間 */
+            border-radius: 50px;
         }
         
-        /* 按鈕滑過與選中時的質感紅底金字 */
-        .cat-btn:hover, .cat-btn.active { 
-            background: linear-gradient(135deg, #8E1E20 0%, #6B1315 100%);
-            color: #FFFDF8; 
-            border-color: #8E1E20; 
-            box-shadow: 0 4px 10px rgba(142,30,32,0.3); 
-            transform: translateY(-2px); 
+        /* 滑鼠移過去時，顯示一點點半透明黃色，讓使用者知道這裡可以點 */
+        .cat-btn:hover { 
+            background: rgba(255, 215, 0, 0.2); 
+        }
+        /* 選中時，顯示明顯一點的半透明黃色 */
+        .cat-btn.active { 
+             background: rgba(255, 215, 0, 0.4); 
+        }
+        /* --- 手機版微調 --- */
+        @media (max-width: 768px) {
+            header { width: 98%; margin-top: 15px; }
+            .category-wrapper { width: 95%; margin-bottom: 5%; }
+            .cat-btn { padding: 5px 2px; }
         }
         
         /* 分類按鈕與 Sticky 效果 */
@@ -337,9 +334,6 @@
     <div class="cny-background"></div>
     <div class="cny-overlay"></div>
     <header id="mainHeader">
-    <h1>美鳳的家</h1>
-    <div class="sub-title">經典熱銷款   冰箱常備的安心美味🍜</div>
-    
     <div class="category-wrapper" id="catWrapper">
         <div class="category-bar">
             <button class="cat-btn active" onclick="filterCategory('全部')">全部</button>
@@ -1203,6 +1197,7 @@
   }
 </script>
 </html>
+
 
 
 
