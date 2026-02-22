@@ -42,76 +42,93 @@
         
      /* --- 🎨 官網頂部：富貴滿堂全寬美編版 --- */
         /* --- 🎨 官網頂部：圖片看板模式 (使用 image_17.png) --- */
+        /* --- 🎨 官網頂部：精緻鑲邊圖片版 --- */
         header { 
             position: relative;
-            margin: 0; 
-            width: 100%;
-            /* 設定最小高度，確保圖片有足夠空間顯示 (可依實際需求調整) */
-            min-height: 350px; 
-            
-            /* 🔥 核心：設定背景圖片 🔥 */
-            /* 請確保 image_17.png 已經上傳到您的網站目錄中 */
-            background-image: url('image_17.png'); 
-            background-size: cover; /* 讓圖片鋪滿整個區塊 */
-            background-position: center center; /* 圖片置中對齊 */
-            background-repeat: no-repeat;
-
-            /* 使用 Flex 佈局將按鈕對齊到下方 */
+            margin: 20px auto; /* 上下留點空隙 */
+            width: 96%; /* 左右留點邊 */
+            max-width: 1200px; /* 限制最大寬度，大螢幕更好看 */
             display: flex;
-            align-items: flex-end; 
-            justify-content: center;
-            padding-bottom: 30px; /* 按鈕距離底部的空間 */
-            
-            /* 底部加一條深紅線做收尾，提升質感 */
-            border-bottom: 4px solid #8E1E20;
+            flex-direction: column; /* 讓圖片和按鈕垂直排列 */
+            align-items: center;
+            /* 移除原本的背景和邊框設定 */
+            background: transparent;
+            border: none;
+            padding: 0;
+            min-height: auto;
         }
 
-        /* 確保舊的文字元素不會跑出來干擾 */
+        /* 確保舊的文字元素不會跑出來 */
         h1, .sub-title, .plaque-content { display: none !important; }
-
-        /* 🔥 隱藏過年的桌菜按鈕 (維持不變) */
+        /* 🔥 隱藏過年的桌菜按鈕 */
         .cat-btn[onclick*="6600桌菜"],
         .cat-btn[onclick*="3800桌菜"] { display: none !important; }
 
-        /* --- 按鈕樣式 (調整為適合花布背景的風格) --- */
+
+        /* --- ✨ 核心美編：圖片的裝飾畫框 ✨ --- */
+        .banner-frame {
+            width: 100%;
+            /* 邊框設計：利用 padding 和背景色做出內襯 */
+            padding: 8px; 
+            background-color: #8E1E20; /* 深紅內襯底色 */
+            border-radius: 12px; /* 圓潤邊角 */
+            
+            /* 利用 box-shadow 做出多層次金紅邊框和立體感 */
+            box-shadow: 
+                0 0 0 3px #D4AF37, /* 內圈細金邊 */
+                0 0 0 7px #a02d2f, /* 外圈深紅框 */
+                0 15px 35px rgba(0,0,0,0.5); /* 強烈的立體陰影 */
+        }
+
+        /* 圖片本體設定 */
+        .banner-img {
+            width: 100%;     /* 寬度佔滿畫框 */
+            height: auto;    /* 🔥 關鍵：高度自動，維持原比例不變形！ */
+            display: block;  /* 消除圖片底部縫隙 */
+            border-radius: 6px; /* 讓圖片本身也有小圓角 */
+        }
+
+
+        /* --- 按鈕區塊調整 --- */
         .category-wrapper { 
-            width: 92%; 
-            max-width: 900px;
+            width: 100%; 
+            margin-top: 30px; /* 與上方圖片拉開距離 */
             z-index: 2; 
         }
         .category-bar { 
             display: flex; 
             justify-content: center; 
-            gap: 10px; 
+            gap: 12px; 
             flex-wrap: wrap; 
         }
+        /* 按鈕樣式 (維持白底金紅邊風格) */
         .cat-btn { 
-            padding: 10px 24px; 
+            padding: 10px 25px; 
             font-size: 1.1rem; 
-            /* 使用半透明白底，讓文字在花布上清晰可見 */
-            background: rgba(255, 255, 255, 0.85); 
-            border: 2px solid #8E1E20; /* 深紅邊框呼應字體 */
-            color: #8E1E20; /* 深紅文字 */
+            background: #fff; 
+            border: 2px solid #D4AF37; /* 金邊 */
+            color: #8E1E20; /* 深紅字 */
             border-radius: 50px; 
             font-weight: bold; 
             cursor: pointer; 
             transition: all 0.3s ease;
             font-family: 'Noto Serif TC', serif;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
-        
-        /* 按鈕選中與滑過的狀態 */
+        /* 按鈕選中與滑過狀態 */
         .cat-btn.active, .cat-btn:hover {
-            background: #8E1E20; /* 變成深紅底 */
-            color: #fff; /* 白字 */
-            border-color: #8E1E20;
+            background: linear-gradient(135deg, #D4AF37 0%, #c49f27 100%); /* 金色漸層底 */
+            color: #fff;
+            border-color: transparent;
             transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.5);
         }
 
         /* 手機版微調 */
         @media (max-width: 768px) {
-            header { min-height: 250px; } /* 手機版高度稍微縮小 */
+            header { width: 98%; margin-top: 15px; }
+            .banner-frame { padding: 4px; box-shadow: 0 0 0 2px #D4AF37, 0 0 0 5px #a02d2f, 0 10px 20px rgba(0,0,0,0.4); } /* 手機版邊框細一點 */
+            .category-wrapper { margin-top: 20px; }
             .cat-btn { padding: 8px 16px; font-size: 1rem; }
         }
         /* --- 主要內容佈局 --- */
@@ -309,6 +326,10 @@
     <div class="cny-background"></div>
     <div class="cny-overlay"></div>
     <header id="mainHeader">
+    <div class="banner-frame">
+        <img src="image_17.png" alt="美鳳的家-三灣客家風味" class="banner-img">
+    </div>
+    
     <div class="category-wrapper" id="catWrapper">
         <div class="category-bar">
             <button class="cat-btn active" onclick="filterCategory('全部')">全部</button>
@@ -1171,6 +1192,7 @@
   }
 </script>
 </html>
+
 
 
 
