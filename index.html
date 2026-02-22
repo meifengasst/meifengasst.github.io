@@ -39,30 +39,55 @@
             background-color: transparent; pointer-events: none;
         }
         
-        /* --- 標題與導航 --- */
-        /* 1. 將 header 背景改為米白色，移除金色邊框 */
-        header { 
+        /* --- 🎨 標題與導航樣式更新 --- */
+header { 
     text-align: center; 
     margin-bottom: 25px; 
     padding: 30px 20px; 
-    background-color: #FDFBF7; /* 溫暖米白 */
-    border-bottom: 1px solid #eee; /* 改為淡灰色細線 */
-        }
-/* 2. 修改標題顏色，移除過年發光特效 */
+    background-color: #FDFBF7; /* 溫暖米白背景 */
+    border-bottom: 1px solid #eee; /* 清爽細邊線 */
+    border-radius: 0 0 15px 15px;
+}
+
 h1 { 
     font-family: 'Noto Serif TC', serif; 
     font-weight: 900; 
-    font-size: 2.5rem; 
-    margin-top: 0; 
-    margin-bottom: 10px; 
-    letter-spacing: 2px; 
-    color: #8E1E20; /* 深紅色字體 */
-    text-shadow: none; /* 移除陰影 */
+    font-size: 2.8rem; 
+    margin: 0; 
+    letter-spacing: 4px; 
+    color: #8E1E20; /* 經典深紅色 */
+    text-shadow: none; /* 移除過年發光特效 */
 }
-        /* 3. 加入這段：隱藏特定的桌菜按鈕 */
+
+/* 標題下方的副標題文字 */
+.sub-title {
+    font-size: 1.4rem;
+    color: #555;
+    font-weight: 500;
+    margin-top: 10px;
+}
+
+/* 🔥 隱藏桌菜按鈕 (過年再移除此段) */
 .cat-btn[onclick*="6600桌菜"],
 .cat-btn[onclick*="3800桌菜"] { 
     display: none !important; 
+}
+
+/* 讓剩餘的按鈕呈現更日常的清爽感 */
+.cat-btn { 
+    padding: 10px 24px; 
+    font-size: 1.1rem; 
+    border: 1px solid #ddd; 
+    color: #666; 
+    background: white; 
+    border-radius: 50px; 
+    cursor: pointer; 
+    transition: 0.3s; 
+}
+.cat-btn.active, .cat-btn:hover {
+    background: #8E1E20;
+    color: white;
+    border-color: #8E1E20;
 }
         
         /* 分類按鈕與 Sticky 效果 */
@@ -281,9 +306,7 @@ h1 {
     <div class="cny-overlay"></div>
     <header id="mainHeader">
     <h1>美鳳的家</h1>
-    <div style="font-size: 1.5rem; color: #666; font-weight: 500;">
-        經典熱銷款 冰箱常備的安心美味🍜
-    </div>
+    <div class="sub-title">經典熱銷款   冰箱常備的安心美味🍜</div>
     
     <div class="category-wrapper" id="catWrapper">
         <div class="category-bar">
@@ -1131,6 +1154,7 @@ h1 {
   }
 </script>
 </html>
+
 
 
 
