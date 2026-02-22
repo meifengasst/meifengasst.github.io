@@ -40,16 +40,30 @@
         }
         
         /* --- 標題與導航 --- */
+        /* 1. 將 header 背景改為米白色，移除金色邊框 */
         header { 
-            text-align: center; margin-bottom: 25px; padding-bottom: 15px; border-bottom: 2px solid rgba(255, 215, 0, 0.6); 
+    text-align: center; 
+    margin-bottom: 25px; 
+    padding: 30px 20px; 
+    background-color: #FDFBF7; /* 溫暖米白 */
+    border-bottom: 1px solid #eee; /* 改為淡灰色細線 */
         }
-
-        h1 { 
-            font-family: 'Noto Serif TC', serif; font-weight: 900; font-size: 3.5rem; margin-top: 0; margin-bottom: 15px; letter-spacing: 4px; 
-            background-image: linear-gradient(to bottom, #FFF8D9 0%, #FFD700 30%, #FFC125 60%, #DAA520 100%);
-            background-clip: text; -webkit-background-clip: text; color: transparent;
-            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2), 0 0 25px rgba(255, 223, 0, 0.8), 0 0 50px rgba(255, 215, 0, 0.4);
-        }
+/* 2. 修改標題顏色，移除過年發光特效 */
+h1 { 
+    font-family: 'Noto Serif TC', serif; 
+    font-weight: 900; 
+    font-size: 2.5rem; 
+    margin-top: 0; 
+    margin-bottom: 10px; 
+    letter-spacing: 2px; 
+    color: #8E1E20; /* 深紅色字體 */
+    text-shadow: none; /* 移除陰影 */
+}
+        /* 3. 加入這段：隱藏特定的桌菜按鈕 */
+.cat-btn[onclick*="6600桌菜"],
+.cat-btn[onclick*="3800桌菜"] { 
+    display: none !important; 
+}
         
         /* 分類按鈕與 Sticky 效果 */
         .category-wrapper { width: 100%; transition: all 0.3s ease; }
@@ -1113,6 +1127,7 @@
   }
 </script>
 </html>
+
 
 
 
