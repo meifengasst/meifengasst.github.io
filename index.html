@@ -40,11 +40,11 @@
             background-color: transparent; pointer-events: none;
         }
         
-    /* --- 🎨 官網看板：比例精修版 (精緻小巧) --- */
+    /* --- 🎨 官網看板：縮小比例精修版 --- */
         header { 
             position: relative;
             text-align: center;
-            margin: 15px auto 25px auto; /* 縮減間距，讓整體更緊湊 */
+            margin: 20px auto 30px auto; 
             width: 100%;
             display: flex;
             flex-direction: column;
@@ -54,47 +54,49 @@
             padding: 0;
         }
 
-        /* --- ✨ 核心美編：精緻比例的畫框 ✨ --- */
+        /* --- ✨ 核心美編：精緻小巧的畫框 ✨ --- */
         .banner-frame {
-            /* 🔥 關鍵點：進一步縮小寬度，展現精緻感 */
-            width: 80%;      
-            max-width: 500px; /* 從 700px 降到 500px，比例最合適 */
+            /* 🔥 關鍵點：縮小寬度，讓它不再巨大 */
+            width: 85%;      /* 手機版占比較大 */
+            max-width: 700px; /* 電腦版限制最大寬度為 700px，非常適中 */
             
-            padding: 6px;    /* 內縮邊框稍微縮減，更細膩 */
-            background-color: #8E1E20; 
+            padding: 8px; /* 內縮空間做出紅襯底 */
+            background-color: #8E1E20; /* 深紅襯底 */
             border-radius: 8px;
             position: relative;
             
-            /* 鑲金邊與更柔和的立體陰影 */
-            border: 2px solid #D4AF37; 
+            /* 做出「鑲金邊」的高級感 */
+            border: 2px solid #D4AF37; /* 實體金邊 */
             box-shadow: 
-                0 8px 20px rgba(0,0,0,0.4), 
-                0 0 10px rgba(212, 175, 55, 0.2); 
+                0 10px 25px rgba(0,0,0,0.5), /* 底部重陰影做出懸掛感 */
+                0 0 15px rgba(212, 175, 55, 0.3); /* 微微的金光 */
         }
 
         /* 圖片本體：維持比例 */
         .banner-img {
             width: 100%;
-            height: auto; 
+            height: auto; /* 🔥 維持原比例不變形 */
             display: block;
             border-radius: 4px;
+            /* 讓圖片色彩更鮮豔一點 */
+            filter: saturate(1.1) contrast(1.05);
         }
 
-        /* --- 分類按鈕：微縮尺寸以配合精緻標題 --- */
+        /* --- 分類按鈕微調 --- */
         .category-wrapper { 
             width: 100%; 
-            margin-top: 15px; /* 緊貼圖片，視覺效果更一體 */
+            margin-top: 20px; /* 縮短與圖片的間距 */
             z-index: 2; 
         }
         .category-bar { 
             display: flex; 
             justify-content: center; 
-            gap: 8px; 
+            gap: 10px; 
             flex-wrap: wrap; 
         }
         .cat-btn { 
-            padding: 6px 16px; /* 按鈕稍微縮小，更優雅 */
-            font-size: 0.95rem; 
+            padding: 8px 18px; 
+            font-size: 1rem; 
             background: #fff; 
             border: 1.5px solid #D4AF37; 
             color: #8E1E20; 
@@ -108,17 +110,16 @@
             background: #D4AF37;
             color: #fff;
             border-color: #D4AF37;
-            transform: translateY(-1px); /* 輕微浮動即可 */
+            transform: translateY(-2px);
         }
 
-        /* 隱藏桌菜邏輯保持不變 */
+        /* 隱藏桌菜邏輯 */
         .cat-btn[onclick*="桌菜"] { display: none !important; }
 
-        /* 手機版適應 */
+        /* 手機版微調 */
         @media (max-width: 768px) {
-            .banner-frame { width: 90%; max-width: none; }
-            .category-bar { gap: 6px; }
-            .cat-btn { padding: 5px 12px; font-size: 0.9rem; }
+            .banner-frame { width: 92%; max-width: none; padding: 4px; }
+            h1 { font-size: 2.2rem; }
         }
         /* --- 主要內容佈局 --- */
         .container { max-width: 96%; margin: 0 auto; display: flex; gap: 25px; position: relative; align-items: flex-start; }
@@ -1181,6 +1182,7 @@
   }
 </script>
 </html>
+
 
 
 
