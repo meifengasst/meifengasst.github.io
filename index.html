@@ -68,40 +68,54 @@
         }
 
         /* --- 📸 照片牆核心樣式 (區域 1 & 2) --- */
+        /* --- 📸 照片牆核心樣式 (填滿空間加強版) --- */
         .photo-wall {
             position: absolute;
-            top: 0;
-            width: 120px; /* 照片牆寬度 */
-            height: 250px;
+            /* 向上延伸，填滿更多垂直空間 */
+            top: -50px; 
+            /* 🔥 關鍵：加大寬度 (原120px -> 220px) */
+            width: 220px; 
+            /* 🔥 關鍵：大幅拉高高度，確保視覺上填滿兩側 */
+            height: 800px; 
             overflow: hidden;
-            opacity: 0.6; /* 降低透明度，當作精緻背景 */
-            mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
-            -webkit-mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
+            /* 稍微提高不透明度，讓照片更清楚一點 */
+            opacity: 0.7; 
+            /* 調整邊緣羽化遮罩，讓上下邊界更自然融合 */
+            mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+            -webkit-mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
             z-index: 1;
+            /* 讓滑鼠指過去時不會擋到後面的點擊 */
+            pointer-events: none;
         }
-        .left-wall { left: 2%; }
-        .right-wall { right: 2%; }
+        /* 讓兩側更貼近螢幕邊緣 */
+        .left-wall { left: 0; }
+        .right-wall { right: 0; }
 
         .photo-track {
             display: flex;
             flex-direction: column;
-            gap: 10px;
-            animation: scrollWall 15s linear infinite;
+            gap: 15px; /* 增加一點照片間距 */
+            /* 調整動畫時間，因為照片變大了，速度要微調 */
+            animation: scrollWall 25s linear infinite;
         }
         .photo-track.reverse { animation-direction: reverse; }
 
         .photo-track img {
-            width: 100px;
-            height: 100px;
+            /* 🔥 關鍵：照片尺寸跟著放大 (原100px -> 180px) */
+            width: 180px;
+            height: 180px;
             object-fit: cover;
-            border-radius: 10px;
-            border: 2px solid #D4AF37;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            border-radius: 12px;
+            /* 金邊稍微加粗 */
+            border: 3px solid #D4AF37;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
         }
 
+        /* 重新計算捲動距離 (基於新的照片大小 180px + 間距 15px) */
         @keyframes scrollWall {
             0% { transform: translateY(0); }
-            100% { transform: translateY(-50%); }
+            /* 捲動大約 4 張照片的高度，確保無縫循環 */
+            100% { transform: translateY(-calc((180px + 15px) * 4)); }
         }
 
         /* --- ✨ 320px 精緻 Banner --- */
@@ -1256,6 +1270,7 @@
   }
 </script>
 </html>
+
 
 
 
