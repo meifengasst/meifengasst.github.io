@@ -245,12 +245,24 @@
         .ticker-text { display: inline-block; padding-left: 100%; animation: scroll-left 12s linear infinite; color: #FFF; font-weight: bold; font-size: 1rem; letter-spacing: 1px; }
         @keyframes scroll-left { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
         
-        /* 資訊公告區塊 */
-        .shop-info, .notice-section { border-radius: 12px; font-size: 0.9rem; line-height: 1.5; }
-        .shop-info { margin-bottom: 20px; color: #555; text-align: center; background: #fafafa; padding: 15px; border: 1px solid #eee; }
+      /* 資訊公告區塊 */
+        /* 🔥 整體內文字體稍微加大 (0.9rem -> 1.05rem) ，行距拉開一點點更易讀 */
+        .shop-info, .notice-section { border-radius: 12px; font-size: 1.05rem; line-height: 1.6; }
+        
+        /* 🔥 內文顏色加深 (淺灰 #555 -> 深黑 #333) */
+        .shop-info { margin-bottom: 20px; color: #333; text-align: center; background: #fafafa; padding: 18px 15px; border: 1px solid #ddd; }
         .notice-section { background: rgba(255, 248, 220, 0.95); padding: 20px; border: 2px solid var(--accent-color); box-shadow: 0 5px 15px rgba(0,0,0,0.1); margin-top: 25px; }
         
-        .shop-info h3, .notice-section h3 { font-family: 'Noto Serif TC', serif; border-bottom: 1px dashed #ccc; padding-bottom: 5px; margin-top: 0; }
+        /* 🔥 頂部標題(h3) 大幅加大、加粗、顏色加到最深 */
+        .shop-info h3, .notice-section h3 { 
+            font-family: 'Noto Serif TC', serif; 
+            border-bottom: 2px dashed #ccc; /* 底線順便加粗一點 */
+            padding-bottom: 10px; 
+            margin-top: 0; 
+            font-size: 1.5rem; /* 標題大幅加大 */
+            font-weight: 900;  /* 字體極致加粗 */
+            color: #111;       /* 顏色極致加深 */
+        }
         .info-item, .notice-item { margin-bottom: 15px; text-align: left; }
         .shop-info .info-item { border-bottom: 1px solid #eee; padding-bottom: 10px; }
         .shop-info .info-item:last-child { border-bottom: none; }
@@ -493,7 +505,7 @@
                     <iframe src="https://www.youtube.com/embed/nrJOspkgeWw?controls=0&autoplay=1&mute=1&loop=1&playlist=M76_2Yu6zoo,vDXSZDidzGA,YUifqRLUQGY&t=2345s,SHta9dzSySo,oxEPNX4Af4M&rel=0" 
                             frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                 </div>
-                <div class="media-label">🎥 媒體專訪與品牌影音</div>
+                <div class="media-label">🎥 媒體專訪 & YTR推薦</div>
             </div>
 
         </div>
@@ -517,15 +529,6 @@
         <div class="left-column">
             <div class="site-logo-container">
                 <img src="image_14.png" alt="美鳳的家 Logo" class="site-logo">
-            </div>
-
-            <div class="video-ticker-btn" onclick="playInterviewVideo()">
-                <div class="ticker-icon">▶</div>
-                <div class="ticker-wrapper">
-                    <div class="ticker-text">
-                        📢 狂賀！【美鳳的家】屢屢受邀 知名媒體/YTers專訪！點擊觀看精彩採訪影片 🎥
-                    </div>
-                </div>
             </div>
 
             <div class="shop-info">
@@ -1382,6 +1385,7 @@
   }
 </script>
 </html>
+
 
 
 
