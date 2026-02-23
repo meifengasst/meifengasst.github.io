@@ -131,7 +131,7 @@
         ======================================= */
         .category-wrapper { 
             position: sticky; top: 15px; 
-            z-index: 50; /* 降低圖層確保不蓋住彈窗 */
+            z-index: 50; 
             width: 100%; margin-bottom: 25px; background: transparent; 
             border-bottom: 2px solid transparent; box-shadow: none; backdrop-filter: none;
             transition: all 0.4s ease; pointer-events: none; 
@@ -142,7 +142,6 @@
             max-width: 1200px; margin: 0 auto; pointer-events: auto; transition: padding 0.4s ease; 
         }
 
-        /* 下滑超過 50px 觸發的深紅玻璃色塊 */
         .category-wrapper.scrolled {
             top: 0; background: rgba(142, 30, 32, 0.95); backdrop-filter: blur(8px); 
             box-shadow: 0 4px 15px rgba(0,0,0,0.4); border-bottom: 2px solid #D4AF37; pointer-events: auto;
@@ -330,9 +329,6 @@
             body { padding: 10px 15px 100px 15px; }
         }
         
-        .fade-update { animation: fadeInText 0.5s ease-in-out; }
-        @keyframes fadeInText { 0% { opacity: 0; transform: translateY(5px); } 100% { opacity: 1; transform: translateY(0); } }
-
         /* 遮罩層 (年節公告) */
         #holiday-modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.75); z-index: 10005; display: none; justify-content: center; align-items: center; backdrop-filter: blur(4px); }
         #holiday-modal-box { position: relative; width: 90%; max-width: 650px; animation: popIn 0.3s ease-out; }
@@ -1097,6 +1093,13 @@
             });
         }
 
+        // ==========================================
+        // 🔥 新春休假圖片自動彈出邏輯 (已重新為妳開啟！)
+        // ==========================================
+        window.addEventListener('load', function() {
+            setTimeout(() => { document.getElementById('holiday-modal-overlay').style.display = 'flex'; }, 600); 
+        });
+        
         function closeHolidayModal() { 
             const modal = document.getElementById('holiday-modal-overlay');
             if(modal) modal.style.display = 'none'; 
