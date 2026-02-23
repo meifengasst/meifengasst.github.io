@@ -836,9 +836,7 @@
             initSalesTicker(); // 啟動跑馬燈
 
             // 🔥 載入時自動跳出公告視窗
-            // 🔥 載入時自動跳出公告視窗
             Swal.fire({
-                // 修改 1：標題更新
                 title: '📢 內用公告',
                 html: `
                     <div style="text-align: left; font-weight: bold; color: #333; line-height: 1.5; font-size: 0.95rem; max-height: 50vh; overflow-y: auto; padding-right: 5px;">
@@ -899,7 +897,8 @@
                 background: '#fff',
                 backdrop: `rgba(0,0,0,0.6)`
             });
-};
+            
+        }; // 🚨🚨🚨 關鍵的救命括號在這裡！有了它，商品就會回來了！ 🚨🚨🚨
         window.onscroll = function() {
             const backTopBtn = document.getElementById("backTopBtn");
             backTopBtn.style.display = (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) ? "flex" : "none";
@@ -1367,6 +1366,7 @@
   }
 </script>
 </html>
+
 
 
 
