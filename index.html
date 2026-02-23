@@ -31,23 +31,26 @@
             scroll-behavior: smooth;
         }
 
+        /* =======================================
+           1. 替換背景圖設定
+        ======================================= */
         .cny-background {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; 
-            /* 🔥 關鍵在這裡：把 url 裡面的檔名，換成妳新上傳的圖片檔名 */
+            
+            /* 🔥 將 new_bg.jpg 換成妳新上傳的圖片檔名 */
             background-image: url('new_bg.jpg'); 
             
-            /* 👇 根據妳的圖片類型，選擇對應的設定 (二選一) */
+            /* 讓新底圖完美填滿整個螢幕，不重複 */
+            background-repeat: no-repeat; 
+            background-size: cover; 
+            background-position: center; 
             
-            /* 情況 A：如果是「一整張大圖」(例如風景、店面照)，請用這行，刪除情況 B */
-            background-repeat: no-repeat; background-size: cover; background-position: center; filter: brightness(0.8); /* brightness 可讓底圖稍微變暗，字比較清楚 */
-            
-            /* 情況 B：如果是「小圖案重複拼貼」(例如木紋、幾何小圖)，請用這行，刪除情況 A */
-            /* background-repeat: repeat; background-size: 400px auto; filter: none; */
+            /* 如果新底圖太亮導致字看不清楚，可以把 1 改成 0.8 或更低來微調亮度 */
+            filter: brightness(0.9); 
         }
-        
+
         .cny-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; 
-            /* 如果換了底圖覺得太花，可以加一點半透明遮罩讓畫面乾淨點，例如 rgba(255,255,255,0.3) */
             background-color: transparent; pointer-events: none;
         }
         
@@ -155,9 +158,15 @@
             flex: 1; display: flex; align-items: center; justify-content: center; gap: 20px;
         }
 
+        /* =======================================
+           2. 放大中央 Banner
+        ======================================= */
         .banner-frame {
-            width: 100%; max-width: 320px; 
-            padding: 6px; background: #8E1E20; border-radius: 15px; border: 2px solid #D4AF37;
+            width: 100%; 
+            /* 🔥 寬度從 320px 大幅放大到 400px */
+            max-width: 400px; 
+            padding: 8px; /* 邊框稍微加粗配合大尺寸 */
+            background: #8E1E20; border-radius: 15px; border: 2px solid #D4AF37;
             animation: goldenGlow 3s ease-in-out infinite alternate;
         }
         @keyframes goldenGlow {
@@ -165,11 +174,23 @@
             100% { box-shadow: 0 8px 20px rgba(0,0,0,0.5), 0 0 25px rgba(212, 175, 55, 0.7); }
         }
         .banner-img { width: 100%; height: auto; display: block; border-radius: 10px; outline: 1.5px solid rgba(212, 175, 55, 0.5); outline-offset: -4px;}
+        @keyframes goldenGlow {
+            0% { box-shadow: 0 5px 15px rgba(0,0,0,0.4), 0 0 8px rgba(212, 175, 55, 0.2); }
+            100% { box-shadow: 0 8px 20px rgba(0,0,0,0.5), 0 0 25px rgba(212, 175, 55, 0.7); }
+        }
+        .banner-img { width: 100%; height: auto; display: block; border-radius: 10px; outline: 1.5px solid rgba(212, 175, 55, 0.5); outline-offset: -4px;}
 
-        /* --- 🎖️ 還原：90px 大徽章浮動 --- */
-        .side-badges { display: flex; flex-direction: column; gap: 20px; }
+        /* =======================================
+           3. 放大四個徽章
+        ======================================= */
+        .side-badges { display: flex; flex-direction: column; gap: 25px; } /* 稍微加大徽章之間的上下間距 */
+        
         .badge-item {
-            width: 90px; height: 90px; border: 3px solid #D4AF37;
+            /* 🔥 尺寸從 90px 放大到 110px */
+            width: 110px; 
+            height: 110px; 
+            
+            border: 3px solid #D4AF37;
             background: linear-gradient(135deg, #8E1E20 0%, #6B1315 100%);
             border-radius: 50%; display: flex; align-items: center; justify-content: center;
             box-shadow: 0 6px 15px rgba(0,0,0,0.4); animation: floatBadge 3s ease-in-out infinite;
@@ -178,9 +199,15 @@
         .right .badge-item:nth-child(1) { animation-delay: 0.2s; }
         .right .badge-item:nth-child(2) { animation-delay: 0.7s; }
         @keyframes floatBadge { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
-        .badge-item span { color: #FFF; font-size: 1.1rem; font-weight: bold; line-height: 1.3; text-shadow: 1px 1px 3px rgba(0,0,0,0.8); font-family: 'Noto Serif TC', serif; text-align: center; }
-
-
+        
+        .badge-item span { 
+            color: #FFF; 
+            /* 🔥 字體跟著稍微放大 (從 1.1rem 變成 1.25rem) */
+            font-size: 1.25rem; 
+            font-weight: bold; line-height: 1.3; text-shadow: 1px 1px 3px rgba(0,0,0,0.8); 
+            font-family: 'Noto Serif TC', serif; text-align: center; 
+        }
+        
         /* --- 💎 還原：白底金邊分類按鈕與 Sticky 置頂 --- */
         .category-wrapper { width: 100%; margin-top: 15px; z-index: 1000; transition: all 0.3s ease; }
         .category-bar { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
@@ -1339,6 +1366,7 @@
   }
 </script>
 </html>
+
 
 
 
