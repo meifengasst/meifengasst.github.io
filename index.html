@@ -332,10 +332,26 @@
         }
 
         /* =======================================
-           ✨ 商品卡片：下方白色內容區塊美編
+           ✨ 完整商品列表區塊 (排版防護 + 精緻美編)
         ======================================= */
+        
+        /* 1. 外層格線排版 (確保三排並列) */
+        .product-list { flex: 3; display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; align-content: start; }
+        
+        /* 2. 卡片本體外框 (確保有白底和圓角) */
+        .product-card { background: rgba(255, 255, 255, 0.95); border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); overflow: hidden; display: flex; flex-direction: column; transition: transform 0.3s; border: 1px solid rgba(0,0,0,0.02); }
+        .product-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.15); }
+        
+        /* 3. 圖片區塊限制 (🚨 就是少了這個，魚才會暴走！) */
+        .product-img-box { width: 100%; height: 280px; background-color: #eee; overflow: hidden; cursor: zoom-in; position: relative; }
+        .product-img-box img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+        .product-card:hover .product-img-box img { transform: scale(1.1); }
+        .product-img-box::after { content: "🔍"; position: absolute; bottom: 10px; right: 10px; background: rgba(255,255,255,0.8); padding: 5px; border-radius: 50%; opacity: 0; transition: 0.3s; }
+        .product-card:hover .product-img-box::after { opacity: 1; }
+
+        /* 4. 下方文字區塊精緻美編 */
         .card-content { 
-            padding: 20px 25px 25px 25px; /* 微調內距，讓內容呼吸 */
+            padding: 20px 25px 25px 25px; 
             flex-grow: 1; 
             display: flex; 
             flex-direction: column; 
@@ -343,21 +359,21 @@
             position: relative;
         }
 
-        /* 1. 分類標籤化 (精緻小膠囊) */
+        /* 分類標籤化 (精緻小膠囊) */
         .product-cat { 
             display: inline-block;
             font-size: 0.85em; 
             color: #8E1E20; 
             font-weight: bold; 
-            background: #fff8e1; /* 淡淡的象牙金底色 */
-            border: 1px solid #D4AF37; /* 金色小邊框 */
+            background: #fff8e1; 
+            border: 1px solid #D4AF37; 
             padding: 4px 12px; 
             border-radius: 20px; 
             margin-bottom: 12px;
             letter-spacing: 1px;
         }
 
-        /* 2. 菜名與分隔線 */
+        /* 菜名與分隔線 */
         .product-name { 
             font-size: 1.5em; 
             font-family: 'Noto Serif TC', serif; 
@@ -366,45 +382,41 @@
             line-height: 1.3; 
             margin: 0 0 15px 0;
             padding-bottom: 15px;
-            border-bottom: 1px dashed #dcdcdc; /* 🔥 加入高級點菜單的虛線 */
+            border-bottom: 1px dashed #dcdcdc; 
         }
 
-        /* 3. 價格與按鈕區的排版 */
+        /* 價格與按鈕區的排版 */
         .price { 
             color: var(--primary-color); 
             font-weight: 900; 
-            font-size: 1.7em; /* 價格稍微放大 */
+            font-size: 1.7em; 
             margin-bottom: 15px; 
             letter-spacing: 0.5px;
         }
-        
-        /* 價格前方的 $ 符號稍微縮小，看起來更專業 */
         .price::first-letter {
             font-size: 0.75em;
             color: #666;
             margin-right: 2px;
         }
 
-        /* 4. 加入訂單按鈕 (寶石漸層金邊版) */
+        /* 加入訂單按鈕 (寶石漸層金邊版) */
         button.add-btn { 
             width: 100%; 
-            background: linear-gradient(135deg, #8E1E20 0%, #6B1315 100%); /* 漸層紅 */
+            background: linear-gradient(135deg, #8E1E20 0%, #6B1315 100%); 
             color: white; 
-            border: 2px solid #D4AF37; /* 金色邊框呼應主題 */
+            border: 2px solid #D4AF37; 
             padding: 12px 15px; 
-            border-radius: 50px; /* 改為全圓角膠囊形狀 */
+            border-radius: 50px; 
             cursor: pointer; 
             font-weight: bold; 
             font-size: 1.15em; 
             letter-spacing: 1px;
-            box-shadow: 0 4px 10px rgba(142, 30, 32, 0.25); /* 柔和的紅色陰影 */
+            box-shadow: 0 4px 10px rgba(142, 30, 32, 0.25); 
             transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); 
         }
-
-        /* 按鈕懸浮特效：微微上浮且發光 */
         button.add-btn:hover { 
             transform: translateY(-3px); 
-            box-shadow: 0 6px 15px rgba(212, 175, 55, 0.4); /* 懸浮時透出金色光芒 */
+            box-shadow: 0 6px 15px rgba(212, 175, 55, 0.4); 
             filter: brightness(1.1);
         }
 
@@ -1515,6 +1527,7 @@
   }
 </script>
 </html>
+
 
 
 
