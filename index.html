@@ -198,18 +198,34 @@
         }
         
         /* --- 💎 還原：白底金邊分類按鈕與 Sticky 置頂 --- */
+        /* =======================================
+           ✨ 分類按鈕 (高質感膠囊型)
+        ======================================= */
         .category-wrapper { width: 100%; margin-top: 15px; z-index: 1000; transition: all 0.3s ease; }
-        .category-bar { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+        .category-bar { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+        
         .cat-btn { 
-            /* 🔥 修改：字體放大到 1.3rem，上下左右間距稍微加大讓按鈕比例更好看 */
-            padding: 12px 28px; 
-            font-size: 1.3rem; 
-            
-            background: #fff; border: 2px solid #D4AF37; color: #8E1E20; 
-            border-radius: 50px; font-weight: bold; cursor: pointer; transition: 0.3s ease; box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+            padding: 10px 24px; /* 完美的上下與左右比例 */
+            font-size: 1.15rem; /* 字體大小適中，不擁擠 */
+            background: rgba(255, 255, 255, 0.95); 
+            border: 2px solid #D4AF37; 
+            color: #8E1E20; 
+            border-radius: 50px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
             font-family: 'Noto Serif TC', serif;
+            letter-spacing: 1px; /* 讓文字之間有點空間 */
         }
-        .cat-btn.active, .cat-btn:hover { background: linear-gradient(135deg, #D4AF37 0%, #c49f27 100%); color: #fff; border-color: transparent; transform: translateY(-2px); box-shadow: 0 6px 15px rgba(212, 175, 55, 0.4); }
+        
+        .cat-btn.active, .cat-btn:hover { 
+            background: linear-gradient(135deg, #D4AF37 0%, #c49f27 100%); 
+            color: #fff; 
+            border-color: transparent; 
+            transform: translateY(-3px); /* 懸浮時跳得更高一點點 */
+            box-shadow: 0 6px 18px rgba(212, 175, 55, 0.45); 
+        } 15px rgba(212, 175, 55, 0.4); }
 
         .sticky-nav {
             position: fixed; top: 0; left: 0; background: rgba(142, 30, 32, 0.96); padding: 12px 0; margin-top: 0;
@@ -245,29 +261,75 @@
         .ticker-text { display: inline-block; padding-left: 100%; animation: scroll-left 12s linear infinite; color: #FFF; font-weight: bold; font-size: 1rem; letter-spacing: 1px; }
         @keyframes scroll-left { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
         
-      /* 資訊公告區塊 */
-        /* 🔥 整體內文字體稍微加大 (0.9rem -> 1.05rem) ，行距拉開一點點更易讀 */
-        .shop-info, .notice-section { border-radius: 12px; font-size: 1.05rem; line-height: 1.6; }
+      /* =======================================
+           ✨ 側邊欄：店家資訊 & 公告區塊 (精緻美編版)
+        ======================================= */
+        .shop-info, .notice-section { 
+            border-radius: 12px; 
+            font-size: 1.05rem; 
+            line-height: 1.6; 
+        }
         
-        /* 🔥 內文顏色加深 (淺灰 #555 -> 深黑 #333) */
-        .shop-info { margin-bottom: 20px; color: #333; text-align: center; background: #fafafa; padding: 18px 15px; border: 1px solid #ddd; }
-        .notice-section { background: rgba(255, 248, 220, 0.95); padding: 20px; border: 2px solid var(--accent-color); box-shadow: 0 5px 15px rgba(0,0,0,0.1); margin-top: 25px; }
+        .shop-info { 
+            margin-bottom: 20px; 
+            color: #333; 
+            text-align: center; 
+            background: rgba(255, 255, 255, 0.95); /* 改為透白，更有質感 */
+            padding: 20px 15px; 
+            border: 2px solid #eee; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05); /* 微微浮凸感 */
+        }
         
-        /* 🔥 頂部標題(h3) 大幅加大、加粗、顏色加到最深 */
+        .notice-section { 
+            background: rgba(255, 248, 220, 0.95); 
+            padding: 20px; 
+            border: 2px solid var(--accent-color); 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1); 
+            margin-top: 25px; 
+        }
+        
+        /* 🔥 標題完美比例：不折行、大氣置中 */
         .shop-info h3, .notice-section h3 { 
             font-family: 'Noto Serif TC', serif; 
-            border-bottom: 2px dashed #ccc; /* 底線順便加粗一點 */
-            padding-bottom: 10px; 
+            border-bottom: 2px dashed #ccc; 
+            padding-bottom: 12px; 
             margin-top: 0; 
-            font-size: 1.5rem; /* 標題大幅加大 */
-            font-weight: 900;  /* 字體極致加粗 */
-            color: #111;       /* 顏色極致加深 */
+            margin-bottom: 15px;
+            font-size: 1.35rem; /* 從1.5退回1.35，避免斷行 */
+            font-weight: 900;  
+            color: #111;
+            letter-spacing: 1px; /* 字距微調，更優雅 */
+            white-space: nowrap; /* 🔥 關鍵保命符：絕對不允許斷行 */
+            overflow: hidden;
+            text-overflow: ellipsis; /* 如果螢幕真的太小，字尾會變... */
         }
-        .info-item, .notice-item { margin-bottom: 15px; text-align: left; }
-        .shop-info .info-item { border-bottom: 1px solid #eee; padding-bottom: 10px; }
-        .shop-info .info-item:last-child { border-bottom: none; }
-        .highlight-red { color: #d63031; font-weight: bold; }
-        .bank-info { background: #fff; padding: 10px; border-radius: 8px; border: 1px dashed var(--primary-color); font-family: monospace; font-size: 1.1em; color: #333; margin-top: 5px; word-break: break-all; }
+
+        .info-item, .notice-item { 
+            margin-bottom: 18px; /* 增加項目之間的呼吸空間 */
+            text-align: left; 
+        }
+        .shop-info .info-item { 
+            border-bottom: 1px solid #f0f0f0; 
+            padding-bottom: 12px; 
+        }
+        .shop-info .info-item:last-child { 
+            border-bottom: none; 
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        /* 紅色提醒框精緻化 */
+        .warning-box {
+            margin-top: 10px; 
+            padding: 10px 12px; 
+            background: #fff5f5; 
+            border-left: 4px solid #d63031; 
+            border-radius: 6px; 
+            font-size: 0.95rem; 
+            line-height: 1.5;
+            color: #333;
+            box-shadow: 0 2px 5px rgba(214, 48, 49, 0.05);
+        }
 
         /* --- 商品列表 --- */
         .product-list { flex: 3; display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; align-content: start; }
@@ -553,7 +615,7 @@
                         <span style="font-weight: bold; font-size: 1.1em;">為最後預約用餐時段喔</span><br>
                         <small style="color:#999;">(因備料不及 無法提供最完善服務 請見諒)</small>
                         
-                        <div style="margin-top: 8px; padding: 8px; background: #fff0f0; border-left: 4px solid #d63031; border-radius: 4px; font-size: 0.9em; line-height: 1.4;">
+                        <div class="warning-box">
                             <span style="color: #d63031; font-weight: bold;">人數有異動(增加或減少)，務必請於預約用餐時間的1小時前告知，到場後恕不接受變動，才來得及作業。 謝謝~</span>
                         </div>
                     </div>
@@ -1385,6 +1447,7 @@
   }
 </script>
 </html>
+
 
 
 
