@@ -198,21 +198,23 @@
         }
         
         /* =======================================
-           ✨ 分類列：滑動時完美凍結置頂 (Sticky)
+           ✨ 分類列：滑動時完美凍結置頂 (透明浮動膠囊版)
         ======================================= */
         .category-wrapper { 
-            position: sticky; /* 🔥 關鍵魔法：黏在畫面上 */
-            top: 0; /* 黏在距離頂部 0 的位置 */
-            z-index: 9999; /* 確保它在最上層，不會被圖片蓋住 */
+            position: sticky; 
+            top: 15px; /* 🔥 距離頂部留一點點空隙，看起來更像浮動 */
+            z-index: 9999; 
             width: 100%; 
-            padding: 12px 0; 
-            
-            /* 加上高質感的半透明紅底玻璃背景，下滑時才不會跟後面的菜單糊在一起 */
-            background: rgba(142, 30, 32, 0.95); 
-            backdrop-filter: blur(8px);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-            border-bottom: 2px solid #D4AF37; /* 加條金邊更霸氣 */
             margin-bottom: 25px; 
+            
+            /* 🌟 拿掉深紅色背景與框線，變成完全透明 */
+            background: transparent; 
+            border: none;
+            box-shadow: none;
+            backdrop-filter: none;
+            
+            /* 避免透明的隱形框框阻擋到後面內容的點擊 */
+            pointer-events: none; 
         }
         
         .category-bar { 
@@ -222,51 +224,55 @@
             flex-wrap: wrap; 
             max-width: 1200px;
             margin: 0 auto;
+            /* 讓按鈕本身可以被點擊 */
+            pointer-events: auto; 
         }
 
-        /* 凍結列專用的精緻按鈕樣式 */
+        /* 🌟 恢復成一顆顆獨立的高質感白底金邊膠囊 */
         .category-wrapper .cat-btn { 
             padding: 10px 24px; 
             font-size: 1.15rem; 
-            background: transparent; /* 預設透明底 */
-            border: 2px solid #FFD700; /* 金色邊框 */
-            color: #FFD700; /* 金色字 */
+            background: rgba(255, 255, 255, 0.95); /* 白底微透 */
+            border: 2px solid #D4AF37; /* 金色邊框 */
+            color: #8E1E20; /* 深紅字 */
             border-radius: 50px; 
             font-weight: bold; 
             cursor: pointer; 
             transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); 
             font-family: 'Noto Serif TC', serif;
             letter-spacing: 1px; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15); /* 讓每一顆按鈕自己帶陰影浮起來 */
         }
         
         /* 按鈕被選中或游標滑過的狀態 */
         .category-wrapper .cat-btn.active, 
         .category-wrapper .cat-btn:hover { 
             background: linear-gradient(135deg, #D4AF37 0%, #c49f27 100%); 
-            color: #8E1E20; /* 變成深紅字 */
+            color: #fff; 
             border-color: transparent; 
             transform: translateY(-3px); 
             box-shadow: 0 6px 18px rgba(212, 175, 55, 0.45); 
         }
 
-        /* 📱 手機版適應：讓按鈕可以左右滑動，不要擠成一坨 */
+        /* 📱 手機版適應：左右滑動 (也保持透明浮動) */
         @media (max-width: 1024px) {
             .category-wrapper {
-                padding: 12px 15px; 
+                top: 10px;
             }
             .category-bar {
-                justify-content: flex-start; /* 靠左對齊 */
-                flex-wrap: nowrap; /* 🔥 強制不換行 */
-                overflow-x: auto; /* 🔥 允許手指左右滑動尋找分類 */
+                justify-content: flex-start; 
+                flex-wrap: nowrap; 
+                overflow-x: auto; 
                 -webkit-overflow-scrolling: touch; 
-                padding-bottom: 5px; 
+                /* 增加一點周圍 padding，讓按鈕的陰影不要被切斷 */
+                padding: 5px 15px 15px 15px; 
             }
-            .category-bar::-webkit-scrollbar { display: none; } /* 隱藏醜醜的滾動條 */
+            .category-bar::-webkit-scrollbar { display: none; } 
             
             .category-wrapper .cat-btn { 
                 padding: 8px 18px; 
                 font-size: 1.05rem; 
-                flex-shrink: 0; /* 確保按鈕不會被擠壓變形 */
+                flex-shrink: 0; 
             }
         }
         
@@ -1554,6 +1560,7 @@
   }
 </script>
 </html>
+
 
 
 
