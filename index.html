@@ -57,8 +57,8 @@
             background: transparent;
         }
 
-        /* 避免隱藏到左側正常的 Logo */
-        header h1, header .sub-title, header .site-logo-container { display: none !important; }
+        h1, .sub-title, .site-logo-container { display: none !important; }
+        .left-column .site-logo-container { display: block !important; }
 
         .header-main-container {
             display: flex;
@@ -162,7 +162,7 @@
         .category-wrapper { 
             position: sticky; 
             top: 15px; 
-            z-index: 95; /* 確保不覆蓋彈出視窗 */
+            z-index: 95; 
             width: 100%; 
             margin-bottom: 25px; 
             background: transparent; 
@@ -216,11 +216,35 @@
         @keyframes scroll-left { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
         
         /* =======================================
-           ✨ 側邊欄：店家資訊 & 公告區塊 (精緻美編版)
+           ✨ 側邊欄：店家資訊 & 公告區塊 (皇家金邊版)
         ======================================= */
-        .shop-info, .notice-section { border-radius: 12px; font-size: 1.05rem; line-height: 1.6; }
-        .shop-info { margin-bottom: 20px; color: #333; text-align: center; background: rgba(255, 255, 255, 0.95); padding: 20px 15px; border: 2px solid #eee; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        .notice-section { background: rgba(255, 248, 220, 0.95); padding: 20px; border: 2px solid var(--accent-color); box-shadow: 0 5px 15px rgba(0,0,0,0.1); margin-top: 25px; }
+        .shop-info, .notice-section { 
+            border-radius: 15px; 
+            font-size: 1.05rem; 
+            line-height: 1.6; 
+            border: 3px solid #D4AF37; 
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2); 
+            transition: all 0.3s ease; 
+        }
+        
+        .shop-info:hover, .notice-section:hover { 
+            box-shadow: 0 12px 25px rgba(0,0,0,0.3), 0 0 15px rgba(212, 175, 55, 0.3); 
+            border-color: #FFD700; 
+        }
+
+        .shop-info { 
+            margin-bottom: 20px; 
+            color: #333; 
+            text-align: center; 
+            background: rgba(255, 255, 255, 0.95); 
+            padding: 20px 15px; 
+        }
+        
+        .notice-section { 
+            background: rgba(255, 248, 220, 0.95); 
+            padding: 20px; 
+            margin-top: 25px; 
+        }
         
         .shop-info h3, .notice-section h3 { 
             font-family: 'Noto Serif TC', serif; border-bottom: 2px dashed #ccc; padding-bottom: 12px; margin-top: 0; margin-bottom: 15px;
@@ -236,38 +260,27 @@
         .bank-info { background: #fff; padding: 10px; border-radius: 8px; border: 1px dashed var(--primary-color); font-family: monospace; font-size: 1.1em; color: #333; margin-top: 5px; word-break: break-all; }
 
         /* =======================================
-           ✨ 完整商品列表區塊 (排版防護 + 精緻美編)
+           ✨ 完整商品列表區塊 (皇家金邊 + 精緻美編)
         ======================================= */
         .product-list { flex: 3; display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; align-content: start; }
-        /* 2. 卡片本體外框 (換上與相片牆同款的霸氣金邊) */
+        
         .product-card { 
             background: rgba(255, 255, 255, 0.95); 
-            border-radius: 15px; /* 統一變成 15px 圓角 */
-            border: 3px solid #D4AF37; /* 🔥 關鍵：加上 3px 的招牌金邊！ */
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2); /* 陰影加深，讓卡片更立體 */
+            border-radius: 15px; 
+            border: 3px solid #D4AF37; 
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2); 
             overflow: hidden; 
             display: flex; 
             flex-direction: column; 
             transition: all 0.3s ease; 
         }
-        
-        /* 懸浮特效：往上浮起，且金邊會發出光芒 */
         .product-card:hover { 
             transform: translateY(-8px); 
             box-shadow: 0 15px 30px rgba(0,0,0,0.3), 0 0 20px rgba(212, 175, 55, 0.4); 
-            border-color: #FFD700; /* 懸浮時邊框變成更亮的純金 */
+            border-color: #FFD700; 
         }
         
-        /* 3. 圖片區塊限制 */
-        .product-img-box { 
-            width: 100%; 
-            height: 280px; 
-            background-color: #eee; 
-            overflow: hidden; 
-            cursor: zoom-in; 
-            position: relative; 
-            border-bottom: 2px solid #D4AF37; /* 🔥 圖片下方也加一條金線，把圖片跟文字區隔開來，更像高級菜單 */
-        }
+        .product-img-box { width: 100%; height: 280px; background-color: #eee; overflow: hidden; cursor: zoom-in; position: relative; border-bottom: 2px solid #D4AF37; }
         .product-img-box img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
         .product-card:hover .product-img-box img { transform: scale(1.1); }
         .product-img-box::after { content: "🔍"; position: absolute; bottom: 10px; right: 10px; background: rgba(255,255,255,0.8); padding: 5px; border-radius: 50%; opacity: 0; transition: 0.3s; }
@@ -282,13 +295,43 @@
         button.add-btn { width: 100%; background: linear-gradient(135deg, #8E1E20 0%, #6B1315 100%); color: white; border: 2px solid #D4AF37; padding: 12px 15px; border-radius: 50px; cursor: pointer; font-weight: bold; font-size: 1.15em; letter-spacing: 1px; box-shadow: 0 4px 10px rgba(142, 30, 32, 0.25); transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }
         button.add-btn:hover { transform: translateY(-3px); box-shadow: 0 6px 15px rgba(212, 175, 55, 0.4); filter: brightness(1.1); }
 
-        /* --- 購物車與側邊欄 --- */
-        .cart-section { flex: 0.7; background: rgba(255, 255, 255, 0.95); padding: 25px; border-radius: 12px; border-top: 5px solid var(--primary-color); align-self: flex-start; position: sticky; top: 80px; max-height: 85vh; overflow-y: auto; z-index: 90; box-shadow: 0 5px 20px rgba(0,0,0,0.1); min-width: 250px; padding-right: 5px; }
+        /* --- 購物車與側邊欄 (皇家金邊版) --- */
+        .cart-section { 
+            flex: 0.7; 
+            background: rgba(255, 255, 255, 0.95); 
+            padding: 25px; 
+            border-radius: 15px; 
+            border: 3px solid #D4AF37; 
+            align-self: flex-start; 
+            position: sticky; 
+            top: 80px; 
+            max-height: 85vh; 
+            overflow-y: auto; 
+            z-index: 90; 
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2); 
+            min-width: 250px; 
+            transition: all 0.3s ease; 
+        }
+        .cart-section:hover { 
+            box-shadow: 0 12px 25px rgba(0,0,0,0.3), 0 0 15px rgba(212, 175, 55, 0.3); 
+            border-color: #FFD700; 
+        }
         .cart-section h2 { font-family: 'Noto Serif TC', serif; color: #333; border-bottom: 1px dashed #ccc; padding-bottom: 15px; margin-top: 0; }
         .cart-item { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f0f0f0; padding: 15px 0; font-size: 0.95em; }
         .total { font-size: 1.5em; font-weight: bold; margin-top: 20px; text-align: right; color: var(--primary-color); font-family: 'Noto Serif TC', serif; }
         .checkout-btn { width: 100%; background: linear-gradient(135deg, #2D6A4F 0%, #40916C 100%); color: white; border: none; font-size: 1.2em; padding: 15px; margin-top: 20px; border-radius: 8px; cursor: pointer; font-weight: bold; box-shadow: 0 4px 10px rgba(45, 106, 79, 0.3); transition: 0.3s; }
         .checkout-btn:hover { filter: brightness(1.1); transform: translateY(-2px); }
+
+        /* ✨ 貼心提醒移入購物車後的專屬微調 */
+        .cart-section .notice-section {
+            margin-top: 35px; 
+            box-shadow: none !important; 
+            border: 2px dashed #D4AF37 !important; 
+        }
+        .cart-section .notice-section:hover {
+            box-shadow: none !important;
+            border-color: #D4AF37 !important;
+        }
 
         .qty-control { display: flex; align-items: center; gap: 8px; margin-top: 5px; background: #f9f9f9; padding: 2px 5px; border-radius: 5px; width: fit-content; }
         .qty-btn { width: 24px; height: 24px; border: 1px solid #ddd; background: #fff; color: #555; border-radius: 4px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-weight: bold; transition: all 0.2s; font-size: 1.1em; padding: 0; }
@@ -365,7 +408,6 @@
             .left-column, .cart-section { position: static; margin-bottom: 20px; max-height: none; }
             .site-logo { width: 140px; margin-bottom: 15px; }
             .mobile-floating-bar { display: flex; } 
-            h1 { font-size: 2.2rem; letter-spacing: 2px; margin-top: 5px; }
             .category-wrapper { top: 10px; }
             .category-wrapper.scrolled { top: 0; }
             .category-bar { justify-content: flex-start; flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; padding: 5px 15px 15px 15px; }
@@ -541,6 +583,41 @@
                 </div>
             </div>
             
+            </div>
+
+        <div class="product-list" id="productList"></div>
+        
+        <div class="cart-section" id="cartSection">
+            <div class="shipping-progress-container" id="shippingProgressBox">
+                <div style="margin-bottom: 15px;">
+                    <div class="progress-text"><span>🏪 7-11 <small style="color:#888;">(滿$2000免運)</small></span><span id="diff711" style="font-weight:bold; color:#8E1E20;">還差 $2000</span></div>
+                    <div class="progress-bar-bg"><div class="progress-bar-fill" id="bar711"></div></div>
+                </div>
+                <div>
+                    <div class="progress-text"><span>🚛 黑貓宅配 <small style="color:#888;">(滿$3000免運)</small></span><span id="diffCat" style="font-weight:bold; color:#8E1E20;">還差 $3000</span></div>
+                    <div class="progress-bar-bg"><div class="progress-bar-fill" id="barCat"></div></div>
+                </div>
+            </div>
+
+            <h2>📋 您的點餐單 <span id="cartCount" style="font-size:0.7em; background:var(--primary-color); color:white; padding:2px 8px; border-radius:10px; vertical-align:middle;">0</span></h2>
+            <div id="cartItems"><p style="color: #999; text-align: center; padding: 20px;">客官，還沒點菜呢！</p></div>
+            <div class="total">總計: $<span id="totalPrice">0</span></div>
+            <div style="text-align: right; font-size: 0.85rem; color: #888; margin-top: -5px; margin-bottom: 15px;">(運費於結帳時計算)</div>
+
+            <button class="checkout-btn" onclick="openCheckoutForm()">前往結帳填寫資料</button>
+
+            <div class="social-area">
+                <a href="https://www.facebook.com/MeiFengHOME" target="_blank" class="social-btn btn-fb">
+                    <svg viewBox="0 0 24 24"><path d="M14.07,3c-2.8,0-4.7,1.72-4.7,4.82V10.5H6.5v3.62h2.87v9.12h3.74V14.12h2.93l0.46-3.62h-3.39V8.04c0-1,0.28-1.76,1.79-1.76h1.91V3.11C16.51,3.06,15.34,3,14.07,3z"></path></svg> 追蹤美鳳的家 FB
+                </a>
+                <a href="https://line.me/R/ti/p/%40hig1742y" target="_blank" class="social-btn btn-line">
+                    <svg viewBox="0 0 24 24"><path d="M12,2C6.48,2,2,5.88,2,10.66c0,2.69,1.43,5.09,3.77,6.64c0.16,0.11,0.38,0.34,0.28,0.78 c-0.1,0.47-0.37,1.83-0.41,2.2c-0.06,0.56,0.29,0.55,0.61,0.3c0.41-0.32,2.26-1.54,3.08-2.1c0.43-0.29,0.98-0.33,1.38-0.29 c0.41,0.04,0.85,0.06,1.29,0.06c5.52,0,10-3.88,10-8.66C22,5.88,17.52,2,12,2z M17.34,13.61H6.66c-0.34,0-0.62-0.28-0.62-0.62 v-0.01c0-0.34,0.28-0.62,0.62-0.62h10.68c0.34,0,0.62,0.28,0.62,0.62v0.01C17.96,13.33,17.68,13.61,17.34,13.61z M17.34,10.66H6.66 c-0.34,0-0.62-0.28-0.62-0.62v-0.01c0-0.34,0.28-0.62,0.62-0.62h10.68c0.34,0,0.62,0.28,0.62,0.62v0.01 C17.96,10.38,17.68,10.66,17.34,10.66z M17.34,7.71H6.66C6.32,7.71,6.04,7.43,6.04,7.09v-0.01c0-0.34,0.28-0.62,0.62-0.62h10.68 c0.34,0,0.62,0.28,0.62,0.62v0.01C17.96,7.43,17.68,7.71,17.34,7.71z"></path></svg> 新增 LINE 好友
+                </a>
+                <a href="https://www.google.com/search?gs_ssp=eJzj4tVP1zc0zLAsKigqyDMxYLRSNagwNjGzMEk2STJJNDa3SDFOszKoSEsyNEs0NUpJMjAytjROM_Hieb6v7-Xmzc9ntTxdtw0AsZoYFA&q=%E7%BE%8E%E9%B3%B3%E7%9A%84%E5%AE%B6&oq=%E7%BE%8E%E9%B3%B3%E7%9A%84%E5%AE%B6&gs_lcrp=EgZjaHJvbWUqDQgBEC4YrwEYxwEYgAQyCggAEAAY4wIYgAQyDQgBEC4YrwEYxwEYgAQyBwgCEAAYgAQyBwgDEAAYgAQyBwgEEAAYgAQyBwgFEAAYgAQyBwgGEAAYgAQyBwgHEAAYgAQyBwgIEAAYgAQyBggJEAAYHtIBCDI5NTRqMGo3qAIAsAIA&sourceid=chrome&ie=UTF-8" target="_blank" class="social-btn btn-google">
+                    <svg viewBox="0 0 24 24"><path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"/></svg> Google 地圖/評論
+                </a>
+            </div>
+
             <div class="notice-section">
                 <h3>💡 貼心提醒</h3>
                 <div class="notice-item">
@@ -606,137 +683,6 @@
                 </div>
             </div>
             
-        </div>
-
-        <div class="product-list" id="productList"></div>
-        
-        <div class="cart-section" id="cartSection">
-            <div class="shipping-progress-container" id="shippingProgressBox">
-                <div style="margin-bottom: 15px;">
-                    <div class="progress-text"><span>🏪 7-11 <small style="color:#888;">(滿$2000免運)</small></span><span id="diff711" style="font-weight:bold; color:#8E1E20;">還差 $2000</span></div>
-                    <div class="progress-bar-bg"><div class="progress-bar-fill" id="bar711"></div></div>
-                </div>
-                <div>
-                    <div class="progress-text"><span>🚛 黑貓宅配 <small style="color:#888;">(滿$3000免運)</small></span><span id="diffCat" style="font-weight:bold; color:#8E1E20;">還差 $3000</span></div>
-                    <div class="progress-bar-bg"><div class="progress-bar-fill" id="barCat"></div></div>
-                </div>
-            </div>
-
-            <h2>📋 您的點餐單 <span id="cartCount" style="font-size:0.7em; background:var(--primary-color); color:white; padding:2px 8px; border-radius:10px; vertical-align:middle;">0</span></h2>
-            <div id="cartItems"><p style="color: #999; text-align: center; padding: 20px;">客官，還沒點菜呢！</p></div>
-            <div class="total">總計: $<span id="totalPrice">0</span></div>
-            <div style="text-align: right; font-size: 0.85rem; color: #888; margin-top: -5px; margin-bottom: 15px;">(運費於結帳時計算)</div>
-
-            <button class="checkout-btn" onclick="openCheckoutForm()">前往結帳填寫資料</button>
-
-            <div class="social-area">
-                <a href="https://www.facebook.com/MeiFengHOME" target="_blank" class="social-btn btn-fb">
-                    <svg viewBox="0 0 24 24"><path d="M14.07,3c-2.8,0-4.7,1.72-4.7,4.82V10.5H6.5v3.62h2.87v9.12h3.74V14.12h2.93l0.46-3.62h-3.39V8.04c0-1,0.28-1.76,1.79-1.76h1.91V3.11C16.51,3.06,15.34,3,14.07,3z"></path></svg> 追蹤美鳳的家 FB
-                </a>
-                <a href="https://line.me/R/ti/p/%40hig1742y" target="_blank" class="social-btn btn-line">
-                    <svg viewBox="0 0 24 24"><path d="M12,2C6.48,2,2,5.88,2,10.66c0,2.69,1.43,5.09,3.77,6.64c0.16,0.11,0.38,0.34,0.28,0.78 c-0.1,0.47-0.37,1.83-0.41,2.2c-0.06,0.56,0.29,0.55,0.61,0.3c0.41-0.32,2.26-1.54,3.08-2.1c0.43-0.29,0.98-0.33,1.38-0.29 c0.41,0.04,0.85,0.06,1.29,0.06c5.52,0,10-3.88,10-8.66C22,5.88,17.52,2,12,2z M17.34,13.61H6.66c-0.34,0-0.62-0.28-0.62-0.62 v-0.01c0-0.34,0.28-0.62,0.62-0.62h10.68c0.34,0,0.62,0.28,0.62,0.62v0.01C17.96,13.33,17.68,13.61,17.34,13.61z M17.34,10.66H6.66 c-0.34,0-0.62-0.28-0.62-0.62v-0.01c0-0.34,0.28-0.62,0.62-0.62h10.68c0.34,0,0.62,0.28,0.62,0.62v0.01 C17.96,10.38,17.68,10.66,17.34,10.66z M17.34,7.71H6.66C6.32,7.71,6.04,7.43,6.04,7.09v-0.01c0-0.34,0.28-0.62,0.62-0.62h10.68 c0.34,0,0.62,0.28,0.62,0.62v0.01C17.96,7.43,17.68,7.71,17.34,7.71z"></path></svg> 新增 LINE 好友
-                </a>
-                <a href="https://www.google.com/search?gs_ssp=eJzj4tVP1zc0zLAsKigqyDMxYLRSNagwNjGzMEk2STJJNDa3SDFOszKoSEsyNEs0NUpJMjAytjROM_Hieb6v7-Xmzc9ntTxdtw0AsZoYFA&q=%E7%BE%8E%E9%B3%B3%E7%9A%84%E5%AE%B6&oq=%E7%BE%8E%E9%B3%B3%E7%9A%84%E5%AE%B6&gs_lcrp=EgZjaHJvbWUqDQgBEC4YrwEYxwEYgAQyCggAEAAY4wIYgAQyDQgBEC4YrwEYxwEYgAQyBwgCEAAYgAQyBwgDEAAYgAQyBwgEEAAYgAQyBwgFEAAYgAQyBwgGEAAYgAQyBwgHEAAYgAQyBwgIEAAYgAQyBggJEAAYHtIBCDI5NTRqMGo3qAIAsAIA&sourceid=chrome&ie=UTF-8" target="_blank" class="social-btn btn-google">
-                    <svg viewBox="0 0 24 24"><path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"/></svg> Google 地圖/評論
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <div class="mobile-floating-bar" id="floatBar">
-        <div class="float-total">總計: $<span id="floatTotal">0</span></div>
-        <button class="float-btn" onclick="openCheckoutForm()">去結帳 ➔</button>
-    </div>
-
-    <button onclick="topFunction()" id="backTopBtn" title="回到頂部">⬆</button>
-
-    <div id="imageModal" class="modal" onclick="closeImageModal()">
-        <div style="text-align:center; max-width:90%;">
-            <img style="max-width:100%; max-height:80vh; border-radius:5px; box-shadow:0 0 20px rgba(0,0,0,0.5);" id="modalImg">
-            <p id="modalDesc" style="color:white; margin-top:10px; font-size:1.1em; text-shadow:0 1px 3px black; display:none;"></p>
-        </div>
-    </div>
-
-    <div id="checkoutModal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeCheckoutForm()">&times;</span>
-            <h2 style="text-align:center; color:var(--primary-color); margin-top:0;">📦 訂購資料</h2>
-            
-            <div class="form-group">
-                <label class="required">姓名</label>
-                <input type="text" id="custName" placeholder="請問怎麼稱呼您？" oninput="removeError(this)">
-            </div>
-            
-            <div class="form-group">
-                <label class="required">手機號碼  </label>
-                <input type="tel" id="custMobile" placeholder="09xx-xxx-xxx" oninput="removeError(this)">
-            </div>
-
-            <div class="form-group">
-                <label>市內電話 (選填)</label>
-                <input type="tel" id="custPhone" placeholder="02-xxxx-xxxx">
-            </div>
-
-            <div class="form-group">
-                <label class="required">收貨方式</label>
-                <select id="custDelivery" onchange="updateAddressInput(); removeError(this)">
-                    <option value="黑貓宅配">🚛 黑貓宅配</option>
-                    <option value="7-11冷凍店到店">🏪 7-11 冷凍店到店</option>
-                    <option value="到店自取">🏠 到店自取</option>
-                </select>
-            </div>
-
-            <div class="form-group" id="addressContainer">
-                <label id="addressLabel" class="required">收貨地址 (宅配請務必填寫)</label>
-                <input type="text" id="custAddress" placeholder="請填寫完整的收件地址" oninput="removeError(this)">
-            </div>
-
-            <div class="form-group">
-                <label class="required">付款方式</label>
-                <select id="custPayment" onchange="updatePaymentInput(); removeError(this)">
-                    <option value="貨到付款">貨到付款</option>
-                    <option value="匯款">匯款 (需填後五碼)</option>
-                    <option value="台灣Pay">💳 台灣Pay (掃碼支付)</option>
-                    <option value="餐廳櫃檯結帳">餐廳櫃檯結帳</option>
-                </select>
-            </div>
-
-            <div id="bankTransferDetails" class="bank-details-box">
-                <div class="bank-details-title">🏦 匯款帳戶資訊</div>
-                <div style="background:#fff; padding:10px; border-radius:5px; border:1px solid #eee;">
-                    <strong>美鳳的家</strong><br>合作金庫 (006)<br>帳號：<span class="bank-account-num">0180717681001</span><br>統編：72466723
-                </div>
-            </div>
-
-            <div id="taiwanPayContainer" class="qr-code-container">
-                <p class="qr-hint">📱 請掃描下方 QR Code 付款</p>
-                <img src="image_d2c236.png" class="qr-code-img" alt="台灣Pay收款碼">
-                <p style="font-size: 0.9em; color: #555; margin-bottom: 0;">應付金額：<span style="color:red; font-weight:bold; font-size:1.4em;">$<span id="qrPayAmount">0</span></span></p>
-                <p style="font-size:0.8em; color:#999; margin-top:5px;">付款成功後請填寫下方末五碼</p>
-            </div>
-
-            <div class="form-group" id="bankInfoContainer" style="display:none;">
-                <label class="required" id="bankInfoLabel">匯款帳號後五碼</label>
-                <input type="text" id="custLast5Digits" placeholder="請輸入您的帳號後五碼" oninput="removeError(this)">
-            </div>
-
-            <div class="form-group">
-                <label class="required">希望到貨/自取日期</label>
-                <input type="date" id="custDate" oninput="removeError(this)">
-            </div>
-
-            <div class="form-group">
-                <label>備註事項</label>
-                <textarea id="custNote" placeholder="例如：管理室代收、避開中午時段..."></textarea>
-            </div>
-
-            <div style="margin-top: 20px; border-top: 2px dashed #eee; padding-top: 15px;">
-                <div style="display: flex; justify-content: space-between; margin-bottom: 5px; color: #555;"><span>商品小計：</span><span>$<span id="checkoutSubtotal">0</span></span></div>
-                <div style="display: flex; justify-content: space-between; margin-bottom: 10px; color: #555;"><span>運費：</span><span>$<span id="checkoutShipping">0</span></span></div>
-                <div style="display: flex; justify-content: space-between; align-items: center; font-size: 1.2em; font-weight: bold; color: #333;"><span>總金額：</span><span style="color: #d63031; font-size: 1.4em;">$<span id="checkoutTotal">0</span></span></div>
-            </div>
-
-            <button class="submit-btn" onclick="validateAndSubmit()">送出訂單</button>
         </div>
     </div>
 
@@ -1168,13 +1114,10 @@
             updateTicker(); setInterval(updateTicker, 4500);
         }
 
-        // --- 新春休假圖片自動彈出邏輯 ---
         window.addEventListener('load', function() {
-            // 目前我先幫妳關閉(註解掉)彈出，因為年節過了。若日後需要，把下面這行最前面的雙斜線 // 刪掉即可。
             // setTimeout(() => { document.getElementById('holiday-modal-overlay').style.display = 'flex'; }, 600); 
         });
         function closeHolidayModal() { document.getElementById('holiday-modal-overlay').style.display = 'none'; }
     </script>
 </body>
 </html>
-
