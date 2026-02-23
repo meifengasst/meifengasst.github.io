@@ -115,23 +115,22 @@
 
         /* --- ✨ 無框去背圖片專用樣式 --- */
         /* 2. 讓「左右兩個去背人物」的容器寬度也跟盒子一模一樣 */
+        /* =======================================
+           ✨ 1 & 2：無框去背圖片 (微微縮小) 
+        ======================================= */
         .transparent-img-box {
-            flex: 0 0 320px !important; /* 🔥 強制鎖定寬度為 320px，與影片同寬 */
-            width: 320px !important;
-            height: 100%; /* 高度填滿，與影片同高 */
+            /* 🔥 從原本的 320px 縮小為 220px，當作精美的點綴 */
+            flex: 0 0 220px !important; 
+            width: 220px !important;
+            height: 100%; 
             display: flex;
-            align-items: center; justify-content: center; /* 讓圖片在框框內居中 */
+            align-items: center; justify-content: center; 
             background: transparent; border: none; box-shadow: none;
-            /* 增加一點邊距，避免人物太擠 */
             padding: 0 10px; 
         }
         .transparent-img-box img {
-            width: 100%; 
-            height: 100%;
-            /* 🔥 關鍵：使用 contain 讓人物在變大的框框內完整顯示，不變形 */
-            object-fit: contain; 
-            cursor: zoom-in;
-            transition: transform 0.3s;
+            width: 100%; height: 100%; object-fit: contain; 
+            cursor: zoom-in; transition: transform 0.3s;
             filter: drop-shadow(0 8px 15px rgba(0,0,0,0.3));
         }
         .transparent-img-box img:hover { transform: scale(1.05); }
@@ -159,14 +158,13 @@
         }
 
         /* =======================================
-           2. 放大中央 Banner
+           ✨ 7：中央 Banner (大幅放大，成為最顯眼主體) 
         ======================================= */
         .banner-frame {
             width: 100%; 
-            /* 🔥 寬度從 320px 大幅放大到 400px */
-            max-width: 400px; 
-            padding: 8px; /* 邊框稍微加粗配合大尺寸 */
-            background: #8E1E20; border-radius: 15px; border: 2px solid #D4AF37;
+            /* 🔥 從原本的 400px 放大到 520px，絕對的視覺焦點！ */
+            max-width: 520px; 
+            padding: 8px; background: #8E1E20; border-radius: 15px; border: 2px solid #D4AF37;
             animation: goldenGlow 3s ease-in-out infinite alternate;
         }
         @keyframes goldenGlow {
@@ -174,22 +172,16 @@
             100% { box-shadow: 0 8px 20px rgba(0,0,0,0.5), 0 0 25px rgba(212, 175, 55, 0.7); }
         }
         .banner-img { width: 100%; height: auto; display: block; border-radius: 10px; outline: 1.5px solid rgba(212, 175, 55, 0.5); outline-offset: -4px;}
-        @keyframes goldenGlow {
-            0% { box-shadow: 0 5px 15px rgba(0,0,0,0.4), 0 0 8px rgba(212, 175, 55, 0.2); }
-            100% { box-shadow: 0 8px 20px rgba(0,0,0,0.5), 0 0 25px rgba(212, 175, 55, 0.7); }
-        }
-        .banner-img { width: 100%; height: auto; display: block; border-radius: 10px; outline: 1.5px solid rgba(212, 175, 55, 0.5); outline-offset: -4px;}
 
         /* =======================================
-           3. 放大四個徽章
+           ✨ 3, 4, 5, 6：四個徽章 (維持比例不變) 
         ======================================= */
-        .side-badges { display: flex; flex-direction: column; gap: 25px; } /* 稍微加大徽章之間的上下間距 */
+        .side-badges { display: flex; flex-direction: column; gap: 25px; } 
         
         .badge-item {
-            /* 🔥 尺寸從 90px 放大到 110px */
+            /* 🔥 維持在 110px 穩定不變 */
             width: 110px; 
             height: 110px; 
-            
             border: 3px solid #D4AF37;
             background: linear-gradient(135deg, #8E1E20 0%, #6B1315 100%);
             border-radius: 50%; display: flex; align-items: center; justify-content: center;
@@ -201,11 +193,8 @@
         @keyframes floatBadge { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
         
         .badge-item span { 
-            color: #FFF; 
-            /* 🔥 字體跟著稍微放大 (從 1.1rem 變成 1.25rem) */
-            font-size: 1.25rem; 
-            font-weight: bold; line-height: 1.3; text-shadow: 1px 1px 3px rgba(0,0,0,0.8); 
-            font-family: 'Noto Serif TC', serif; text-align: center; 
+            color: #FFF; font-size: 1.25rem; font-weight: bold; line-height: 1.3; 
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.8); font-family: 'Noto Serif TC', serif; text-align: center; 
         }
         
         /* --- 💎 還原：白底金邊分類按鈕與 Sticky 置頂 --- */
@@ -1366,6 +1355,7 @@
   }
 </script>
 </html>
+
 
 
 
