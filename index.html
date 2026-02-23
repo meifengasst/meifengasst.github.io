@@ -269,15 +269,6 @@
                 flex-shrink: 0; /* 確保按鈕不會被擠壓變形 */
             }
         }
-
-        /* 📱 手機版適應：隱藏影音牆避免太擠 */
-        @media (max-width: 1200px) {
-            .side-media-group { display: none !important; }
-            .header-main-container { height: auto; }
-            .center-content-section { flex-direction: column; gap: 15px; }
-            .side-badges { flex-direction: row; gap: 15px; }
-            .badge-item { width: 80px; height: 80px; }
-        }
         
         /* --- 主要內容佈局 --- */
         .container { max-width: 96%; margin: 0 auto; display: flex; gap: 25px; position: relative; align-items: flex-start; }
@@ -1100,8 +1091,7 @@
         window.onscroll = function() {
             const backTopBtn = document.getElementById("backTopBtn");
             backTopBtn.style.display = (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) ? "flex" : "none";
-            const header = document.getElementById("mainHeader"); const catWrapper = document.getElementById("catWrapper");
-            if (window.pageYOffset > header.offsetHeight) { catWrapper.classList.add("sticky-nav"); } else { catWrapper.classList.remove("sticky-nav"); }
+            
         };
 
         function topFunction() { window.scrollTo({top: 0, behavior: 'smooth'}); }
@@ -1564,6 +1554,7 @@
   }
 </script>
 </html>
+
 
 
 
