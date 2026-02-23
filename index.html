@@ -203,7 +203,7 @@
         .category-wrapper { 
             position: sticky; 
             top: 15px; /* 頂部浮動時的間距 */
-            z-index: 9999; 
+            z-index: 95; /* 🔥 降到 95，這樣它就不會蓋住任何彈出視窗了！ */ 
             width: 100%; 
             margin-bottom: 25px; 
             
@@ -1116,11 +1116,12 @@
             
             // 2. 🔥 新增：控制分類列的「動態色塊包覆」
             const catWrapper = document.getElementById("catWrapper");
-            // 當網頁往下滑超過 300 像素時，加上色塊；回到最上面時，拿掉色塊變透明
-            if (window.scrollY > 300) { 
+            // 🔥 改為超過 50 像素就馬上加上色塊，避免字跟下面的菜色疊在一起！
+            if (window.scrollY > 50) { 
                 catWrapper.classList.add("scrolled"); 
             } else { 
                 catWrapper.classList.remove("scrolled"); 
+            }
             }
         };
 
@@ -1584,6 +1585,7 @@
   }
 </script>
 </html>
+
 
 
 
