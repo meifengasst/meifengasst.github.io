@@ -127,7 +127,7 @@
         }
         
         /* =======================================
-           ✨ 分類列：滑動變色動態效果 (妳要的功能就在這)
+           ✨ 分類列：滑動變色動態效果
         ======================================= */
         .category-wrapper { 
             position: sticky; top: 15px; 
@@ -313,9 +313,6 @@
         .video-title { font-weight: bold; font-size: 1.1em; margin-bottom: 5px; color: #8E1E20; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
         .video-desc { font-size: 0.85em; color: #666; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 
-        .stats-box { margin-top: 10px; padding-top: 10px; border-top: 1px dashed #ccc; display: flex; justify-content: center; gap: 15px; font-size: 0.9em; flex-wrap: wrap; }
-        .stats-item { background: #fff8e1; color: #8E1E20; padding: 2px 8px; border-radius: 4px; border: 1px solid #FFD700; font-weight: bold; }
-
         /* --- 手機版響應式設定 --- */
         @media (max-width: 1200px) { .product-list { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 1024px) { 
@@ -492,8 +489,7 @@
                 </div>
 
                 <div class="copyright-text" style="font-size:0.9em; color:#888; border-top:1px solid #eee; padding-top:10px; margin-top:10px;">Copyright © 2026 美鳳的家 版權所有</div>
-                
-                </div>
+            </div>
             
         </div>
 
@@ -536,20 +532,6 @@
                     <span class="notice-title">⏳ 取貨時間</span>
                     <div style="margin-top: 5px; color: #333;">
                         下單後三日內可寄出，恕不指定收貨時段。
-                    </div>
-                    <div style="display: none;">
-                        <div style="margin-bottom: 8px; margin-top: 5px;">
-                            <strong style="color:var(--primary-color);">【年節檔期之前】</strong><br>
-                            三日內可送，不指定收貨時段。
-                        </div>
-                        <div>
-                            <strong style="color:var(--primary-color);">【年節檔期】</strong>
-                            <ul style="padding-left: 20px; margin: 5px 0;">
-                                <li><strong>01/20 - 01/26</strong>：可送，不指定時段</li>
-                                <li><strong>01/27 - 02/03</strong>：可送，不指定時段</li>
-                                <li><strong>02/02 - 02/06</strong>：可送，不指定時段</li>
-                            </ul>
-                        </div>
                     </div>
                 </div>
                 <div class="notice-item">
@@ -595,6 +577,103 @@
                 </div>
             </div>
             
+        </div>
+    </div>
+
+    <div class="mobile-floating-bar" id="floatBar">
+        <div class="float-total">總計: $<span id="floatTotal">0</span></div>
+        <button class="float-btn" onclick="openCheckoutForm()">去結帳 ➔</button>
+    </div>
+
+    <button onclick="topFunction()" id="backTopBtn" title="回到頂部">⬆</button>
+
+    <div id="imageModal" class="modal" onclick="closeImageModal()">
+        <div style="text-align:center; max-width:90%;">
+            <img style="max-width:100%; max-height:80vh; border-radius:5px; box-shadow:0 0 20px rgba(0,0,0,0.5);" id="modalImg">
+            <p id="modalDesc" style="color:white; margin-top:10px; font-size:1.1em; text-shadow:0 1px 3px black; display:none;"></p>
+        </div>
+    </div>
+
+    <div id="checkoutModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeCheckoutForm()">&times;</span>
+            <h2 style="text-align:center; color:var(--primary-color); margin-top:0;">📦 訂購資料</h2>
+            
+            <div class="form-group">
+                <label class="required">姓名</label>
+                <input type="text" id="custName" placeholder="請問怎麼稱呼您？" oninput="removeError(this)">
+            </div>
+            
+            <div class="form-group">
+                <label class="required">手機號碼  </label>
+                <input type="tel" id="custMobile" placeholder="09xx-xxx-xxx" oninput="removeError(this)">
+            </div>
+
+            <div class="form-group">
+                <label>市內電話 (選填)</label>
+                <input type="tel" id="custPhone" placeholder="02-xxxx-xxxx">
+            </div>
+
+            <div class="form-group">
+                <label class="required">收貨方式</label>
+                <select id="custDelivery" onchange="updateAddressInput(); removeError(this)">
+                    <option value="黑貓宅配">🚛 黑貓宅配</option>
+                    <option value="7-11冷凍店到店">🏪 7-11 冷凍店到店</option>
+                    <option value="到店自取">🏠 到店自取</option>
+                </select>
+            </div>
+
+            <div class="form-group" id="addressContainer">
+                <label id="addressLabel" class="required">收貨地址 (宅配請務必填寫)</label>
+                <input type="text" id="custAddress" placeholder="請填寫完整的收件地址" oninput="removeError(this)">
+            </div>
+
+            <div class="form-group">
+                <label class="required">付款方式</label>
+                <select id="custPayment" onchange="updatePaymentInput(); removeError(this)">
+                    <option value="貨到付款">貨到付款</option>
+                    <option value="匯款">匯款 (需填後五碼)</option>
+                    <option value="台灣Pay">💳 台灣Pay (掃碼支付)</option>
+                    <option value="餐廳櫃檯結帳">餐廳櫃檯結帳</option>
+                </select>
+            </div>
+
+            <div id="bankTransferDetails" class="bank-details-box">
+                <div class="bank-details-title">🏦 匯款帳戶資訊</div>
+                <div style="background:#fff; padding:10px; border-radius:5px; border:1px solid #eee;">
+                    <strong>美鳳的家</strong><br>合作金庫 (006)<br>帳號：<span class="bank-account-num">0180717681001</span><br>統編：72466723
+                </div>
+            </div>
+
+            <div id="taiwanPayContainer" class="qr-code-container">
+                <p class="qr-hint">📱 請掃描下方 QR Code 付款</p>
+                <img src="image_d2c236.png" class="qr-code-img" alt="台灣Pay收款碼">
+                <p style="font-size: 0.9em; color: #555; margin-bottom: 0;">應付金額：<span style="color:red; font-weight:bold; font-size:1.4em;">$<span id="qrPayAmount">0</span></span></p>
+                <p style="font-size:0.8em; color:#999; margin-top:5px;">付款成功後請填寫下方末五碼</p>
+            </div>
+
+            <div class="form-group" id="bankInfoContainer" style="display:none;">
+                <label class="required" id="bankInfoLabel">匯款帳號後五碼</label>
+                <input type="text" id="custLast5Digits" placeholder="請輸入您的帳號後五碼" oninput="removeError(this)">
+            </div>
+
+            <div class="form-group">
+                <label class="required">希望到貨/自取日期</label>
+                <input type="date" id="custDate" oninput="removeError(this)">
+            </div>
+
+            <div class="form-group">
+                <label>備註事項</label>
+                <textarea id="custNote" placeholder="例如：管理室代收、避開中午時段..."></textarea>
+            </div>
+
+            <div style="margin-top: 20px; border-top: 2px dashed #eee; padding-top: 15px;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 5px; color: #555;"><span>商品小計：</span><span>$<span id="checkoutSubtotal">0</span></span></div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 10px; color: #555;"><span>運費：</span><span>$<span id="checkoutShipping">0</span></span></div>
+                <div style="display: flex; justify-content: space-between; align-items: center; font-size: 1.2em; font-weight: bold; color: #333;"><span>總金額：</span><span style="color: #d63031; font-size: 1.4em;">$<span id="checkoutTotal">0</span></span></div>
+            </div>
+
+            <button class="submit-btn" onclick="validateAndSubmit()">送出訂單</button>
         </div>
     </div>
 
