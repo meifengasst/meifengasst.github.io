@@ -201,7 +201,11 @@
         .category-wrapper { width: 100%; margin-top: 15px; z-index: 1000; transition: all 0.3s ease; }
         .category-bar { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
         .cat-btn { 
-            padding: 9px 22px; font-size: 1.05rem; background: #fff; border: 2px solid #D4AF37; color: #8E1E20; 
+            /* 🔥 修改：字體放大到 1.3rem，上下左右間距稍微加大讓按鈕比例更好看 */
+            padding: 12px 28px; 
+            font-size: 1.3rem; 
+            
+            background: #fff; border: 2px solid #D4AF37; color: #8E1E20; 
             border-radius: 50px; font-weight: bold; cursor: pointer; transition: 0.3s ease; box-shadow: 0 3px 6px rgba(0,0,0,0.1);
             font-family: 'Noto Serif TC', serif;
         }
@@ -397,7 +401,8 @@
             .site-logo { width: 140px; margin-bottom: 15px; }
             .mobile-floating-bar { display: flex; } 
             h1 { font-size: 2.2rem; letter-spacing: 2px; margin-top: 5px; }
-            .cat-btn { padding: 8px 16px; font-size: 1rem; }
+            /* 手機版字體也稍微放大，但保持在一排能塞下比較多字的狀態 */
+            .cat-btn { padding: 10px 18px; font-size: 1.15rem; }
             .product-list { grid-template-columns: 1fr; }
             body { padding: 10px 15px 100px 15px; }
             .sticky-nav { padding: 15px 0; overflow-x: auto; white-space: nowrap; justify-content: flex-start; }
@@ -1377,6 +1382,7 @@
   }
 </script>
 </html>
+
 
 
 
