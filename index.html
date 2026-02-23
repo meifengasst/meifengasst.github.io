@@ -31,21 +31,12 @@
             scroll-behavior: smooth;
         }
 
-        /* =======================================
-           1. 替換背景圖設定
-        ======================================= */
         .cny-background {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; 
-            
-            /* 🔥 將 new_bg.jpg 換成妳新上傳的圖片檔名 */
             background-image: url('new_bg.jpg'); 
-            
-            /* 讓新底圖完美填滿整個螢幕，不重複 */
             background-repeat: no-repeat; 
             background-size: cover; 
             background-position: center; 
-            
-            /* 如果新底圖太亮導致字看不清楚，可以把 1 改成 0.8 或更低來微調亮度 */
             filter: brightness(0.9); 
         }
 
@@ -54,9 +45,6 @@
             background-color: transparent; pointer-events: none;
         }
         
-    /* --- 🎨 頂部全域：極致精緻徽章版 --- */
-        /* --- 🎨 頂部全域：時光照片牆旗艦版 --- */
-       /* --- 🎨 頂部全域：左右旗艦佈局版 --- */
         /* --- 🎨 頂部全域 --- */
         header { 
             position: relative;
@@ -69,21 +57,19 @@
             background: transparent;
         }
 
-        h1, .sub-title, .site-logo-container { display: none !important; }
+        /* 避免隱藏到左側正常的 Logo */
+        header h1, header .sub-title, header .site-logo-container { display: none !important; }
 
-        /* --- 🏗️ 影音媒體黃金三角主容器 --- */
-        /* --- 🏗️ 影音媒體主容器 --- */
         .header-main-container {
             display: flex;
             align-items: center; 
-            justify-content: space-between; /* 左右推開對齊邊緣 */
+            justify-content: space-between; 
             gap: 20px;
             width: 96%;
             margin: 0 auto 30px auto; 
-            height: 380px; /* 統一高度基礎 */
+            height: 380px; 
         }
 
-        /* --- 左右兩側的群組容器 --- */
         .side-media-group {
             display: flex;
             align-items: center;
@@ -91,7 +77,6 @@
             height: 100%;
         }
 
-        /* --- 📺 有框媒體盒共通設定 (相片牆 & 影片) --- */
         .media-box {
             background: #8E1E20;
             border: 3px solid #D4AF37;
@@ -103,23 +88,12 @@
             display: block !important;
         }
 
-        /* 🔥🔥🔥 關鍵修改：統一所有側邊元素的大小 🔥🔥🔥 */
-        
-        /* 1. 讓「左側相片牆」和「右側影片」的盒子寬度一模一樣 */
         .side-media-group .media-box {
-            flex: 0 0 320px !important; /* 強制鎖定寬度為 320px */
+            flex: 0 0 320px !important; 
             width: 320px !important;
         }
-        /* (原本分別設定 .photo-wall-box 和 .video-box 的代碼已刪除，由上面統一控制) */
 
-
-        /* --- ✨ 無框去背圖片專用樣式 --- */
-        /* 2. 讓「左右兩個去背人物」的容器寬度也跟盒子一模一樣 */
-        /* =======================================
-           ✨ 1 & 2：無框去背圖片 (微微縮小) 
-        ======================================= */
         .transparent-img-box {
-            /* 🔥 從原本的 320px 縮小為 200px，當作精美的點綴 */
             flex: 0 0 200px !important; 
             width: 200px !important;
             height: 100%; 
@@ -135,13 +109,10 @@
         }
         .transparent-img-box img:hover { transform: scale(1.05); }
 
-
-        /* 📸 照片牆捲動動畫 */
         .large-photo-track { display: flex; flex-direction: column; animation: scrollWall 40s linear infinite; }
         .clickable-photo { width: 100%; height: auto; display: block; border-bottom: 2px solid #D4AF37; }
         @keyframes scrollWall { 0% { transform: translateY(0); } 100% { transform: translateY(-50%); } }
 
-        /* 🎥 影片容器 */
         .video-container { width: 100%; height: calc(100% - 32px); background: #000; }
         .video-container iframe { width: 100%; height: 100%; border: none; }
 
@@ -152,17 +123,10 @@
             border-top: 1px solid #D4AF37; z-index: 2;
         }
 
-        /* --- 🟦 中央區塊 (區域 2) --- */
-        .center-content-section {
-            flex: 1; display: flex; align-items: center; justify-content: center; gap: 20px;
-        }
+        .center-content-section { flex: 1; display: flex; align-items: center; justify-content: center; gap: 20px; }
 
-        /* =======================================
-           ✨ 7：中央 Banner (大幅放大，成為最顯眼主體) 
-        ======================================= */
         .banner-frame {
             width: 100%; 
-            /* 🔥 從原本的 400px 放大到 650px，絕對的視覺焦點！ */
             max-width: 650px; 
             padding: 8px; background: #8E1E20; border-radius: 15px; border: 2px solid #D4AF37;
             animation: goldenGlow 3s ease-in-out infinite alternate;
@@ -173,15 +137,10 @@
         }
         .banner-img { width: 100%; height: auto; display: block; border-radius: 10px; outline: 1.5px solid rgba(212, 175, 55, 0.5); outline-offset: -4px;}
 
-        /* =======================================
-           ✨ 3, 4, 5, 6：四個徽章 (維持比例不變) 
-        ======================================= */
         .side-badges { display: flex; flex-direction: column; gap: 25px; } 
         
         .badge-item {
-            /* 🔥 維持在 110px 穩定不變 */
-            width: 110px; 
-            height: 110px; 
+            width: 110px; height: 110px; 
             border: 3px solid #D4AF37;
             background: linear-gradient(135deg, #8E1E20 0%, #6B1315 100%);
             border-radius: 50%; display: flex; align-items: center; justify-content: center;
@@ -202,98 +161,45 @@
         ======================================= */
         .category-wrapper { 
             position: sticky; 
-            top: 15px; /* 頂部浮動時的間距 */
-            z-index: 95; /* 🔥 降到 95，這樣它就不會蓋住任何彈出視窗了！ */ 
+            top: 15px; 
+            z-index: 95; /* 確保不覆蓋彈出視窗 */
             width: 100%; 
             margin-bottom: 25px; 
-            
-            /* 預設狀態：透明無背景 */
             background: transparent; 
             border-bottom: 2px solid transparent; 
             box-shadow: none;
             backdrop-filter: none;
-            
-            /* 🔥 關鍵魔法：讓背景變色時有 0.4 秒的柔和過場動畫 */
             transition: all 0.4s ease; 
             pointer-events: none; 
         }
         
         .category-bar { 
-            display: flex; 
-            justify-content: center; 
-            gap: 12px; 
-            flex-wrap: wrap; 
-            max-width: 1200px;
-            margin: 0 auto;
-            pointer-events: auto; 
-            /* 讓內距變化也有動畫 */
+            display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; 
+            max-width: 1200px; margin: 0 auto; pointer-events: auto; 
             transition: padding 0.4s ease; 
         }
 
-        /* 🌟 下滑時觸發的「深紅玻璃色塊」狀態 */
         .category-wrapper.scrolled {
-            top: 0; /* 下滑後緊緊貼齊螢幕最上緣 */
-            background: rgba(142, 30, 32, 0.95); /* 半透明深紅底色 */
-            backdrop-filter: blur(8px); /* 背景微模糊 */
-            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-            border-bottom: 2px solid #D4AF37; /* 底部跑出金邊 */
+            top: 0; background: rgba(142, 30, 32, 0.95); backdrop-filter: blur(8px); 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4); border-bottom: 2px solid #D4AF37; 
             pointer-events: auto;
         }
-        .category-wrapper.scrolled .category-bar {
-            padding: 12px 0; /* 撐開上下空間，讓色塊變寬 */
-        }
+        .category-wrapper.scrolled .category-bar { padding: 12px 0; }
 
-        /* 按鈕本體預設為白底金邊膠囊 */
         .category-wrapper .cat-btn { 
-            padding: 10px 24px; 
-            font-size: 1.15rem; 
-            background: rgba(255, 255, 255, 0.95); 
-            border: 2px solid #D4AF37; 
-            color: #8E1E20; 
-            border-radius: 50px; 
-            font-weight: bold; 
-            cursor: pointer; 
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); 
-            font-family: 'Noto Serif TC', serif;
-            letter-spacing: 1px; 
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15); 
+            padding: 10px 24px; font-size: 1.15rem; background: rgba(255, 255, 255, 0.95); 
+            border: 2px solid #D4AF37; color: #8E1E20; border-radius: 50px; 
+            font-weight: bold; cursor: pointer; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); 
+            font-family: 'Noto Serif TC', serif; letter-spacing: 1px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); 
         }
-        
-        /* 按鈕被選中或游標滑過的狀態 */
-        .category-wrapper .cat-btn.active, 
-        .category-wrapper .cat-btn:hover { 
-            background: linear-gradient(135deg, #D4AF37 0%, #c49f27 100%); 
-            color: #fff; 
-            border-color: transparent; 
-            transform: translateY(-3px); 
-            box-shadow: 0 6px 18px rgba(212, 175, 55, 0.45); 
+        .category-wrapper .cat-btn.active, .category-wrapper .cat-btn:hover { 
+            background: linear-gradient(135deg, #D4AF37 0%, #c49f27 100%); color: #fff; 
+            border-color: transparent; transform: translateY(-3px); box-shadow: 0 6px 18px rgba(212, 175, 55, 0.45); 
         }
 
-        /* 📱 手機版適應 */
-        @media (max-width: 1024px) {
-            .category-wrapper { top: 10px; }
-            .category-wrapper.scrolled { top: 0; }
-            .category-bar {
-                justify-content: flex-start; 
-                flex-wrap: nowrap; 
-                overflow-x: auto; 
-                -webkit-overflow-scrolling: touch; 
-                padding: 5px 15px 15px 15px; 
-            }
-            .category-wrapper.scrolled .category-bar {
-                padding: 12px 15px; /* 下滑後的手機版間距 */
-            }
-            .category-bar::-webkit-scrollbar { display: none; } 
-            .category-wrapper .cat-btn { 
-                padding: 8px 18px; 
-                font-size: 1.05rem; 
-                flex-shrink: 0; 
-            }
-        }
-        
         /* --- 主要內容佈局 --- */
         .container { max-width: 96%; margin: 0 auto; display: flex; gap: 25px; position: relative; align-items: flex-start; }
-        .left-column { flex: 0.7; display: flex; flex-direction: column; position: sticky; top: 20px; max-height: 90vh; z-index: 80; min-width: 250px; overflow-y: auto; padding-right: 5px; }
+        .left-column { flex: 0.7; display: flex; flex-direction: column; position: sticky; top: 80px; max-height: 85vh; z-index: 80; min-width: 250px; overflow-y: auto; padding-right: 5px; }
 
         .site-logo-container { text-align: center; margin-bottom: 20px; }
         .site-logo { width: 160px; height: auto; border-radius: 50%; border: 4px solid var(--accent-color); box-shadow: 0 5px 15px rgba(0,0,0,0.2); object-fit: cover; background-color: #fff; }
@@ -309,226 +215,71 @@
         .ticker-text { display: inline-block; padding-left: 100%; animation: scroll-left 12s linear infinite; color: #FFF; font-weight: bold; font-size: 1rem; letter-spacing: 1px; }
         @keyframes scroll-left { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
         
-      /* =======================================
+        /* =======================================
            ✨ 側邊欄：店家資訊 & 公告區塊 (精緻美編版)
         ======================================= */
-        .shop-info, .notice-section { 
-            border-radius: 12px; 
-            font-size: 1.05rem; 
-            line-height: 1.6; 
-        }
+        .shop-info, .notice-section { border-radius: 12px; font-size: 1.05rem; line-height: 1.6; }
+        .shop-info { margin-bottom: 20px; color: #333; text-align: center; background: rgba(255, 255, 255, 0.95); padding: 20px 15px; border: 2px solid #eee; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .notice-section { background: rgba(255, 248, 220, 0.95); padding: 20px; border: 2px solid var(--accent-color); box-shadow: 0 5px 15px rgba(0,0,0,0.1); margin-top: 25px; }
         
-        .shop-info { 
-            margin-bottom: 20px; 
-            color: #333; 
-            text-align: center; 
-            background: rgba(255, 255, 255, 0.95); /* 改為透白，更有質感 */
-            padding: 20px 15px; 
-            border: 2px solid #eee; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05); /* 微微浮凸感 */
-        }
-        
-        .notice-section { 
-            background: rgba(255, 248, 220, 0.95); 
-            padding: 20px; 
-            border: 2px solid var(--accent-color); 
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1); 
-            margin-top: 25px; 
-        }
-        
-        /* 🔥 標題完美比例：優雅換行版 (解決 ... 截斷問題) */
         .shop-info h3, .notice-section h3 { 
-            font-family: 'Noto Serif TC', serif; 
-            border-bottom: 2px dashed #ccc; 
-            padding-bottom: 12px; 
-            margin-top: 0; 
-            margin-bottom: 15px;
-            font-size: 1.25rem; /* 稍微微調到最適合側邊欄的黃金尺寸 */
-            font-weight: 900;  
-            color: #111;
-            letter-spacing: 1px; 
-            line-height: 1.4; /* 如果折成兩行，行距也能保持舒適 */
-            white-space: normal; /* ✅ 拿掉強制不換行，允許自然掉落 */
-            word-break: keep-all; /* ✅ 盡量保持詞彙完整，避免單留一個字在下一行 */
+            font-family: 'Noto Serif TC', serif; border-bottom: 2px dashed #ccc; padding-bottom: 12px; margin-top: 0; margin-bottom: 15px;
+            font-size: 1.25rem; font-weight: 900; color: #111; letter-spacing: 1px; line-height: 1.4; white-space: normal; word-break: keep-all; 
         }
 
-        .info-item, .notice-item { 
-            margin-bottom: 18px; /* 增加項目之間的呼吸空間 */
-            text-align: left; 
-        }
-        .shop-info .info-item { 
-            border-bottom: 1px solid #f0f0f0; 
-            padding-bottom: 12px; 
-        }
-        .shop-info .info-item:last-child { 
-            border-bottom: none; 
-            margin-bottom: 0;
-            padding-bottom: 0;
-        }
+        .info-item, .notice-item { margin-bottom: 18px; text-align: left; }
+        .shop-info .info-item { border-bottom: 1px solid #f0f0f0; padding-bottom: 12px; }
+        .shop-info .info-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
 
-        /* 紅色提醒框精緻化 */
-        .warning-box {
-            margin-top: 10px; 
-            padding: 10px 12px; 
-            background: #fff5f5; 
-            border-left: 4px solid #d63031; 
-            border-radius: 6px; 
-            font-size: 0.95rem; 
-            line-height: 1.5;
-            color: #333;
-            box-shadow: 0 2px 5px rgba(214, 48, 49, 0.05);
-        }
+        .warning-box { margin-top: 10px; padding: 10px 12px; background: #fff5f5; border-left: 4px solid #d63031; border-radius: 6px; font-size: 0.95rem; line-height: 1.5; color: #333; box-shadow: 0 2px 5px rgba(214, 48, 49, 0.05); }
+        .highlight-red { color: #d63031; font-weight: bold; }
+        .bank-info { background: #fff; padding: 10px; border-radius: 8px; border: 1px dashed var(--primary-color); font-family: monospace; font-size: 1.1em; color: #333; margin-top: 5px; word-break: break-all; }
 
         /* =======================================
            ✨ 完整商品列表區塊 (排版防護 + 精緻美編)
         ======================================= */
-        
-        /* 1. 外層格線排版 (確保三排並列) */
         .product-list { flex: 3; display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; align-content: start; }
-        
-        /* 2. 卡片本體外框 (確保有白底和圓角) */
         .product-card { background: rgba(255, 255, 255, 0.95); border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); overflow: hidden; display: flex; flex-direction: column; transition: transform 0.3s; border: 1px solid rgba(0,0,0,0.02); }
         .product-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.15); }
         
-        /* 3. 圖片區塊限制 (🚨 就是少了這個，魚才會暴走！) */
         .product-img-box { width: 100%; height: 280px; background-color: #eee; overflow: hidden; cursor: zoom-in; position: relative; }
         .product-img-box img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
         .product-card:hover .product-img-box img { transform: scale(1.1); }
         .product-img-box::after { content: "🔍"; position: absolute; bottom: 10px; right: 10px; background: rgba(255,255,255,0.8); padding: 5px; border-radius: 50%; opacity: 0; transition: 0.3s; }
         .product-card:hover .product-img-box::after { opacity: 1; }
 
-        /* 4. 下方文字區塊精緻美編 */
-        .card-content { 
-            padding: 20px 25px 25px 25px; 
-            flex-grow: 1; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: space-between; 
-            position: relative;
-        }
+        .card-content { padding: 20px 25px 25px 25px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; position: relative; }
+        .product-cat { display: inline-block; font-size: 0.85em; color: #8E1E20; font-weight: bold; background: #fff8e1; border: 1px solid #D4AF37; padding: 4px 12px; border-radius: 20px; margin-bottom: 12px; letter-spacing: 1px; }
+        .product-name { font-size: 1.5em; font-family: 'Noto Serif TC', serif; font-weight: 900; color: #222; line-height: 1.3; margin: 0 0 15px 0; padding-bottom: 15px; border-bottom: 1px dashed #dcdcdc; }
+        .price { color: var(--primary-color); font-weight: 900; font-size: 1.7em; margin-bottom: 15px; letter-spacing: 0.5px; }
+        .price::first-letter { font-size: 0.75em; color: #666; margin-right: 2px; }
 
-        /* 分類標籤化 (精緻小膠囊) */
-        .product-cat { 
-            display: inline-block;
-            font-size: 0.85em; 
-            color: #8E1E20; 
-            font-weight: bold; 
-            background: #fff8e1; 
-            border: 1px solid #D4AF37; 
-            padding: 4px 12px; 
-            border-radius: 20px; 
-            margin-bottom: 12px;
-            letter-spacing: 1px;
-        }
-
-        /* 菜名與分隔線 */
-        .product-name { 
-            font-size: 1.5em; 
-            font-family: 'Noto Serif TC', serif; 
-            font-weight: 900; 
-            color: #222; 
-            line-height: 1.3; 
-            margin: 0 0 15px 0;
-            padding-bottom: 15px;
-            border-bottom: 1px dashed #dcdcdc; 
-        }
-
-        /* 價格與按鈕區的排版 */
-        .price { 
-            color: var(--primary-color); 
-            font-weight: 900; 
-            font-size: 1.7em; 
-            margin-bottom: 15px; 
-            letter-spacing: 0.5px;
-        }
-        .price::first-letter {
-            font-size: 0.75em;
-            color: #666;
-            margin-right: 2px;
-        }
-
-        /* 加入訂單按鈕 (寶石漸層金邊版) */
-        button.add-btn { 
-            width: 100%; 
-            background: linear-gradient(135deg, #8E1E20 0%, #6B1315 100%); 
-            color: white; 
-            border: 2px solid #D4AF37; 
-            padding: 12px 15px; 
-            border-radius: 50px; 
-            cursor: pointer; 
-            font-weight: bold; 
-            font-size: 1.15em; 
-            letter-spacing: 1px;
-            box-shadow: 0 4px 10px rgba(142, 30, 32, 0.25); 
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); 
-        }
-        button.add-btn:hover { 
-            transform: translateY(-3px); 
-            box-shadow: 0 6px 15px rgba(212, 175, 55, 0.4); 
-            filter: brightness(1.1);
-        }
+        button.add-btn { width: 100%; background: linear-gradient(135deg, #8E1E20 0%, #6B1315 100%); color: white; border: 2px solid #D4AF37; padding: 12px 15px; border-radius: 50px; cursor: pointer; font-weight: bold; font-size: 1.15em; letter-spacing: 1px; box-shadow: 0 4px 10px rgba(142, 30, 32, 0.25); transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }
+        button.add-btn:hover { transform: translateY(-3px); box-shadow: 0 6px 15px rgba(212, 175, 55, 0.4); filter: brightness(1.1); }
 
         /* --- 購物車與側邊欄 --- */
-        .cart-section { flex: 0.7; background: rgba(255, 255, 255, 0.95); padding: 25px; border-radius: 12px; border-top: 5px solid var(--primary-color); align-self: flex-start; position: sticky; top: 20px; max-height: 90vh; overflow-y: auto; z-index: 90; box-shadow: 0 5px 20px rgba(0,0,0,0.1); min-width: 250px; padding-right: 5px; }
+        .cart-section { flex: 0.7; background: rgba(255, 255, 255, 0.95); padding: 25px; border-radius: 12px; border-top: 5px solid var(--primary-color); align-self: flex-start; position: sticky; top: 80px; max-height: 85vh; overflow-y: auto; z-index: 90; box-shadow: 0 5px 20px rgba(0,0,0,0.1); min-width: 250px; padding-right: 5px; }
         .cart-section h2 { font-family: 'Noto Serif TC', serif; color: #333; border-bottom: 1px dashed #ccc; padding-bottom: 15px; margin-top: 0; }
         .cart-item { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f0f0f0; padding: 15px 0; font-size: 0.95em; }
         .total { font-size: 1.5em; font-weight: bold; margin-top: 20px; text-align: right; color: var(--primary-color); font-family: 'Noto Serif TC', serif; }
         .checkout-btn { width: 100%; background: linear-gradient(135deg, #2D6A4F 0%, #40916C 100%); color: white; border: none; font-size: 1.2em; padding: 15px; margin-top: 20px; border-radius: 8px; cursor: pointer; font-weight: bold; box-shadow: 0 4px 10px rgba(45, 106, 79, 0.3); transition: 0.3s; }
         .checkout-btn:hover { filter: brightness(1.1); transform: translateY(-2px); }
 
-        /* --- 新增：購物車數量增減按鈕樣式 --- */
-        .qty-control {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-top: 5px;
-            background: #f9f9f9;
-            padding: 2px 5px;
-            border-radius: 5px;
-            width: fit-content;
-        }
-        .qty-btn {
-            width: 24px;
-            height: 24px;
-            border: 1px solid #ddd;
-            background: #fff;
-            color: #555;
-            border-radius: 4px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            transition: all 0.2s;
-            font-size: 1.1em;
-            padding: 0;
-        }
-        .qty-btn:hover {
-            background: #e0e0e0;
-            color: #333;
-        }
+        .qty-control { display: flex; align-items: center; gap: 8px; margin-top: 5px; background: #f9f9f9; padding: 2px 5px; border-radius: 5px; width: fit-content; }
+        .qty-btn { width: 24px; height: 24px; border: 1px solid #ddd; background: #fff; color: #555; border-radius: 4px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-weight: bold; transition: all 0.2s; font-size: 1.1em; padding: 0; }
+        .qty-btn:hover { background: #e0e0e0; color: #333; }
         .qty-btn.minus { color: #d63031; border-color: #fab1a0; }
         .qty-btn.plus { color: #2D6A4F; border-color: #b8e994; }
-        .qty-display {
-            font-weight: bold;
-            font-family: monospace;
-            font-size: 1.1em;
-            color: #333;
-            min-width: 20px;
-            text-align: center;
-        }
+        .qty-display { font-weight: bold; font-family: monospace; font-size: 1.1em; color: #333; min-width: 20px; text-align: center; }
 
-        /* 購物車震動動畫 */
         @keyframes shakeCart { 0% { transform: scale(1); border-color: var(--primary-color); } 50% { transform: scale(1.02); border-color: #FFD700; box-shadow: 0 0 15px #FFD700; } 100% { transform: scale(1); border-color: var(--primary-color); } }
         .cart-animate { animation: shakeCart 0.3s ease-in-out; }
 
-        /* 雙重免運進度條 */
         .shipping-progress-container { margin-bottom: 20px; background: #fff8f8; padding: 15px; border-radius: 8px; border: 1px dashed #eecaca; }
         .progress-text { font-size: 0.9rem; color: #555; margin-bottom: 5px; display: flex; justify-content: space-between; align-items: center; }
         .progress-bar-bg { width: 100%; height: 10px; background-color: #eee; border-radius: 10px; overflow: hidden; }
         .progress-bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #FFD700, #ffae00); transition: width 0.5s ease-out; }
 
-        /* 社群按鈕 */
         .social-area { margin-top: 25px; padding-top: 20px; border-top: 2px dashed #eee; display: flex; flex-direction: column; gap: 10px; }
         .social-btn { display: flex; align-items: center; justify-content: center; text-decoration: none; color: white; padding: 12px; border-radius: 8px; font-weight: bold; font-size: 1.1em; transition: transform 0.2s, filter 0.2s; box-shadow: 0 3px 6px rgba(0,0,0,0.15); width: 100%; box-sizing: border-box; }
         .social-btn:hover { transform: translateY(-2px); filter: brightness(1.1); }
@@ -541,7 +292,6 @@
         .float-total { color: #FFD700; font-size: 1.3em; font-weight: bold; font-family: 'Noto Serif TC', serif; }
         .float-btn { background: linear-gradient(135deg, #2D6A4F 0%, #40916C 100%); color: white; border: none; padding: 10px 25px; border-radius: 50px; font-weight: bold; font-size: 1.1em; cursor: pointer; }
 
-        /* 回到頂部按鈕 */
         #backTopBtn { display: none; position: fixed; bottom: 80px; right: 20px; z-index: 99; width: 50px; height: 50px; font-size: 1.5rem; border: none; outline: none; background: linear-gradient(135deg, #FFD700 0%, #DAA520 100%); color: #8E1E20; cursor: pointer; border-radius: 50%; box-shadow: 0 4px 15px rgba(0,0,0,0.3); transition: 0.3s; align-items: center; justify-content: center; font-weight: bold; }
         #backTopBtn:hover { transform: translateY(-5px) scale(1.1); box-shadow: 0 6px 20px rgba(255, 215, 0, 0.5); }
 
@@ -558,22 +308,18 @@
         .submit-btn:hover { background: #a02d2f; }
         @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
 
-        /* 表單驗證錯誤樣式 */
         .input-error { border: 2px solid var(--error-color) !important; background-color: #fff0f0; box-shadow: 0 0 5px rgba(214, 48, 49, 0.3); }
         @keyframes shakeInput { 0% { transform: translateX(0); } 25% { transform: translateX(-5px); } 50% { transform: translateX(5px); } 75% { transform: translateX(-5px); } 100% { transform: translateX(0); } }
         .shake-animation { animation: shakeInput 0.4s ease-in-out; }
 
-        /* 台灣 Pay QR Code */
         .qr-code-container { text-align: center; margin: 15px 0; padding: 15px; background: #fff8e1; border: 2px dashed #D4AF37; border-radius: 8px; display: none; }
         .qr-code-img { max-width: 220px; width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); margin-bottom: 10px; background: #fff; padding: 5px; }
         .qr-hint { color: #8E1E20; font-weight: bold; font-size: 1em; margin: 5px 0; }
 
-        /* 匯款資訊 */
         .bank-details-box { background: #fffdf5; border: 2px dashed #D4AF37; border-radius: 8px; padding: 15px; margin: 15px 0; text-align: center; display: none; }
         .bank-details-title { font-weight: bold; font-size: 1.1em; margin-bottom: 8px; color: #333; }
         .bank-account-num { color: #d63031; font-weight: bold; font-size: 1.2em; letter-spacing: 1px; }
 
-        /* 媒體專訪列表樣式 */
         .video-list-container { display: flex; flex-direction: column; gap: 15px; max-height: 60vh; overflow-y: auto; padding: 5px; }
         .video-item { display: flex; align-items: center; background: #fff; border: 1px solid #eee; border-radius: 8px; overflow: hidden; cursor: pointer; transition: all 0.2s; box-shadow: 0 2px 5px rgba(0,0,0,0.05); text-decoration: none; color: #333; }
         .video-item:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); border-color: #D4AF37; }
@@ -584,7 +330,6 @@
         .video-title { font-weight: bold; font-size: 1.1em; margin-bottom: 5px; color: #8E1E20; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
         .video-desc { font-size: 0.85em; color: #666; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 
-        /* 🔥 新增：流量統計區塊樣式 (精簡版) */
         .stats-box { margin-top: 10px; padding-top: 10px; border-top: 1px dashed #ccc; display: flex; justify-content: center; gap: 15px; font-size: 0.9em; flex-wrap: wrap; }
         .stats-item { background: #fff8e1; color: #8E1E20; padding: 2px 8px; border-radius: 4px; border: 1px solid #FFD700; font-weight: bold; }
 
@@ -596,108 +341,107 @@
             .site-logo { width: 140px; margin-bottom: 15px; }
             .mobile-floating-bar { display: flex; } 
             h1 { font-size: 2.2rem; letter-spacing: 2px; margin-top: 5px; }
-            /* 手機版字體也稍微放大，但保持在一排能塞下比較多字的狀態 */
-            .cat-btn { padding: 10px 18px; font-size: 1.15rem; }
+            .category-wrapper { top: 10px; }
+            .category-wrapper.scrolled { top: 0; }
+            .category-bar { justify-content: flex-start; flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; padding: 5px 15px 15px 15px; }
+            .category-wrapper.scrolled .category-bar { padding: 12px 15px; }
+            .category-bar::-webkit-scrollbar { display: none; } 
+            .category-wrapper .cat-btn { padding: 8px 18px; font-size: 1.05rem; flex-shrink: 0; }
             .product-list { grid-template-columns: 1fr; }
             body { padding: 10px 15px 100px 15px; }
-            .sticky-nav { padding: 15px 0; overflow-x: auto; white-space: nowrap; justify-content: flex-start; }
-            .sticky-nav .category-bar { width: 100%; justify-content: start; padding-left: 15px; padding-right: 15px; }
         }
-        /* --- 銷售跑馬燈特效 --- */
-        .fade-update {
-            animation: fadeInText 0.5s ease-in-out;
-        }
-        @keyframes fadeInText {
-            0% { opacity: 0; transform: translateY(5px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
+        
+        .fade-update { animation: fadeInText 0.5s ease-in-out; }
+        @keyframes fadeInText { 0% { opacity: 0; transform: translateY(5px); } 100% { opacity: 1; transform: translateY(0); } }
+
+        /* 遮罩層 (年節公告) */
+        #holiday-modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.75); z-index: 10005; display: none; justify-content: center; align-items: center; backdrop-filter: blur(4px); }
+        #holiday-modal-box { position: relative; width: 90%; max-width: 650px; animation: popIn 0.3s ease-out; }
+        .holiday-img { width: 100%; height: auto; display: block; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.6); }
+        .holiday-close-btn { position: absolute; top: -15px; right: -15px; width: 38px; height: 38px; background: #8E1E20; color: white; border: 2px solid white; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 24px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 2; transition: 0.2s; }
+        .holiday-close-btn:hover { background: #d63031; transform: scale(1.1); }
+        @keyframes popIn { 0% { transform: scale(0.8); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+
     </style>
 </head>
 <body>
 
     <div class="cny-background"></div>
     <div class="cny-overlay"></div>
-    <header id="mainHeader">
-    <div class="header-main-container">
-        
-        <div class="side-media-group left-group">
-            
-            <div class="media-box photo-wall-box">
-                <div class="large-photo-track">
-                <img class="clickable-photo" src="images/photos/customer_01.jpg" alt="好評合照" onclick="openImageModal(this.src)">
-                <img class="clickable-photo" src="images/photos/customer_02.jpg" alt="好評合照" onclick="openImageModal(this.src)">
-                <img class="clickable-photo" src="images/photos/customer_03.jpg" alt="好評合照" onclick="openImageModal(this.src)">
-                <img class="clickable-photo" src="images/photos/customer_04.jpg" alt="好評合照" onclick="openImageModal(this.src)">
-                <img class="clickable-photo" src="images/photos/customer_05.jpg" alt="好評合照" onclick="openImageModal(this.src)">
-                <img class="clickable-photo" src="images/photos/customer_06.jpg" alt="好評合照" onclick="openImageModal(this.src)">
-                <img class="clickable-photo" src="images/photos/customer_07.jpg" alt="好評合照" onclick="openImageModal(this.src)">
-                <img class="clickable-photo" src="images/photos/customer_08.jpg" alt="好評合照" onclick="openImageModal(this.src)">
-                <img class="clickable-photo" src="images/photos/customer_09.jpg" alt="好評合照" onclick="openImageModal(this.src)">
-                <img class="clickable-photo" src="images/photos/customer_10.jpg" alt="好評合照" onclick="openImageModal(this.src)">
-                <img class="clickable-photo" src="images/photos/customer_11.jpg" alt="好評合照" onclick="openImageModal(this.src)">
-                <img class="clickable-photo" src="images/photos/customer_12.jpg" alt="好評合照" onclick="openImageModal(this.src)">
-                <img class="clickable-photo" src="images/photos/customer_13.jpg" alt="好評合照" onclick="openImageModal(this.src)">
-                <img class="clickable-photo" src="images/photos/customer_14.jpg" alt="好評合照" onclick="openImageModal(this.src)">
-                <img class="clickable-photo" src="images/photos/customer_15.jpg" alt="好評合照" onclick="openImageModal(this.src)">
-                <img class="clickable-photo" src="images/photos/customer_16.jpg" alt="好評合照" onclick="openImageModal(this.src)">
-                <img class="clickable-photo" src="images/photos/customer_17.jpg" alt="好評合照" onclick="openImageModal(this.src)">
-                <img class="clickable-photo" src="images/photos/customer_18.jpg" alt="好評合照" onclick="openImageModal(this.src)">
-                <img class="clickable-photo" src="images/photos/customer_19.jpg" alt="好評合照" onclick="openImageModal(this.src)">
-                <img class="clickable-photo" src="images/photos/customer_20.jpg" alt="好評合照" onclick="openImageModal(this.src)">
-                <img class="clickable-photo" src="images/photos/customer_21.jpg" alt="好評合照" onclick="openImageModal(this.src)">
-                <img class="clickable-photo" src="images/photos/customer_22.jpg" alt="好評合照" onclick="openImageModal(this.src)">
-                <img class="clickable-photo" src="images/photos/customer_23.jpg" alt="好評合照" onclick="openImageModal(this.src)">
-                <img class="clickable-photo" src="images/photos/customer_24.jpg" alt="好評合照" onclick="openImageModal(this.src)">
-                <img class="clickable-photo" src="images/photos/customer_25.jpg" alt="好評合照" onclick="openImageModal(this.src)">
-                <img class="clickable-photo" src="images/photos/customer_26.jpg" alt="好評合照" onclick="openImageModal(this.src)">
-                <img class="clickable-photo" src="images/photos/customer_27.jpg" alt="好評合照" onclick="openImageModal(this.src)">
-                </div>
-                <div class="media-label">📸 客人好評見證</div>
-            </div>
-
-            <div class="transparent-img-box">
-                <img src="images/photos/my-transparent-1.png" alt="特色裝飾" onclick="openImageModal(this.src)">
-            </div>
-
-        </div>
-
-
-        <div class="center-content-section">
-            <div class="side-badges left">
-                <div class="badge-item"><span>堅持<br>手作</span></div>
-                <div class="badge-item"><span>嚴選<br>食材</span></div>
-            </div>
-            <div class="banner-frame">
-                <img src="image_17.png" alt="美鳳的家" class="banner-img">
-            </div>
-            <div class="side-badges right">
-                <div class="badge-item"><span>冷凍<br>宅配</span></div>
-                <div class="badge-item"><span>三灣<br>在地</span></div>
-            </div>
-        </div>
-
-
-        <div class="side-media-group right-group">
-
-            <div class="transparent-img-box">
-                <img src="images/photos/my-transparent-2.png" alt="特色裝飾" onclick="openImageModal(this.src)">
-            </div>
-
-            <div class="media-box video-box">
-                <div class="video-container">
-                    <iframe src="https://www.youtube.com/embed/nrJOspkgeWw?controls=0&autoplay=1&mute=1&loop=1&playlist=M76_2Yu6zoo,vDXSZDidzGA,nrJOspkgeWw,SHta9dzSySo,oxEPNX4Af4M&rel=0" 
-                            frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                </div>
-                <div class="media-label">🎥 媒體專訪 & YTR推薦</div>
-            </div>
-
-        </div>
-
-    </div>
     
-  
-</header>
-      <div class="category-wrapper" id="catWrapper">
+    <header id="mainHeader">
+        <div class="header-main-container">
+            
+            <div class="side-media-group left-group">
+                <div class="media-box photo-wall-box">
+                    <div class="large-photo-track">
+                    <img class="clickable-photo" src="images/photos/customer_01.jpg" alt="好評合照" onclick="openImageModal(this.src)">
+                    <img class="clickable-photo" src="images/photos/customer_02.jpg" alt="好評合照" onclick="openImageModal(this.src)">
+                    <img class="clickable-photo" src="images/photos/customer_03.jpg" alt="好評合照" onclick="openImageModal(this.src)">
+                    <img class="clickable-photo" src="images/photos/customer_04.jpg" alt="好評合照" onclick="openImageModal(this.src)">
+                    <img class="clickable-photo" src="images/photos/customer_05.jpg" alt="好評合照" onclick="openImageModal(this.src)">
+                    <img class="clickable-photo" src="images/photos/customer_06.jpg" alt="好評合照" onclick="openImageModal(this.src)">
+                    <img class="clickable-photo" src="images/photos/customer_07.jpg" alt="好評合照" onclick="openImageModal(this.src)">
+                    <img class="clickable-photo" src="images/photos/customer_08.jpg" alt="好評合照" onclick="openImageModal(this.src)">
+                    <img class="clickable-photo" src="images/photos/customer_09.jpg" alt="好評合照" onclick="openImageModal(this.src)">
+                    <img class="clickable-photo" src="images/photos/customer_10.jpg" alt="好評合照" onclick="openImageModal(this.src)">
+                    <img class="clickable-photo" src="images/photos/customer_11.jpg" alt="好評合照" onclick="openImageModal(this.src)">
+                    <img class="clickable-photo" src="images/photos/customer_12.jpg" alt="好評合照" onclick="openImageModal(this.src)">
+                    <img class="clickable-photo" src="images/photos/customer_13.jpg" alt="好評合照" onclick="openImageModal(this.src)">
+                    <img class="clickable-photo" src="images/photos/customer_14.jpg" alt="好評合照" onclick="openImageModal(this.src)">
+                    <img class="clickable-photo" src="images/photos/customer_15.jpg" alt="好評合照" onclick="openImageModal(this.src)">
+                    <img class="clickable-photo" src="images/photos/customer_16.jpg" alt="好評合照" onclick="openImageModal(this.src)">
+                    <img class="clickable-photo" src="images/photos/customer_17.jpg" alt="好評合照" onclick="openImageModal(this.src)">
+                    <img class="clickable-photo" src="images/photos/customer_18.jpg" alt="好評合照" onclick="openImageModal(this.src)">
+                    <img class="clickable-photo" src="images/photos/customer_19.jpg" alt="好評合照" onclick="openImageModal(this.src)">
+                    <img class="clickable-photo" src="images/photos/customer_20.jpg" alt="好評合照" onclick="openImageModal(this.src)">
+                    <img class="clickable-photo" src="images/photos/customer_21.jpg" alt="好評合照" onclick="openImageModal(this.src)">
+                    <img class="clickable-photo" src="images/photos/customer_22.jpg" alt="好評合照" onclick="openImageModal(this.src)">
+                    <img class="clickable-photo" src="images/photos/customer_23.jpg" alt="好評合照" onclick="openImageModal(this.src)">
+                    <img class="clickable-photo" src="images/photos/customer_24.jpg" alt="好評合照" onclick="openImageModal(this.src)">
+                    <img class="clickable-photo" src="images/photos/customer_25.jpg" alt="好評合照" onclick="openImageModal(this.src)">
+                    <img class="clickable-photo" src="images/photos/customer_26.jpg" alt="好評合照" onclick="openImageModal(this.src)">
+                    <img class="clickable-photo" src="images/photos/customer_27.jpg" alt="好評合照" onclick="openImageModal(this.src)">
+                    </div>
+                    <div class="media-label">📸 客人好評見證</div>
+                </div>
+
+                <div class="transparent-img-box">
+                    <img src="images/photos/my-transparent-1.png" alt="特色裝飾" onclick="openImageModal(this.src)">
+                </div>
+            </div>
+
+            <div class="center-content-section">
+                <div class="side-badges left">
+                    <div class="badge-item"><span>堅持<br>手作</span></div>
+                    <div class="badge-item"><span>嚴選<br>食材</span></div>
+                </div>
+                <div class="banner-frame">
+                    <img src="image_17.png" alt="美鳳的家" class="banner-img">
+                </div>
+                <div class="side-badges right">
+                    <div class="badge-item"><span>冷凍<br>宅配</span></div>
+                    <div class="badge-item"><span>三灣<br>在地</span></div>
+                </div>
+            </div>
+
+            <div class="side-media-group right-group">
+                <div class="transparent-img-box">
+                    <img src="images/photos/my-transparent-2.png" alt="特色裝飾" onclick="openImageModal(this.src)">
+                </div>
+
+                <div class="media-box video-box">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/nrJOspkgeWw?controls=0&autoplay=1&mute=1&loop=1&playlist=M76_2Yu6zoo,vDXSZDidzGA,nrJOspkgeWw,SHta9dzSySo,oxEPNX4Af4M&rel=0" 
+                                frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                    </div>
+                    <div class="media-label">🎥 媒體專訪 & YTR推薦</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="category-wrapper" id="catWrapper">
         <div class="category-bar">
             <button class="cat-btn active" onclick="filterCategory('全部')">全部</button>
             <button class="cat-btn" onclick="filterCategory('飯類')">飯類</button>
@@ -708,13 +452,15 @@
             <button class="cat-btn" onclick="filterCategory('甜點類')">甜點類</button>
         </div>
     </div>
+
     <div class="container">
         
         <div class="left-column">
             <div class="site-logo-container">
                 <img src="image_14.png" alt="美鳳的家 Logo" class="site-logo">
             </div>
-<div class="video-ticker-btn" onclick="playInterviewVideo()">
+            
+            <div class="video-ticker-btn" onclick="playInterviewVideo()">
                 <div class="ticker-icon">▶</div>
                 <div class="ticker-wrapper">
                     <div class="ticker-text">
@@ -722,6 +468,7 @@
                     </div>
                 </div>
             </div>
+            
             <div class="shop-info">
                 <h3>ℹ️ 店家資訊 & 內用公告</h3>
                 
@@ -767,52 +514,15 @@
                 <div class="stats-box">
                     <span class="stats-item" id="salesTicker" style="width: 100%; display: block; box-sizing: border-box; line-height: 1.6;">🚀 系統連線中...</span>
                 </div>
-
             </div>
-        </div>
-
-        <div class="product-list" id="productList"></div>
-        
-        <div class="cart-section" id="cartSection">
-            <div class="shipping-progress-container" id="shippingProgressBox">
-                <div style="margin-bottom: 15px;">
-                    <div class="progress-text"><span>🏪 7-11 <small style="color:#888;">(滿$2000免運)</small></span><span id="diff711" style="font-weight:bold; color:#8E1E20;">還差 $2000</span></div>
-                    <div class="progress-bar-bg"><div class="progress-bar-fill" id="bar711"></div></div>
-                </div>
-                <div>
-                    <div class="progress-text"><span>🚛 黑貓宅配 <small style="color:#888;">(滿$3000免運)</small></span><span id="diffCat" style="font-weight:bold; color:#8E1E20;">還差 $3000</span></div>
-                    <div class="progress-bar-bg"><div class="progress-bar-fill" id="barCat"></div></div>
-                </div>
-            </div>
-
-            <h2>📋 您的點餐單 <span id="cartCount" style="font-size:0.7em; background:var(--primary-color); color:white; padding:2px 8px; border-radius:10px; vertical-align:middle;">0</span></h2>
-            <div id="cartItems"><p style="color: #999; text-align: center; padding: 20px;">客官，還沒點菜呢！</p></div>
-            <div class="total">總計: $<span id="totalPrice">0</span></div>
-            <div style="text-align: right; font-size: 0.85rem; color: #888; margin-top: -5px; margin-bottom: 15px;">(運費於結帳時計算)</div>
-
-            <button class="checkout-btn" onclick="openCheckoutForm()">前往結帳填寫資料</button>
-
-            <div class="social-area">
-                <a href="https://www.facebook.com/MeiFengHOME" target="_blank" class="social-btn btn-fb">
-                    <svg viewBox="0 0 24 24"><path d="M14.07,3c-2.8,0-4.7,1.72-4.7,4.82V10.5H6.5v3.62h2.87v9.12h3.74V14.12h2.93l0.46-3.62h-3.39V8.04c0-1,0.28-1.76,1.79-1.76h1.91V3.11C16.51,3.06,15.34,3,14.07,3z"></path></svg> 追蹤美鳳的家 FB
-                </a>
-                <a href="https://line.me/R/ti/p/%40hig1742y" target="_blank" class="social-btn btn-line">
-                    <svg viewBox="0 0 24 24"><path d="M12,2C6.48,2,2,5.88,2,10.66c0,2.69,1.43,5.09,3.77,6.64c0.16,0.11,0.38,0.34,0.28,0.78 c-0.1,0.47-0.37,1.83-0.41,2.2c-0.06,0.56,0.29,0.55,0.61,0.3c0.41-0.32,2.26-1.54,3.08-2.1c0.43-0.29,0.98-0.33,1.38-0.29 c0.41,0.04,0.85,0.06,1.29,0.06c5.52,0,10-3.88,10-8.66C22,5.88,17.52,2,12,2z M17.34,13.61H6.66c-0.34,0-0.62-0.28-0.62-0.62 v-0.01c0-0.34,0.28-0.62,0.62-0.62h10.68c0.34,0,0.62,0.28,0.62,0.62v0.01C17.96,13.33,17.68,13.61,17.34,13.61z M17.34,10.66H6.66 c-0.34,0-0.62-0.28-0.62-0.62v-0.01c0-0.34,0.28-0.62,0.62-0.62h10.68c0.34,0,0.62,0.28,0.62,0.62v0.01 C17.96,10.38,17.68,10.66,17.34,10.66z M17.34,7.71H6.66C6.32,7.71,6.04,7.43,6.04,7.09v-0.01c0-0.34,0.28-0.62,0.62-0.62h10.68 c0.34,0,0.62,0.28,0.62,0.62v0.01C17.96,7.43,17.68,7.71,17.34,7.71z"></path></svg> 新增 LINE 好友
-                </a>
-                <a href="https://www.google.com/search?gs_ssp=eJzj4tVP1zc0zLAsKigqyDMxYLRSNagwNjGzMEk2STJJNDa3SDFOszKoSEsyNEs0NUpJMjAytjROM_Hieb6v7-Xmzc9ntTxdtw0AsZoYFA&q=%E7%BE%8E%E9%B3%B3%E7%9A%84%E5%AE%B6&oq=%E7%BE%8E%E9%B3%B3%E7%9A%84%E5%AE%B6&gs_lcrp=EgZjaHJvbWUqDQgBEC4YrwEYxwEYgAQyCggAEAAY4wIYgAQyDQgBEC4YrwEYxwEYgAQyBwgCEAAYgAQyBwgDEAAYgAQyBwgEEAAYgAQyBwgFEAAYgAQyBwgGEAAYgAQyBwgHEAAYgAQyBwgIEAAYgAQyBggJEAAYHtIBCDI5NTRqMGo3qAIAsAIA&sourceid=chrome&ie=UTF-8" target="_blank" class="social-btn btn-google">
-                    <svg viewBox="0 0 24 24"><path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"/></svg> Google 地圖/評論
-                </a>
-            </div>
-
+            
             <div class="notice-section">
                 <h3>💡 貼心提醒</h3>
                 <div class="notice-item">
                     <span class="notice-title">⏳ 取貨時間</span>
-                    
                     <div style="margin-top: 5px; color: #333;">
                         下單後三日內可寄出，恕不指定收貨時段。
                     </div>
-
                     <div style="display: none;">
                         <div style="margin-bottom: 8px; margin-top: 5px;">
                             <strong style="color:var(--primary-color);">【年節檔期之前】</strong><br>
@@ -821,9 +531,9 @@
                         <div>
                             <strong style="color:var(--primary-color);">【年節檔期】</strong>
                             <ul style="padding-left: 20px; margin: 5px 0;">
-                                <li><strong>01/20 - 01/26</strong>：可送，不指定收貨時段。</li>
-                                <li><strong>01/27 - 02/03</strong>：可送，不指定收貨時段。</li>
-                                <li><strong>02/02 - 02/06</strong>：可送，不指定收貨時段。</li>
+                                <li><strong>01/20 - 01/26</strong>：可送，不指定時段</li>
+                                <li><strong>01/27 - 02/03</strong>：可送，不指定時段</li>
+                                <li><strong>02/02 - 02/06</strong>：可送，不指定時段</li>
                             </ul>
                         </div>
                     </div>
@@ -870,6 +580,41 @@
                     </div>
                 </div>
             </div>
+            
+        </div>
+
+        <div class="product-list" id="productList"></div>
+        
+        <div class="cart-section" id="cartSection">
+            <div class="shipping-progress-container" id="shippingProgressBox">
+                <div style="margin-bottom: 15px;">
+                    <div class="progress-text"><span>🏪 7-11 <small style="color:#888;">(滿$2000免運)</small></span><span id="diff711" style="font-weight:bold; color:#8E1E20;">還差 $2000</span></div>
+                    <div class="progress-bar-bg"><div class="progress-bar-fill" id="bar711"></div></div>
+                </div>
+                <div>
+                    <div class="progress-text"><span>🚛 黑貓宅配 <small style="color:#888;">(滿$3000免運)</small></span><span id="diffCat" style="font-weight:bold; color:#8E1E20;">還差 $3000</span></div>
+                    <div class="progress-bar-bg"><div class="progress-bar-fill" id="barCat"></div></div>
+                </div>
+            </div>
+
+            <h2>📋 您的點餐單 <span id="cartCount" style="font-size:0.7em; background:var(--primary-color); color:white; padding:2px 8px; border-radius:10px; vertical-align:middle;">0</span></h2>
+            <div id="cartItems"><p style="color: #999; text-align: center; padding: 20px;">客官，還沒點菜呢！</p></div>
+            <div class="total">總計: $<span id="totalPrice">0</span></div>
+            <div style="text-align: right; font-size: 0.85rem; color: #888; margin-top: -5px; margin-bottom: 15px;">(運費於結帳時計算)</div>
+
+            <button class="checkout-btn" onclick="openCheckoutForm()">前往結帳填寫資料</button>
+
+            <div class="social-area">
+                <a href="https://www.facebook.com/MeiFengHOME" target="_blank" class="social-btn btn-fb">
+                    <svg viewBox="0 0 24 24"><path d="M14.07,3c-2.8,0-4.7,1.72-4.7,4.82V10.5H6.5v3.62h2.87v9.12h3.74V14.12h2.93l0.46-3.62h-3.39V8.04c0-1,0.28-1.76,1.79-1.76h1.91V3.11C16.51,3.06,15.34,3,14.07,3z"></path></svg> 追蹤美鳳的家 FB
+                </a>
+                <a href="https://line.me/R/ti/p/%40hig1742y" target="_blank" class="social-btn btn-line">
+                    <svg viewBox="0 0 24 24"><path d="M12,2C6.48,2,2,5.88,2,10.66c0,2.69,1.43,5.09,3.77,6.64c0.16,0.11,0.38,0.34,0.28,0.78 c-0.1,0.47-0.37,1.83-0.41,2.2c-0.06,0.56,0.29,0.55,0.61,0.3c0.41-0.32,2.26-1.54,3.08-2.1c0.43-0.29,0.98-0.33,1.38-0.29 c0.41,0.04,0.85,0.06,1.29,0.06c5.52,0,10-3.88,10-8.66C22,5.88,17.52,2,12,2z M17.34,13.61H6.66c-0.34,0-0.62-0.28-0.62-0.62 v-0.01c0-0.34,0.28-0.62,0.62-0.62h10.68c0.34,0,0.62,0.28,0.62,0.62v0.01C17.96,13.33,17.68,13.61,17.34,13.61z M17.34,10.66H6.66 c-0.34,0-0.62-0.28-0.62-0.62v-0.01c0-0.34,0.28-0.62,0.62-0.62h10.68c0.34,0,0.62,0.28,0.62,0.62v0.01 C17.96,10.38,17.68,10.66,17.34,10.66z M17.34,7.71H6.66C6.32,7.71,6.04,7.43,6.04,7.09v-0.01c0-0.34,0.28-0.62,0.62-0.62h10.68 c0.34,0,0.62,0.28,0.62,0.62v0.01C17.96,7.43,17.68,7.71,17.34,7.71z"></path></svg> 新增 LINE 好友
+                </a>
+                <a href="https://www.google.com/search?gs_ssp=eJzj4tVP1zc0zLAsKigqyDMxYLRSNagwNjGzMEk2STJJNDa3SDFOszKoSEsyNEs0NUpJMjAytjROM_Hieb6v7-Xmzc9ntTxdtw0AsZoYFA&q=%E7%BE%8E%E9%B3%B3%E7%9A%84%E5%AE%B6&oq=%E7%BE%8E%E9%B3%B3%E7%9A%84%E5%AE%B6&gs_lcrp=EgZjaHJvbWUqDQgBEC4YrwEYxwEYgAQyCggAEAAY4wIYgAQyDQgBEC4YrwEYxwEYgAQyBwgCEAAYgAQyBwgDEAAYgAQyBwgEEAAYgAQyBwgFEAAYgAQyBwgGEAAYgAQyBwgHEAAYgAQyBwgIEAAYgAQyBggJEAAYHtIBCDI5NTRqMGo3qAIAsAIA&sourceid=chrome&ie=UTF-8" target="_blank" class="social-btn btn-google">
+                    <svg viewBox="0 0 24 24"><path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"/></svg> Google 地圖/評論
+                </a>
+            </div>
         </div>
     </div>
 
@@ -883,8 +628,7 @@
     <div id="imageModal" class="modal" onclick="closeImageModal()">
         <div style="text-align:center; max-width:90%;">
             <img style="max-width:100%; max-height:80vh; border-radius:5px; box-shadow:0 0 20px rgba(0,0,0,0.5);" id="modalImg">
-            <p id="modalDesc" style="color:white; margin-top:10px; font-size:1.1em; text-shadow:0 1px 3px black; display:none;">
-                </p>
+            <p id="modalDesc" style="color:white; margin-top:10px; font-size:1.1em; text-shadow:0 1px 3px black; display:none;"></p>
         </div>
     </div>
 
@@ -971,6 +715,13 @@
         </div>
     </div>
 
+    <div id="holiday-modal-overlay">
+        <div id="holiday-modal-box">
+            <div class="holiday-close-btn" onclick="closeHolidayModal()">×</div>
+            <img src="新春公休.jpg" class="holiday-img" alt="新春公休公告">
+        </div>
+    </div>
+
     <script>
         // ▼▼▼ 請務必將下方的網址換成您「新增部署」後產生的新網址 (以/exec結尾) ▼▼▼
         const googleScriptUrl = "https://script.google.com/macros/s/AKfycbypW7qpaMZnwz03tUGOLgsGX3s83W54K_lAh3fKilsx3nretGGIz_Eu4bNi8-ym9SVi/exec";
@@ -1017,15 +768,7 @@
             { id: 34, name: "花生湯圓(只能冷凍寄送)", price: 150, category: "甜點類", image: "sweet1.jpg" },
             { id: 35, name: "地瓜圓", price: 150, category: "甜點類", image: "sweet3.jpg" },
             { id: 36, name: "黑糖糕", price: 70, category: "甜點類", image: "sweet2.jpg" },
-            // ▼▼▼ 新增這一段 ▼▼▼
-            { 
-                id: 39, 
-                name: "紅麴養生飯 (600g)", 
-                price: 250, 
-                category: "飯類", 
-                image: "red_rice.jpg" // 記得將圖片命名為 red_rice.jpg 並上傳到同個資料夾
-            }
-            // ▲▲▲ 新增結束 ▲▲▲
+            { id: 39, name: "紅麴養生飯 (600g)", price: 250, category: "飯類", image: "red_rice.jpg" }
         ];
 
         let cart = [];
@@ -1039,18 +782,16 @@
             const savedCart = localStorage.getItem(CART_STORAGE_KEY);
             if (savedCart) { try { cart = JSON.parse(savedCart); renderCart(); } catch(e) { console.error("購物車讀取失敗", e); } }
             
-            // 這些是顯示菜單跟跑馬燈的關鍵，絕對不能少！
             renderProducts('全部'); 
             updateAddressInput(); 
             updatePaymentInput();
-            initSalesTicker(); // 啟動跑馬燈
+            initSalesTicker(); 
 
-            // 🔥 載入時自動跳出公告視窗
+            // 🔥 載入時自動跳出內用公告視窗
             Swal.fire({
                 title: '📢 內用公告',
                 html: `
                     <div style="text-align: left; font-weight: bold; color: #333; line-height: 1.5; font-size: 0.95rem; max-height: 50vh; overflow-y: auto; padding-right: 5px;">
-                        
                         <div style="margin-bottom: 10px;">
                             <span style="color: #8E1E20; font-size: 1.1em;">1. 內用收費標準</span> <small style="color: #666;">&lt;2026年元月後適用&gt;</small><br>
                             <ul style="margin: 3px 0; padding-left: 20px;">
@@ -1060,9 +801,7 @@
                             </ul>
                             <span style="color: #8E1E20;">※ 平日/假日<非農曆春節>以上皆不收服務費</span>
                         </div>
-                        
                         <div style="border-top: 1px dashed #ccc; margin: 8px 0;"></div>
-                        
                         <div style="margin-bottom: 10px;">
                             <span style="color: #8E1E20; font-size: 1.1em;">2. 內用訂位提醒</span><br>
                             <span style="font-size: 1.1em; font-weight: bold;">中餐 11:00 前 / 晚餐 16:00 前</span><br>
@@ -1073,31 +812,6 @@
                                 <span style="color: #d63031;">⚠️ <strong>人數有異動(增加或減少)，務必請於預約用餐時間的1小時前告知，到場後恕不接受變動，才來得及作業。 謝謝~</strong></span>
                             </div>
                         </div>
-
-                        <div style="display: none;">
-                            <div style="border-top: 1px dashed #ccc; margin: 8px 0;"></div>
-                            <div style="margin-bottom: 10px;">
-                                <span style="color: #8E1E20; font-size: 1.1em;">3. 農曆春節 內用收費標準</span><br>
-                                <small style="color: #D4AF37; font-weight: bold;">&lt;除夕/初二/初三&gt;</small><br>
-                                <span style="color: #d63031;">※ 農曆春節上述三天 內用一人 780元 另酌收 10% 服務費</span>
-                            </div>
-                            <div style="border-top: 1px dashed #ccc; margin: 8px 0;"></div>
-                            <div style="margin-bottom: 0;">
-                                <span style="color: #8E1E20; font-size: 1.1em;">4. 年菜取貨/宅配時間</span><br>
-                                <div style="background: #fff8e1; padding: 8px; border-radius: 8px; margin-top: 5px; font-size: 0.9em; font-weight: normal;">
-                                    <strong style="color:#d63031;">【年節檔期之前】</strong><br>
-                                    三日內可送，不指定收貨時段。<br>
-                                    <div style="margin-top:5px;"></div>
-                                    <strong style="color:#d63031;">【年節檔期】</strong>
-                                    <ul style="margin: 3px 0; padding-left: 20px;">
-                                        <li><strong>01/20 - 01/26</strong>：可送，不指定時段</li>
-                                        <li><strong>01/27 - 02/03</strong>：可送，不指定時段</li>
-                                        <li><strong>02/02 - 02/06</strong>：可送，不指定時段</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        
                     </div>
                 `,
                 confirmButtonText: '收到，我瞭解了',
@@ -1107,22 +821,18 @@
                 background: '#fff',
                 backdrop: `rgba(0,0,0,0.6)`
             });
-            
-        }; // 🚨🚨🚨 關鍵的救命括號在這裡！有了它，商品就會回來了！ 🚨🚨🚨
+        };
+
         window.onscroll = function() {
-            // 1. 控制「回到頂部」按鈕顯示隱藏
             const backTopBtn = document.getElementById("backTopBtn");
             backTopBtn.style.display = (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) ? "flex" : "none";
             
-            // 2. 🔥 新增：控制分類列的「動態色塊包覆」
             const catWrapper = document.getElementById("catWrapper");
-            // 🔥 改為超過 50 像素就馬上加上色塊，避免字跟下面的菜色疊在一起！
             if (window.scrollY > 50) { 
                 catWrapper.classList.add("scrolled"); 
             } else { 
                 catWrapper.classList.remove("scrolled"); 
             }
-
         };
 
         function topFunction() { window.scrollTo({top: 0, behavior: 'smooth'}); }
@@ -1165,12 +875,11 @@
             else { last5Input.value = ""; }
         }
 
-        /* --- 媒體專訪功能 --- */
         function playInterviewVideo() {
             const videoData = [
                 { id: "vDXSZDidzGA", title: "客家無菜單料理 創意美食撫慰人心", desc: "台視:尋找台灣感動力" },
                 { id: "M76_2Yu6zoo", title: "苗栗三灣無菜單料理！超過十道客家媽媽的手路菜！", desc: "youtuber:我是馬鈴薯小姐雁靈" },
-                { id: "YUifqRLUQGY&t=2345s", title: "天菜就醬吃", desc: "TVBS 42頻道:食尚玩家" },
+                { id: "YUifqRLUQGY", title: "天菜就醬吃", desc: "TVBS 42頻道:食尚玩家" },
                 { id: "SHta9dzSySo", title: "稀有客家料理 好多創意料理超用心！", desc: "youtuber:六一遛阿寬" },
                 { id: "oxEPNX4Af4M", title: "苗栗無菜單客家料理 多樣道地合菜!!", desc: "youtuber:牛舌" }
             ];
@@ -1180,9 +889,7 @@
                 let safeId = v.id.split('&')[0]; 
                 videoListHtml += `
                     <a class="video-item" href="https://www.youtube.com/watch?v=${v.id}" target="_blank">
-                        <div class="video-thumb">
-                            <img src="https://img.youtube.com/vi/${safeId}/hqdefault.jpg" loading="lazy">
-                        </div>
+                        <div class="video-thumb"><img src="https://img.youtube.com/vi/${safeId}/hqdefault.jpg" loading="lazy"></div>
                         <div class="video-info">
                             <div class="video-title">${v.title}</div>
                             <div class="video-desc">${v.desc}</div>
@@ -1209,14 +916,10 @@
             const productListEl = document.getElementById("productList"); 
             productListEl.innerHTML = ""; 
             
-            // --- 🔧 在此過濾掉不想顯示的商品 ---
             let filteredProducts = [];
-            
             if (filterCat === '全部') {
-                // 如果是看「全部」，就排除掉過年專屬的桌菜
                 filteredProducts = products.filter(p => p.category !== '6600桌菜' && p.category !== '3800桌菜');
             } else {
-                // 如果點選特定分類，就照常顯示
                 filteredProducts = products.filter(p => p.category === filterCat);
             }
 
@@ -1236,8 +939,6 @@
         function openImageModal(src) { 
             document.getElementById("imageModal").style.display = "flex"; 
             document.getElementById("modalImg").src = src; 
-            
-            // --- 針對紅麴飯顯示特別說明 ---
             const descEl = document.getElementById("modalDesc");
             if (src.includes("red_rice")) {
                 descEl.style.display = "block";
@@ -1270,29 +971,24 @@
             const countEl = document.getElementById("cartCount");
             const floatBar = document.getElementById("floatBar");
             const floatTotal = document.getElementById("floatTotal");
-            
             const bar711 = document.getElementById("bar711");
             const diff711 = document.getElementById("diff711");
             const barCat = document.getElementById("barCat");
             const diffCat = document.getElementById("diffCat");
 
             cartItemsEl.innerHTML = "";
-            let total = 0;
-            let count = 0;
+            let total = 0; let count = 0;
 
             if (cart.length === 0) {
                 cartItemsEl.innerHTML = "<p style='color: #999; text-align: center; padding: 20px;'>客官，還沒點菜呢！</p>";
                 if(floatBar) floatBar.classList.remove("show");
             } else {
                 if(floatBar) floatBar.classList.add("show");
-                
                 cart.forEach((item, index) => {
                     total += item.price * item.quantity;
                     count += item.quantity;
-
                     const itemEl = document.createElement("div");
                     itemEl.className = "cart-item";
-                    
                     itemEl.innerHTML = `
                         <div style="flex-grow:1;">
                             <div style="font-weight:bold; color:#333; font-size:1.05em;">${item.name}</div>
@@ -1314,8 +1010,7 @@
                 });
             }
 
-            totalEl.innerText = total;
-            countEl.innerText = count;
+            totalEl.innerText = total; countEl.innerText = count;
             if(floatTotal) floatTotal.innerText = total;
 
             let progress711 = (total / 2000) * 100; if (progress711 > 100) progress711 = 100;
@@ -1334,26 +1029,14 @@
         function changeQuantity(index, delta) {
             const item = cart[index];
             const newQty = item.quantity + delta;
-
             if (newQty <= 0) {
                 Swal.fire({
-                    title: '要移除這道菜嗎？',
-                    text: item.name,
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#d63031',
-                    cancelButtonColor: '#aaa',
-                    confirmButtonText: '是的，移除',
-                    cancelButtonText: '按錯了'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        removeFromCart(index);
-                    }
-                });
+                    title: '要移除這道菜嗎？', text: item.name, icon: 'warning',
+                    showCancelButton: true, confirmButtonColor: '#d63031', cancelButtonColor: '#aaa',
+                    confirmButtonText: '是的，移除', cancelButtonText: '按錯了'
+                }).then((result) => { if (result.isConfirmed) { removeFromCart(index); } });
             } else {
-                item.quantity = newQty;
-                saveCart();
-                renderCart();
+                item.quantity = newQty; saveCart(); renderCart();
             }
         }
 
@@ -1373,45 +1056,26 @@
             
             const markError = (el) => { el.classList.add('input-error'); el.classList.add('shake-animation'); setTimeout(() => el.classList.remove('shake-animation'), 500); isValid = false; };
             
-            // --- 🔥 B2C 獨家設計：特定商品物流限制檢查 (紅麴飯邏輯) ---
-            // 檢查購物車內是否有 id: 39 (紅麴養生飯)
             const restrictedItem = cart.find(item => item.id === 39);
-            
-            // 如果有買紅麴飯，且運送方式「不是」到店自取
             if (restrictedItem && delivery !== '到店自取') {
                 Swal.fire({
-                    icon: 'warning',
-                    title: '包含「限自取」商品',
-                    html: `
-                        <div style="text-align:left; font-size:0.95em;">
-                            客官不好意思！您的訂單中包含：<br>
-                            <strong style="color:#8E1E20;">● ${restrictedItem.name}</strong><br><br>
-                            因過年物流繁忙~<br>
-                            <span style="background:#fff0f0; color:#d63031; padding:2px 5px; font-weight:bold;">目前僅提供「到店自取」喔！</span><br><br>
-                            請修改運送方式，或先將該商品移除。<br>
-                            (年後將同步開放宅配服務/超商取貨服務)
-                        </div>
-                    `,
-                    confirmButtonText: '好的，我調整一下',
-                    confirmButtonColor: '#8E1E20'
+                    icon: 'warning', title: '包含「限自取」商品',
+                    html: `<div style="text-align:left; font-size:0.95em;">客官不好意思！您的訂單中包含：<br><strong style="color:#8E1E20;">● ${restrictedItem.name}</strong><br><br>因過年物流繁忙~<br><span style="background:#fff0f0; color:#d63031; padding:2px 5px; font-weight:bold;">目前僅提供「到店自取」喔！</span><br><br>請修改運送方式，或先將該商品移除。<br>(年後將同步開放宅配服務/超商取貨服務)</div>`,
+                    confirmButtonText: '好的，我調整一下', confirmButtonColor: '#8E1E20'
                 });
-                return; // 阻止表單送出
+                return; 
             }
-            // -------------------------------------------------------
 
             if (!nameEl.value.trim()) markError(nameEl);
-            
             const phonePattern = /^09\d{8}$/;
             const cleanPhone = mobileEl.value.replace(/-/g, "").trim();
             if (!mobileEl.value.trim() || !phonePattern.test(cleanPhone)) {
                 Swal.fire({ icon: 'error', title: '手機號碼格式錯誤', text: '請輸入正確的台灣手機號碼 (例如 0912345678)', confirmButtonColor: '#8E1E20' });
                 markError(mobileEl);
             }
-            
             if (!dateEl.value) markError(dateEl);
             if (delivery !== '到店自取') { if (!addressEl.value.trim()) markError(addressEl); }
             if (payment === '匯款' || payment === '台灣Pay') { if (!last5El.value.trim()) markError(last5El); }
-            
             if (!isValid) return;
             submitOrder();
         }
@@ -1429,8 +1093,7 @@
             
             const btn = document.querySelector(".submit-btn"); 
             const originalText = btn.innerText; 
-            btn.innerText = "⏳ 訂單傳送中..."; 
-            btn.disabled = true;
+            btn.innerText = "⏳ 訂單傳送中..."; btn.disabled = true;
             
             const subtotal = document.getElementById("checkoutSubtotal").innerText; 
             const shipping = document.getElementById("checkoutShipping").innerText; 
@@ -1439,22 +1102,13 @@
             let orderDetails = "🛒 購買清單：\n"; 
             cart.forEach(item => { orderDetails += `${item.name} x ${item.quantity} = $${item.price * item.quantity}\n`; });
             orderDetails += `------------------\n`;
-            
-            if(note && note.trim() !== "") {
-                orderDetails += `📝 備註：${note}\n`;
-                orderDetails += `------------------\n`;
-            }
-            
+            if(note && note.trim() !== "") { orderDetails += `📝 備註：${note}\n------------------\n`; }
             orderDetails += `商品小計：$${subtotal}\n運費：$${shipping}\n💰 總金額：$${finalTotal}`;
             
             const payload = { message: orderDetails, customer: { name, mobile, phone, address, delivery, payment, last5, date, note, total: finalTotal } };
             
-            // ▼▼▼ 關鍵修正：加入 charset=utf-8 防止亂碼 ▼▼▼
             fetch(googleScriptUrl, { 
-                method: "POST", 
-                body: JSON.stringify(payload), 
-                mode: "no-cors", 
-                headers: { "Content-Type": "text/plain; charset=utf-8" } 
+                method: "POST", body: JSON.stringify(payload), mode: "no-cors", headers: { "Content-Type": "text/plain; charset=utf-8" } 
             }).then(() => {
                 let successMsg = '已收到您的訂單囉 有任何問題 歡迎與我們聯繫';
                 if(payment === '台灣Pay') { successMsg = '訂單已送出，確認收到款項後會盡快安排出貨！'; }
@@ -1465,9 +1119,7 @@
             });
         }
 
-        // --- 🔥 啟動銷售跑馬燈 (取代不蒜子) ---
         function initSalesTicker() {
-            // 這裡設定要輪播的假資料，您可以自由新增更多
             const salesData = [
                 { city: "台北", name: "陳小姐", item: "富貴吉祥 6600 桌菜組 x1" },
                 { city: "新竹", name: "林先生", item: "幸福團圓 3800 桌菜組 x1" },
@@ -1476,180 +1128,27 @@
                 { city: "桃園", name: "劉先生", item: "放養文昌鹹水母雞 x1 四神豬肚湯 x1 客家小炒 x1" },
                 { city: "竹南", name: "王大哥", item: "富貴吉祥 6600 桌菜組 x1" },
                 { city: "新北", name: "胡先生", item: "客家豬腳 x1 黑糖糕 x3" },
-                { city: "台北", name: "戚阿姨", item: "富貴吉祥 6600 桌菜組 x1" },
                 { city: "竹北", name: "陳大哥", item: "櫻花蝦米糕 x2" },
-                { city: "基隆", name: "鄭先生", item: "御品佛跳牆 x1 蜜製醬鴨 (全) x1 天麻人蔘烏骨雞湯 x1" },
-                { city: "板橋", name: "李小姐", item: "客家豬腳 + 筍乾 x1" },
-                { city: "台北", name: "黃小姐", item: "客家豬腳 x1 + 放養文昌鹹水母雞 (半) x2 " },
-                { city: "三灣", name: "謝小姐", item: "客家豬腳 x1 + 四神豬肚湯 x1 + 黑糖糕 x2 " },
-                { city: "北投", name: "吳小姐", item: "客家小封肉 x1+ 腸圈 x2" },
-                { city: "頭份", name: "黃先生", item: "藥膳醉大蝦 x1 客家小封肉 x1 櫻花蝦米糕 x1" }
+                { city: "三灣", name: "謝小姐", item: "客家豬腳 x1 + 四神豬肚湯 x1 + 黑糖糕 x2 " }
             ];
-
             const tickerEl = document.getElementById("salesTicker");
             if (!tickerEl) return;
-
             function updateTicker() {
-                // 隨機挑選一筆訂單
                 const randomOrder = salesData[Math.floor(Math.random() * salesData.length)];
-                
                 tickerEl.classList.remove("fade-update");
                 void tickerEl.offsetWidth; 
-                
-                // ✨ 修改重點：拿掉時間，只保留「預訂了」
-                tickerEl.innerHTML = `
-                    <div style="margin-bottom:2px;">❤️ 感謝 <strong>${randomOrder.city} ${randomOrder.name}</strong></div>
-                    <div style="font-size:0.9em; color:#666;">
-                       預訂了 <span style="color:#d63031; font-weight:bold;">${randomOrder.item}</span>
-                    </div>
-                `;
-                
+                tickerEl.innerHTML = `<div style="margin-bottom:2px;">❤️ 感謝 <strong>${randomOrder.city} ${randomOrder.name}</strong></div><div style="font-size:0.9em; color:#666;">預訂了 <span style="color:#d63031; font-weight:bold;">${randomOrder.item}</span></div>`;
                 tickerEl.classList.add("fade-update");
             }
-
-            // 一開始先執行一次
-            updateTicker();
-
-            // 之後每 4.5 秒換一次
-            setInterval(updateTicker, 4500);
+            updateTicker(); setInterval(updateTicker, 4500);
         }
+
+        // --- 新春休假圖片自動彈出邏輯 ---
+        window.addEventListener('load', function() {
+            // 目前我先幫妳關閉(註解掉)彈出，因為年節過了。若日後需要，把下面這行最前面的雙斜線 // 刪掉即可。
+            // setTimeout(() => { document.getElementById('holiday-modal-overlay').style.display = 'flex'; }, 600); 
+        });
+        function closeHolidayModal() { document.getElementById('holiday-modal-overlay').style.display = 'none'; }
     </script>
-
 </body>
-
-<style>
-  /* 遮罩層 */
-  #holiday-modal-overlay {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background-color: rgba(0, 0, 0, 0.75); 
-    z-index: 10005; /* 確保層級在最上層 */
-    display: none; justify-content: center; align-items: center;
-    backdrop-filter: blur(4px); /* 背景微模糊，質感更好 */
-  }
-  
-  /* 彈窗本體 (根據圖片大小自適應) */
-  #holiday-modal-box {
-    position: relative; 
-    width: 90%; 
-    max-width: 650px; /* 限制最大寬度，避免電腦版圖片太大 */
-    animation: popIn 0.3s ease-out;
-  }
-  
-  /* 圖片樣式 */
-  .holiday-img {
-    width: 100%; height: auto; display: block;
-    border-radius: 12px; 
-    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-  }
-  
-  /* 右上角關閉按鈕 (X) */
-  .holiday-close-btn {
-    position: absolute; top: -15px; right: -15px; 
-    width: 38px; height: 38px; 
-    background: #8E1E20; color: white; 
-    border: 2px solid white; border-radius: 50%;
-    display: flex; justify-content: center; align-items: center;
-    font-size: 24px; font-weight: bold; cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3); 
-    z-index: 2; transition: 0.2s;
-  }
-  .holiday-close-btn:hover { 
-    background: #d63031; transform: scale(1.1); 
-  }
-  
-  @keyframes popIn { 
-    0% { transform: scale(0.8); opacity: 0; } 
-    100% { transform: scale(1); opacity: 1; } 
-  }
-</style>
-
-<div id="holiday-modal-overlay">
-  <div id="holiday-modal-box">
-    <div class="holiday-close-btn" onclick="closeHolidayModal()">×</div>
-    <img src="新春公休.jpg" class="holiday-img" alt="新春公休公告">
-  </div>
-</div>
-
-<script>
-  // 網頁載入完成後，自動顯示圖片彈窗
-  window.addEventListener('load', function() {
-    // 稍微延遲 0.6 秒顯示，讓畫面的載入動畫更順暢
-    setTimeout(() => {
-        document.getElementById('holiday-modal-overlay').style.display = 'flex';
-    }, 600); 
-  });
-
-  // 關閉圖片彈窗的函數
-  function closeHolidayModal() {
-    document.getElementById('holiday-modal-overlay').style.display = 'none';
-  }
-</script>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
