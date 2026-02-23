@@ -836,10 +836,13 @@
             initSalesTicker(); // 啟動跑馬燈
 
             // 🔥 載入時自動跳出公告視窗
+            // 🔥 載入時自動跳出公告視窗
             Swal.fire({
-                title: '📢 內用公告 & 年菜取貨',
+                // 修改 1：標題更新
+                title: '📢 內用公告',
                 html: `
                     <div style="text-align: left; font-weight: bold; color: #333; line-height: 1.5; font-size: 0.95rem; max-height: 50vh; overflow-y: auto; padding-right: 5px;">
+                        
                         <div style="margin-bottom: 10px;">
                             <span style="color: #8E1E20; font-size: 1.1em;">1. 內用收費標準</span> <small style="color: #666;">&lt;2026年元月後適用&gt;</small><br>
                             <ul style="margin: 3px 0; padding-left: 20px;">
@@ -849,34 +852,44 @@
                             </ul>
                             <span style="color: #8E1E20;">※ 平日/假日<非農曆春節>以上皆不收服務費</span>
                         </div>
+                        
                         <div style="border-top: 1px dashed #ccc; margin: 8px 0;"></div>
+                        
                         <div style="margin-bottom: 10px;">
                             <span style="color: #8E1E20; font-size: 1.1em;">2. 內用訂位提醒</span><br>
                             <span style="font-size: 1.1em; font-weight: bold;">中餐 11:00 前 / 晚餐 17:00 前</span><br>
                             <span style="color: #d63031; font-size: 1.1em; font-weight: bold;">為最後預約用餐時段喔</span><br>
-                            <small style="color: #666;">&lt;因備料不及 無法提供最完善服務 請見諒&gt;</small>
-                        </div>
-                        <div style="border-top: 1px dashed #ccc; margin: 8px 0;"></div>
-                        <div style="margin-bottom: 10px;">
-                            <span style="color: #8E1E20; font-size: 1.1em;">3. 農曆春節 內用收費標準</span><br>
-                            <small style="color: #D4AF37; font-weight: bold;">&lt;除夕/初二/初三&gt;</small><br>
-                            <span style="color: #d63031;">※ 農曆春節上述三天 內用一人 780元 另酌收 10% 服務費</span>
-                        </div>
-                        <div style="border-top: 1px dashed #ccc; margin: 8px 0;"></div>
-                        <div style="margin-bottom: 0;">
-                            <span style="color: #8E1E20; font-size: 1.1em;">4. 年菜取貨/宅配時間</span><br>
-                            <div style="background: #fff8e1; padding: 8px; border-radius: 8px; margin-top: 5px; font-size: 0.9em; font-weight: normal;">
-                                <strong style="color:#d63031;">【年節檔期之前】</strong><br>
-                                三日內可送，不指定收貨時段。<br>
-                                <div style="margin-top:5px;"></div>
-                                <strong style="color:#d63031;">【年節檔期】</strong>
-                                <ul style="margin: 3px 0; padding-left: 20px;">
-                                    <li><strong>01/20 - 01/26</strong>：可送，不指定時段</li>
-                                    <li><strong>01/27 - 02/03</strong>：可送，不指定時段</li>
-                                    <li><strong>02/02 - 02/06</strong>：可送，不指定時段</li>
-                                </ul>
+                            <small style="color: #666;">&lt;因備料不及 無法提供最完善服務 請見諒&gt;</small><br>
+                            
+                            <div style="margin-top: 8px; padding: 8px; background: #fff0f0; border-left: 4px solid #d63031; border-radius: 4px; font-size: 0.95em;">
+                                <span style="color: #d63031;">⚠️ <strong>人數有異動(增加或減少)，務必請於預約用餐時間的1小時前告知，到場後恕不接受變動，才來得及作業。 謝謝~</strong></span>
                             </div>
                         </div>
+
+                        <div style="display: none;">
+                            <div style="border-top: 1px dashed #ccc; margin: 8px 0;"></div>
+                            <div style="margin-bottom: 10px;">
+                                <span style="color: #8E1E20; font-size: 1.1em;">3. 農曆春節 內用收費標準</span><br>
+                                <small style="color: #D4AF37; font-weight: bold;">&lt;除夕/初二/初三&gt;</small><br>
+                                <span style="color: #d63031;">※ 農曆春節上述三天 內用一人 780元 另酌收 10% 服務費</span>
+                            </div>
+                            <div style="border-top: 1px dashed #ccc; margin: 8px 0;"></div>
+                            <div style="margin-bottom: 0;">
+                                <span style="color: #8E1E20; font-size: 1.1em;">4. 年菜取貨/宅配時間</span><br>
+                                <div style="background: #fff8e1; padding: 8px; border-radius: 8px; margin-top: 5px; font-size: 0.9em; font-weight: normal;">
+                                    <strong style="color:#d63031;">【年節檔期之前】</strong><br>
+                                    三日內可送，不指定收貨時段。<br>
+                                    <div style="margin-top:5px;"></div>
+                                    <strong style="color:#d63031;">【年節檔期】</strong>
+                                    <ul style="margin: 3px 0; padding-left: 20px;">
+                                        <li><strong>01/20 - 01/26</strong>：可送，不指定時段</li>
+                                        <li><strong>01/27 - 02/03</strong>：可送，不指定時段</li>
+                                        <li><strong>02/02 - 02/06</strong>：可送，不指定時段</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
                     </div>
                 `,
                 confirmButtonText: '收到，我瞭解了',
@@ -886,7 +899,6 @@
                 background: '#fff',
                 backdrop: `rgba(0,0,0,0.6)`
             });
-        };
 
         window.onscroll = function() {
             const backTopBtn = document.getElementById("backTopBtn");
@@ -1355,6 +1367,7 @@
   }
 </script>
 </html>
+
 
 
 
