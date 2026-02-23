@@ -198,22 +198,23 @@
         }
         
         /* =======================================
-           ✨ 分類列：滑動時完美凍結置頂 (透明浮動膠囊版)
+           ✨ 分類列：滑動時完美凍結置頂 (動態變色版)
         ======================================= */
         .category-wrapper { 
             position: sticky; 
-            top: 15px; /* 🔥 距離頂部留一點點空隙，看起來更像浮動 */
+            top: 15px; /* 頂部浮動時的間距 */
             z-index: 9999; 
             width: 100%; 
             margin-bottom: 25px; 
             
-            /* 🌟 拿掉深紅色背景與框線，變成完全透明 */
+            /* 預設狀態：透明無背景 */
             background: transparent; 
-            border: none;
+            border-bottom: 2px solid transparent; 
             box-shadow: none;
             backdrop-filter: none;
             
-            /* 避免透明的隱形框框阻擋到後面內容的點擊 */
+            /* 🔥 關鍵魔法：讓背景變色時有 0.4 秒的柔和過場動畫 */
+            transition: all 0.4s ease; 
             pointer-events: none; 
         }
         
@@ -224,24 +225,38 @@
             flex-wrap: wrap; 
             max-width: 1200px;
             margin: 0 auto;
-            /* 讓按鈕本身可以被點擊 */
             pointer-events: auto; 
+            /* 讓內距變化也有動畫 */
+            transition: padding 0.4s ease; 
         }
 
-        /* 🌟 恢復成一顆顆獨立的高質感白底金邊膠囊 */
+        /* 🌟 下滑時觸發的「深紅玻璃色塊」狀態 */
+        .category-wrapper.scrolled {
+            top: 0; /* 下滑後緊緊貼齊螢幕最上緣 */
+            background: rgba(142, 30, 32, 0.95); /* 半透明深紅底色 */
+            backdrop-filter: blur(8px); /* 背景微模糊 */
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            border-bottom: 2px solid #D4AF37; /* 底部跑出金邊 */
+            pointer-events: auto;
+        }
+        .category-wrapper.scrolled .category-bar {
+            padding: 12px 0; /* 撐開上下空間，讓色塊變寬 */
+        }
+
+        /* 按鈕本體預設為白底金邊膠囊 */
         .category-wrapper .cat-btn { 
             padding: 10px 24px; 
             font-size: 1.15rem; 
-            background: rgba(255, 255, 255, 0.95); /* 白底微透 */
-            border: 2px solid #D4AF37; /* 金色邊框 */
-            color: #8E1E20; /* 深紅字 */
+            background: rgba(255, 255, 255, 0.95); 
+            border: 2px solid #D4AF37; 
+            color: #8E1E20; 
             border-radius: 50px; 
             font-weight: bold; 
             cursor: pointer; 
             transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); 
             font-family: 'Noto Serif TC', serif;
             letter-spacing: 1px; 
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15); /* 讓每一顆按鈕自己帶陰影浮起來 */
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15); 
         }
         
         /* 按鈕被選中或游標滑過的狀態 */
@@ -254,21 +269,21 @@
             box-shadow: 0 6px 18px rgba(212, 175, 55, 0.45); 
         }
 
-        /* 📱 手機版適應：左右滑動 (也保持透明浮動) */
+        /* 📱 手機版適應 */
         @media (max-width: 1024px) {
-            .category-wrapper {
-                top: 10px;
-            }
+            .category-wrapper { top: 10px; }
+            .category-wrapper.scrolled { top: 0; }
             .category-bar {
                 justify-content: flex-start; 
                 flex-wrap: nowrap; 
                 overflow-x: auto; 
                 -webkit-overflow-scrolling: touch; 
-                /* 增加一點周圍 padding，讓按鈕的陰影不要被切斷 */
                 padding: 5px 15px 15px 15px; 
             }
+            .category-wrapper.scrolled .category-bar {
+                padding: 12px 15px; /* 下滑後的手機版間距 */
+            }
             .category-bar::-webkit-scrollbar { display: none; } 
-            
             .category-wrapper .cat-btn { 
                 padding: 8px 18px; 
                 font-size: 1.05rem; 
@@ -1095,9 +1110,18 @@
             
         }; // 🚨🚨🚨 關鍵的救命括號在這裡！有了它，商品就會回來了！ 🚨🚨🚨
         window.onscroll = function() {
+            // 1. 控制「回到頂部」按鈕顯示隱藏
             const backTopBtn = document.getElementById("backTopBtn");
             backTopBtn.style.display = (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) ? "flex" : "none";
             
+            // 2. 🔥 新增：控制分類列的「動態色塊包覆」
+            const catWrapper = document.getElementById("catWrapper");
+            // 當網頁往下滑超過 300 像素時，加上色塊；回到最上面時，拿掉色塊變透明
+            if (window.scrollY > 300) { 
+                catWrapper.classList.add("scrolled"); 
+            } else { 
+                catWrapper.classList.remove("scrolled"); 
+            }
         };
 
         function topFunction() { window.scrollTo({top: 0, behavior: 'smooth'}); }
@@ -1560,6 +1584,7 @@
   }
 </script>
 </html>
+
 
 
 
