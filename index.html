@@ -692,10 +692,9 @@
     </div>
 
     <script>
-        // ▼▼▼ 請務必將下方的網址換成您「新增部署」後產生的新網址 (以/exec結尾) ▼▼▼
+        <script>
+        // ▼▼▼ 妳的 Google 部署網址 ▼▼▼
         const googleScriptUrl = "https://script.google.com/macros/s/AKfycbypW7qpaMZnwz03tUGOLgsGX3s83W54K_lAh3fKilsx3nretGGIz_Eu4bNi8-ym9SVi/exec";
-        // ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
-
         const CART_STORAGE_KEY = 'meifeng_cart_v2026';
 
         const products = [
@@ -743,29 +742,27 @@
         let cart = [];
 
         // ==========================================
-        // 🔥 終極魔法：拿掉等待條件，瞬間強制印出菜單！
+        // 🔥 1. 網頁一讀取完畢，立刻執行以下動作
         // ==========================================
-        
-        // 1. 設定日期
-        const dateInput = document.getElementById('custDate');
-        if(dateInput) {
-            const minDate = new Date(); minDate.setDate(minDate.getDate() + 3); 
-            const yyyy = minDate.getFullYear(); const mm = String(minDate.getMonth() + 1).padStart(2, '0'); const dd = String(minDate.getDate()).padStart(2, '0');
-            dateInput.min = `${yyyy}-${mm}-${dd}`; dateInput.value = `${yyyy}-${mm}-${dd}`; 
-        }
+        document.addEventListener("DOMContentLoaded", function() {
+            
+            // 瞬間印出商品，不用等影片載入！
+            renderProducts('全部'); 
+            
+            // 設定日期與讀取購物車
+            const dateInput = document.getElementById('custDate');
+            if(dateInput) {
+                const minDate = new Date(); minDate.setDate(minDate.getDate() + 3); 
+                const yyyy = minDate.getFullYear(); const mm = String(minDate.getMonth() + 1).padStart(2, '0'); const dd = String(minDate.getDate()).padStart(2, '0');
+                dateInput.min = `${yyyy}-${mm}-${dd}`; dateInput.value = `${yyyy}-${mm}-${dd}`; 
+            }
+            const savedCart = localStorage.getItem(CART_STORAGE_KEY);
+            if (savedCart) { try { cart = JSON.parse(savedCart); renderCart(); } catch(e) {} }
+            
+            updateAddressInput(); 
+            updatePaymentInput();
 
-        // 2. 讀取購物車
-        const savedCart = localStorage.getItem(CART_STORAGE_KEY);
-        if (savedCart) { try { cart = JSON.parse(savedCart); renderCart(); } catch(e) {} }
-        
-        // 3. 🌟 毫無延遲，網頁讀到這裡瞬間印出商品！
-        renderProducts('全部'); 
-        updateAddressInput(); 
-        updatePaymentInput();
-        
-        // 4. 稍微延遲 0.5 秒再彈出公告跟跑馬燈，確保資源先讓給商品照片
-        setTimeout(() => {
-            initSalesTicker(); 
+            // 🔥 完美復活的公告彈窗
             Swal.fire({
                 title: '📢 內用公告',
                 html: `
@@ -799,21 +796,32 @@
                 background: '#fff',
                 backdrop: `rgba(0,0,0,0.6)`
             });
-        }, 500);
+        });
+
         // ==========================================
-
-        window.onscroll = function() {
+        // 🔥 2. 滑動變色魔法 (妳要的半透明色塊包覆按鈕)
+        // ==========================================
+        window.addEventListener("scroll", function() {
+            // 控制右下角「回到頂部」按鈕顯示
             const backTopBtn = document.getElementById("backTopBtn");
-            backTopBtn.style.display = (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) ? "flex" : "none";
-            
-            const catWrapper = document.getElementById("catWrapper");
-            if (window.scrollY > 50) { 
-                catWrapper.classList.add("scrolled"); 
-            } else { 
-                catWrapper.classList.remove("scrolled"); 
+            if(backTopBtn) {
+                backTopBtn.style.display = window.scrollY > 300 ? "flex" : "none";
             }
-        };
+            
+            // 🌟 分類按鈕的背景變色觸發器
+            const catWrapper = document.getElementById("catWrapper");
+            if (catWrapper) {
+                if (window.scrollY > 50) { 
+                    catWrapper.classList.add("scrolled"); // 加上深紅色塊
+                } else { 
+                    catWrapper.classList.remove("scrolled"); // 恢復透明漂浮
+                }
+            }
+        });
 
+        // ==========================================
+        // 其他原本的運作功能 (保持不變)
+        // ==========================================
         function topFunction() { window.scrollTo({top: 0, behavior: 'smooth'}); }
 
         function updateAddressInput() {
@@ -862,7 +870,6 @@
                 { id: "SHta9dzSySo", title: "稀有客家料理 好多創意料理超用心！", desc: "youtuber:六一遛阿寬" },
                 { id: "oxEPNX4Af4M", title: "苗栗無菜單客家料理 多樣道地合菜!!", desc: "youtuber:牛舌" }
             ];
-            
             let videoListHtml = '<div class="video-list-container">';
             videoData.forEach(v => {
                 let safeId = v.id.split('&')[0]; 
@@ -877,15 +884,10 @@
                 `;
             });
             videoListHtml += '</div>';
-
             Swal.fire({
                 title: '🎥 美鳳的家 媒體專訪',
                 html: videoListHtml,
-                showConfirmButton: false, 
-                showCloseButton: true,
-                width: 600,
-                padding: '10px',
-                background: '#f9f9f9'
+                showConfirmButton: false, showCloseButton: true, width: 600, padding: '10px', background: '#f9f9f9'
             });
         } 
 
@@ -893,6 +895,7 @@
 
         function renderProducts(filterCat) {
             const productListEl = document.getElementById("productList"); 
+            if(!productListEl) return;
             productListEl.innerHTML = ""; 
             
             let filteredProducts = [];
@@ -940,7 +943,7 @@
             saveCart(); renderCart();
             const cartSection = document.getElementById('cartSection'); const floatBar = document.getElementById('floatBar');
             cartSection.classList.remove('cart-animate'); void cartSection.offsetWidth; cartSection.classList.add('cart-animate');
-            if(floatBar.style.display !== 'none') { floatBar.classList.remove('cart-animate'); void floatBar.offsetWidth; floatBar.classList.add('cart-animate'); }
+            if(floatBar && floatBar.style.display !== 'none') { floatBar.classList.remove('cart-animate'); void floatBar.offsetWidth; floatBar.classList.add('cart-animate'); }
             setTimeout(() => { cartSection.classList.remove('cart-animate'); if(floatBar) floatBar.classList.remove('cart-animate'); }, 300);
         }
 
@@ -955,6 +958,7 @@
             const barCat = document.getElementById("barCat");
             const diffCat = document.getElementById("diffCat");
 
+            if(!cartItemsEl) return;
             cartItemsEl.innerHTML = "";
             let total = 0; let count = 0;
 
@@ -964,8 +968,7 @@
             } else {
                 if(floatBar) floatBar.classList.add("show");
                 cart.forEach((item, index) => {
-                    total += item.price * item.quantity;
-                    count += item.quantity;
+                    total += item.price * item.quantity; count += item.quantity;
                     const itemEl = document.createElement("div");
                     itemEl.className = "cart-item";
                     itemEl.innerHTML = `
@@ -993,16 +996,20 @@
             if(floatTotal) floatTotal.innerText = total;
 
             let progress711 = (total / 2000) * 100; if (progress711 > 100) progress711 = 100;
-            bar711.style.width = progress711 + "%";
-            if (total >= 2000) { diff711.innerHTML = "🎉 已達免運！"; diff711.style.color = "#2D6A4F"; } 
-            else { diff711.innerHTML = `還差 $${2000 - total}`; diff711.style.color = "#8E1E20"; }
+            if(bar711) {
+                bar711.style.width = progress711 + "%";
+                if (total >= 2000) { diff711.innerHTML = "🎉 已達免運！"; diff711.style.color = "#2D6A4F"; } 
+                else { diff711.innerHTML = `還差 $${2000 - total}`; diff711.style.color = "#8E1E20"; }
+            }
 
             let progressCat = (total / 3000) * 100; if (progressCat > 100) progressCat = 100;
-            barCat.style.width = progressCat + "%";
-            if (total >= 3000) { diffCat.innerHTML = "🎉 已達免運！"; diffCat.style.color = "#2D6A4F"; } 
-            else { diffCat.innerHTML = `還差 $${3000 - total}`; diffCat.style.color = "#8E1E20"; }
+            if(barCat) {
+                barCat.style.width = progressCat + "%";
+                if (total >= 3000) { diffCat.innerHTML = "🎉 已達免運！"; diffCat.style.color = "#2D6A4F"; } 
+                else { diffCat.innerHTML = `還差 $${3000 - total}`; diffCat.style.color = "#8E1E20"; }
+            }
             
-            if(document.getElementById("checkoutModal").style.display === "flex") { calculateFinalTotal(); }
+            if(document.getElementById("checkoutModal") && document.getElementById("checkoutModal").style.display === "flex") { calculateFinalTotal(); }
         }
 
         function changeQuantity(index, delta) {
@@ -1049,8 +1056,7 @@
             const phonePattern = /^09\d{8}$/;
             const cleanPhone = mobileEl.value.replace(/-/g, "").trim();
             if (!mobileEl.value.trim() || !phonePattern.test(cleanPhone)) {
-                Swal.fire({ icon: 'error', title: '手機號碼格式錯誤', text: '請輸入正確的台灣手機號碼 (例如 0912345678)', confirmButtonColor: '#8E1E20' });
-                markError(mobileEl);
+                Swal.fire({ icon: 'error', title: '手機號碼格式錯誤', text: '請輸入正確的台灣手機號碼 (例如 0912345678)', confirmButtonColor: '#8E1E20' }); markError(mobileEl);
             }
             if (!dateEl.value) markError(dateEl);
             if (delivery !== '到店自取') { if (!addressEl.value.trim()) markError(addressEl); }
@@ -1098,37 +1104,15 @@
             });
         }
 
-        function initSalesTicker() {
-            const salesData = [
-                { city: "台北", name: "陳小姐", item: "富貴吉祥 6600 桌菜組 x1" },
-                { city: "新竹", name: "林先生", item: "幸福團圓 3800 桌菜組 x1" },
-                { city: "苗栗", name: "張阿姨", item: "御品佛跳牆 x2" },
-                { city: "台中", name: "吳小姐", item: "櫻花蝦米糕 x1" },
-                { city: "桃園", name: "劉先生", item: "放養文昌鹹水母雞 x1 四神豬肚湯 x1 客家小炒 x1" },
-                { city: "竹南", name: "王大哥", item: "富貴吉祥 6600 桌菜組 x1" },
-                { city: "新北", name: "胡先生", item: "客家豬腳 x1 黑糖糕 x3" },
-                { city: "竹北", name: "陳大哥", item: "櫻花蝦米糕 x2" },
-                { city: "三灣", name: "謝小姐", item: "客家豬腳 x1 + 四神豬肚湯 x1 + 黑糖糕 x2 " }
-            ];
-            const tickerEl = document.getElementById("salesTicker");
-            if (!tickerEl) return;
-            function updateTicker() {
-                const randomOrder = salesData[Math.floor(Math.random() * salesData.length)];
-                tickerEl.classList.remove("fade-update");
-                void tickerEl.offsetWidth; 
-                tickerEl.innerHTML = `<div style="margin-bottom:2px;">❤️ 感謝 <strong>${randomOrder.city} ${randomOrder.name}</strong></div><div style="font-size:0.9em; color:#666;">預訂了 <span style="color:#d63031; font-weight:bold;">${randomOrder.item}</span></div>`;
-                tickerEl.classList.add("fade-update");
-            }
-            updateTicker(); setInterval(updateTicker, 4500);
-        }
-
+        // 新春休假圖片自動彈出邏輯 (目前關閉)
         window.addEventListener('load', function() {
             // setTimeout(() => { document.getElementById('holiday-modal-overlay').style.display = 'flex'; }, 600); 
         });
         function closeHolidayModal() { document.getElementById('holiday-modal-overlay').style.display = 'none'; }
-    </script>
+    </script>    </script>
 </body>
 </html>
+
 
 
 
