@@ -33,10 +33,21 @@
 
         .cny-background {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; 
-            background-image: url('image_7.png'); background-repeat: repeat; background-size: 400px auto; filter: none;
+            /* 🔥 關鍵在這裡：把 url 裡面的檔名，換成妳新上傳的圖片檔名 */
+            background-image: url('new_bg.jpg'); 
+            
+            /* 👇 根據妳的圖片類型，選擇對應的設定 (二選一) */
+            
+            /* 情況 A：如果是「一整張大圖」(例如風景、店面照)，請用這行，刪除情況 B */
+            background-repeat: no-repeat; background-size: cover; background-position: center; filter: brightness(0.8); /* brightness 可讓底圖稍微變暗，字比較清楚 */
+            
+            /* 情況 B：如果是「小圖案重複拼貼」(例如木紋、幾何小圖)，請用這行，刪除情況 A */
+            /* background-repeat: repeat; background-size: 400px auto; filter: none; */
         }
+        
         .cny-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; 
+            /* 如果換了底圖覺得太花，可以加一點半透明遮罩讓畫面乾淨點，例如 rgba(255,255,255,0.3) */
             background-color: transparent; pointer-events: none;
         }
         
@@ -1328,6 +1339,7 @@
   }
 </script>
 </html>
+
 
 
 
