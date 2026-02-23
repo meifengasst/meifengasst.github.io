@@ -288,20 +288,20 @@
             margin-top: 25px; 
         }
         
-        /* 🔥 標題完美比例：不折行、大氣置中 */
+        /* 🔥 標題完美比例：優雅換行版 (解決 ... 截斷問題) */
         .shop-info h3, .notice-section h3 { 
             font-family: 'Noto Serif TC', serif; 
             border-bottom: 2px dashed #ccc; 
             padding-bottom: 12px; 
             margin-top: 0; 
             margin-bottom: 15px;
-            font-size: 1.35rem; /* 從1.5退回1.35，避免斷行 */
+            font-size: 1.25rem; /* 稍微微調到最適合側邊欄的黃金尺寸 */
             font-weight: 900;  
             color: #111;
-            letter-spacing: 1px; /* 字距微調，更優雅 */
-            white-space: nowrap; /* 🔥 關鍵保命符：絕對不允許斷行 */
-            overflow: hidden;
-            text-overflow: ellipsis; /* 如果螢幕真的太小，字尾會變... */
+            letter-spacing: 1px; 
+            line-height: 1.4; /* 如果折成兩行，行距也能保持舒適 */
+            white-space: normal; /* ✅ 拿掉強制不換行，允許自然掉落 */
+            word-break: keep-all; /* ✅ 盡量保持詞彙完整，避免單留一個字在下一行 */
         }
 
         .info-item, .notice-item { 
@@ -1447,6 +1447,7 @@
   }
 </script>
 </html>
+
 
 
 
