@@ -744,7 +744,7 @@
 
         let cart = [];
 
-        window.onload = function() {
+        document.addEventListener("DOMContentLoaded", function() {
             const dateInput = document.getElementById('custDate');
             const minDate = new Date(); minDate.setDate(minDate.getDate() + 3); 
             const yyyy = minDate.getFullYear(); const mm = String(minDate.getMonth() + 1).padStart(2, '0'); const dd = String(minDate.getDate()).padStart(2, '0');
@@ -1121,3 +1121,4 @@
     </script>
 </body>
 </html>
+
