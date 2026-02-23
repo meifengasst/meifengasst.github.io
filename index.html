@@ -744,21 +744,30 @@
 
         let cart = [];
 
-        document.addEventListener("DOMContentLoaded", function() {
-            const dateInput = document.getElementById('custDate');
+        // ==========================================
+        // 🔥 終極魔法：拿掉等待條件，瞬間強制印出菜單！
+        // ==========================================
+        
+        // 1. 設定日期
+        const dateInput = document.getElementById('custDate');
+        if(dateInput) {
             const minDate = new Date(); minDate.setDate(minDate.getDate() + 3); 
             const yyyy = minDate.getFullYear(); const mm = String(minDate.getMonth() + 1).padStart(2, '0'); const dd = String(minDate.getDate()).padStart(2, '0');
             dateInput.min = `${yyyy}-${mm}-${dd}`; dateInput.value = `${yyyy}-${mm}-${dd}`; 
+        }
 
-            const savedCart = localStorage.getItem(CART_STORAGE_KEY);
-            if (savedCart) { try { cart = JSON.parse(savedCart); renderCart(); } catch(e) { console.error("購物車讀取失敗", e); } }
-            
-            renderProducts('全部'); 
-            updateAddressInput(); 
-            updatePaymentInput();
+        // 2. 讀取購物車
+        const savedCart = localStorage.getItem(CART_STORAGE_KEY);
+        if (savedCart) { try { cart = JSON.parse(savedCart); renderCart(); } catch(e) {} }
+        
+        // 3. 🌟 毫無延遲，網頁讀到這裡瞬間印出商品！
+        renderProducts('全部'); 
+        updateAddressInput(); 
+        updatePaymentInput();
+        
+        // 4. 稍微延遲 0.5 秒再彈出公告跟跑馬燈，確保資源先讓給商品照片
+        setTimeout(() => {
             initSalesTicker(); 
-
-            // 🔥 載入時自動跳出內用公告視窗
             Swal.fire({
                 title: '📢 內用公告',
                 html: `
@@ -792,7 +801,8 @@
                 background: '#fff',
                 backdrop: `rgba(0,0,0,0.6)`
             });
-        });
+        }, 500);
+        // ==========================================
 
         window.onscroll = function() {
             const backTopBtn = document.getElementById("backTopBtn");
@@ -1121,5 +1131,6 @@
     </script>
 </body>
 </html>
+
 
 
