@@ -11,6 +11,9 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <style>
+        /* 🔥 全局排版防護罩 */
+        *, *::before, *::after { box-sizing: border-box; }
+
         /* --- 🎨 基礎配色變數 --- */
         :root { 
             --primary-color: #8E1E20; /* 深紅 */
@@ -47,64 +50,35 @@
         
         /* --- 🎨 頂部全域 --- */
         header { 
-            position: relative;
-            text-align: center;
-            margin: 20px auto 40px auto; 
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background: transparent;
+            position: relative; text-align: center; margin: 20px auto 40px auto; 
+            width: 100%; display: flex; flex-direction: column; align-items: center; background: transparent;
         }
 
         h1, .sub-title, .site-logo-container { display: none !important; }
         .left-column .site-logo-container { display: block !important; }
 
         .header-main-container {
-            display: flex;
-            align-items: center; 
-            justify-content: space-between; 
-            gap: 20px;
-            width: 96%;
-            margin: 0 auto 30px auto; 
-            height: 380px; 
+            display: flex; align-items: center; justify-content: space-between; 
+            gap: 20px; width: 96%; margin: 0 auto 30px auto; height: 380px; 
         }
 
-        .side-media-group {
-            display: flex;
-            align-items: center;
-            gap: 20px; 
-            height: 100%;
-        }
+        .side-media-group { display: flex; align-items: center; gap: 20px; height: 100%; }
 
         .media-box {
-            background: #8E1E20;
-            border: 3px solid #D4AF37;
-            border-radius: 15px;
-            overflow: hidden;
-            position: relative;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-            height: 100%;
-            display: block !important;
+            background: #8E1E20; border: 3px solid #D4AF37; border-radius: 15px;
+            overflow: hidden; position: relative; box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+            height: 100%; display: block !important;
         }
 
-        .side-media-group .media-box {
-            flex: 0 0 320px !important; 
-            width: 320px !important;
-        }
+        .side-media-group .media-box { flex: 0 0 320px !important; width: 320px !important; }
 
         .transparent-img-box {
-            flex: 0 0 200px !important; 
-            width: 200px !important;
-            height: 100%; 
-            display: flex;
-            align-items: center; justify-content: center; 
-            background: transparent; border: none; box-shadow: none;
-            padding: 0 10px; 
+            flex: 0 0 200px !important; width: 200px !important; height: 100%; 
+            display: flex; align-items: center; justify-content: center; 
+            background: transparent; border: none; box-shadow: none; padding: 0 10px; 
         }
         .transparent-img-box img {
-            width: 100%; height: 100%; object-fit: contain; 
-            cursor: zoom-in; transition: transform 0.3s;
+            width: 100%; height: 100%; object-fit: contain; cursor: zoom-in; transition: transform 0.3s;
             filter: drop-shadow(0 8px 15px rgba(0,0,0,0.3));
         }
         .transparent-img-box img:hover { transform: scale(1.05); }
@@ -119,17 +93,14 @@
         .media-label {
             position: absolute; bottom: 0; left: 0; width: 100%;
             background: rgba(142, 30, 32, 0.95); color: #FFD700;
-            font-size: 0.95rem; padding: 6px 0; font-weight: bold;
-            border-top: 1px solid #D4AF37; z-index: 2;
+            font-size: 0.95rem; padding: 6px 0; font-weight: bold; border-top: 1px solid #D4AF37; z-index: 2;
         }
 
         .center-content-section { flex: 1; display: flex; align-items: center; justify-content: center; gap: 20px; }
 
         .banner-frame {
-            width: 100%; 
-            max-width: 650px; 
-            padding: 8px; background: #8E1E20; border-radius: 15px; border: 2px solid #D4AF37;
-            animation: goldenGlow 3s ease-in-out infinite alternate;
+            width: 100%; max-width: 650px; padding: 8px; background: #8E1E20; border-radius: 15px; 
+            border: 2px solid #D4AF37; animation: goldenGlow 3s ease-in-out infinite alternate;
         }
         @keyframes goldenGlow {
             0% { box-shadow: 0 5px 15px rgba(0,0,0,0.4), 0 0 8px rgba(212, 175, 55, 0.2); }
@@ -140,8 +111,7 @@
         .side-badges { display: flex; flex-direction: column; gap: 25px; } 
         
         .badge-item {
-            width: 110px; height: 110px; 
-            border: 3px solid #D4AF37;
+            width: 110px; height: 110px; border: 3px solid #D4AF37;
             background: linear-gradient(135deg, #8E1E20 0%, #6B1315 100%);
             border-radius: 50%; display: flex; align-items: center; justify-content: center;
             box-shadow: 0 6px 15px rgba(0,0,0,0.4); animation: floatBadge 3s ease-in-out infinite;
@@ -157,32 +127,25 @@
         }
         
         /* =======================================
-           ✨ 分類列：滑動時完美凍結置頂 (動態變色版)
+           ✨ 分類列：滑動變色動態效果 (妳要的功能就在這)
         ======================================= */
         .category-wrapper { 
-            position: sticky; 
-            top: 15px; 
-            z-index: 95; 
-            width: 100%; 
-            margin-bottom: 25px; 
-            background: transparent; 
-            border-bottom: 2px solid transparent; 
-            box-shadow: none;
-            backdrop-filter: none;
-            transition: all 0.4s ease; 
-            pointer-events: none; 
+            position: sticky; top: 15px; 
+            z-index: 50; /* 降低圖層確保不蓋住彈窗 */
+            width: 100%; margin-bottom: 25px; background: transparent; 
+            border-bottom: 2px solid transparent; box-shadow: none; backdrop-filter: none;
+            transition: all 0.4s ease; pointer-events: none; 
         }
         
         .category-bar { 
             display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; 
-            max-width: 1200px; margin: 0 auto; pointer-events: auto; 
-            transition: padding 0.4s ease; 
+            max-width: 1200px; margin: 0 auto; pointer-events: auto; transition: padding 0.4s ease; 
         }
 
+        /* 下滑超過 50px 觸發的深紅玻璃色塊 */
         .category-wrapper.scrolled {
             top: 0; background: rgba(142, 30, 32, 0.95); backdrop-filter: blur(8px); 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.4); border-bottom: 2px solid #D4AF37; 
-            pointer-events: auto;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4); border-bottom: 2px solid #D4AF37; pointer-events: auto;
         }
         .category-wrapper.scrolled .category-bar { padding: 12px 0; }
 
@@ -199,14 +162,15 @@
 
         /* --- 主要內容佈局 --- */
         .container { max-width: 96%; margin: 0 auto; display: flex; gap: 25px; position: relative; align-items: flex-start; }
-        .left-column { flex: 0.7; display: flex; flex-direction: column; position: sticky; top: 80px; max-height: 85vh; z-index: 80; min-width: 250px; overflow-y: auto; padding-right: 5px; }
+        .left-column { flex: 0.8; display: flex; flex-direction: column; position: sticky; top: 80px; max-height: 85vh; z-index: 40; min-width: 270px; overflow-y: auto; padding-right: 5px; }
 
-        .site-logo-container { text-align: center; margin-bottom: 20px; }
+        .site-logo-container { text-align: center; margin-bottom: 20px; width: 100%; }
         .site-logo { width: 160px; height: auto; border-radius: 50%; border: 4px solid var(--accent-color); box-shadow: 0 5px 15px rgba(0,0,0,0.2); object-fit: cover; background-color: #fff; }
 
         /* 影片跑馬燈按鈕 */
         .video-ticker-btn {
-            background: linear-gradient(135deg, #b71c1c 0%, #8E1E20 100%); border: 2px solid #FFD700; border-radius: 8px; margin-bottom: 20px; overflow: hidden; cursor: pointer;
+            width: 100%; background: linear-gradient(135deg, #b71c1c 0%, #8E1E20 100%); 
+            border: 2px solid #FFD700; border-radius: 8px; margin-bottom: 20px; overflow: hidden; cursor: pointer;
             box-shadow: 0 4px 10px rgba(0,0,0,0.2); position: relative; height: 50px; display: flex; align-items: center; transition: transform 0.2s; flex-shrink: 0; 
         }
         .video-ticker-btn:hover { transform: scale(1.02); box-shadow: 0 0 15px rgba(255, 215, 0, 0.6); }
@@ -218,46 +182,24 @@
         /* =======================================
            ✨ 側邊欄：店家資訊 & 公告區塊 (皇家金邊版)
         ======================================= */
-        .shop-info, .notice-section { 
-            border-radius: 15px; 
-            font-size: 1.05rem; 
-            line-height: 1.6; 
-            border: 3px solid #D4AF37; 
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2); 
-            transition: all 0.3s ease; 
-        }
-        
-        .shop-info:hover, .notice-section:hover { 
-            box-shadow: 0 12px 25px rgba(0,0,0,0.3), 0 0 15px rgba(212, 175, 55, 0.3); 
-            border-color: #FFD700; 
-        }
-
         .shop-info { 
-            margin-bottom: 20px; 
-            color: #333; 
-            text-align: center; 
-            background: rgba(255, 255, 255, 0.95); 
-            padding: 20px 15px; 
+            width: 100%; border-radius: 15px; font-size: 1.05rem; line-height: 1.6; 
+            border: 3px solid #D4AF37; box-shadow: 0 8px 20px rgba(0,0,0,0.2); transition: all 0.3s ease; 
+            margin-bottom: 20px; color: #333; text-align: center; background: rgba(255, 255, 255, 0.95); padding: 20px 15px; 
         }
+        .shop-info:hover { box-shadow: 0 12px 25px rgba(0,0,0,0.3), 0 0 15px rgba(212, 175, 55, 0.3); border-color: #FFD700; }
         
-        .notice-section { 
-            background: rgba(255, 248, 220, 0.95); 
-            padding: 20px; 
-            margin-top: 25px; 
-        }
-        
-        .shop-info h3, .notice-section h3 { 
+        .shop-info h3 { 
             font-family: 'Noto Serif TC', serif; border-bottom: 2px dashed #ccc; padding-bottom: 12px; margin-top: 0; margin-bottom: 15px;
-            font-size: 1.25rem; font-weight: 900; color: #111; letter-spacing: 1px; line-height: 1.4; white-space: normal; word-break: keep-all; 
+            font-size: 1.15rem; font-weight: 900; color: #111; letter-spacing: 1px; line-height: 1.4; white-space: normal; word-break: keep-all; 
         }
 
-        .info-item, .notice-item { margin-bottom: 18px; text-align: left; }
+        .info-item { margin-bottom: 18px; text-align: left; }
         .shop-info .info-item { border-bottom: 1px solid #f0f0f0; padding-bottom: 12px; }
         .shop-info .info-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
 
         .warning-box { margin-top: 10px; padding: 10px 12px; background: #fff5f5; border-left: 4px solid #d63031; border-radius: 6px; font-size: 0.95rem; line-height: 1.5; color: #333; box-shadow: 0 2px 5px rgba(214, 48, 49, 0.05); }
         .highlight-red { color: #d63031; font-weight: bold; }
-        .bank-info { background: #fff; padding: 10px; border-radius: 8px; border: 1px dashed var(--primary-color); font-family: monospace; font-size: 1.1em; color: #333; margin-top: 5px; word-break: break-all; }
 
         /* =======================================
            ✨ 完整商品列表區塊 (皇家金邊 + 精緻美編)
@@ -265,20 +207,10 @@
         .product-list { flex: 3; display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; align-content: start; }
         
         .product-card { 
-            background: rgba(255, 255, 255, 0.95); 
-            border-radius: 15px; 
-            border: 3px solid #D4AF37; 
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2); 
-            overflow: hidden; 
-            display: flex; 
-            flex-direction: column; 
-            transition: all 0.3s ease; 
+            background: rgba(255, 255, 255, 0.95); border-radius: 15px; border: 3px solid #D4AF37; 
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2); overflow: hidden; display: flex; flex-direction: column; transition: all 0.3s ease; 
         }
-        .product-card:hover { 
-            transform: translateY(-8px); 
-            box-shadow: 0 15px 30px rgba(0,0,0,0.3), 0 0 20px rgba(212, 175, 55, 0.4); 
-            border-color: #FFD700; 
-        }
+        .product-card:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(0,0,0,0.3), 0 0 20px rgba(212, 175, 55, 0.4); border-color: #FFD700; }
         
         .product-img-box { width: 100%; height: 280px; background-color: #eee; overflow: hidden; cursor: zoom-in; position: relative; border-bottom: 2px solid #D4AF37; }
         .product-img-box img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
@@ -297,25 +229,11 @@
 
         /* --- 購物車與側邊欄 (皇家金邊版) --- */
         .cart-section { 
-            flex: 0.7; 
-            background: rgba(255, 255, 255, 0.95); 
-            padding: 25px; 
-            border-radius: 15px; 
-            border: 3px solid #D4AF37; 
-            align-self: flex-start; 
-            position: sticky; 
-            top: 80px; 
-            max-height: 85vh; 
-            overflow-y: auto; 
-            z-index: 90; 
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2); 
-            min-width: 250px; 
-            transition: all 0.3s ease; 
+            flex: 0.7; background: rgba(255, 255, 255, 0.95); padding: 25px; border-radius: 15px; border: 3px solid #D4AF37; 
+            align-self: flex-start; position: sticky; top: 80px; max-height: 85vh; overflow-y: auto; z-index: 90; 
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2); min-width: 250px; transition: all 0.3s ease; 
         }
-        .cart-section:hover { 
-            box-shadow: 0 12px 25px rgba(0,0,0,0.3), 0 0 15px rgba(212, 175, 55, 0.3); 
-            border-color: #FFD700; 
-        }
+        .cart-section:hover { box-shadow: 0 12px 25px rgba(0,0,0,0.3), 0 0 15px rgba(212, 175, 55, 0.3); border-color: #FFD700; }
         .cart-section h2 { font-family: 'Noto Serif TC', serif; color: #333; border-bottom: 1px dashed #ccc; padding-bottom: 15px; margin-top: 0; }
         .cart-item { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f0f0f0; padding: 15px 0; font-size: 0.95em; }
         .total { font-size: 1.5em; font-weight: bold; margin-top: 20px; text-align: right; color: var(--primary-color); font-family: 'Noto Serif TC', serif; }
@@ -323,15 +241,12 @@
         .checkout-btn:hover { filter: brightness(1.1); transform: translateY(-2px); }
 
         /* ✨ 貼心提醒移入購物車後的專屬微調 */
-        .cart-section .notice-section {
-            margin-top: 35px; 
-            box-shadow: none !important; 
-            border: 2px dashed #D4AF37 !important; 
-        }
-        .cart-section .notice-section:hover {
-            box-shadow: none !important;
-            border-color: #D4AF37 !important;
-        }
+        .notice-section { width: 100%; background: rgba(255, 248, 220, 0.95); padding: 20px; border-radius: 15px; font-size: 1.05rem; line-height: 1.6; }
+        .notice-section h3 { font-family: 'Noto Serif TC', serif; border-bottom: 2px dashed #ccc; padding-bottom: 12px; margin-top: 0; margin-bottom: 15px; font-size: 1.15rem; font-weight: 900; color: #111; letter-spacing: 1px; }
+        .notice-item { margin-bottom: 18px; text-align: left; }
+        .bank-info { background: #fff; padding: 10px; border-radius: 8px; border: 1px dashed var(--primary-color); font-family: monospace; font-size: 1.1em; color: #333; margin-top: 5px; word-break: break-all; }
+        .cart-section .notice-section { margin-top: 35px; box-shadow: none !important; border: 2px dashed #D4AF37 !important; }
+        .cart-section .notice-section:hover { box-shadow: none !important; border-color: #D4AF37 !important; }
 
         .qty-control { display: flex; align-items: center; gap: 8px; margin-top: 5px; background: #f9f9f9; padding: 2px 5px; border-radius: 5px; width: fit-content; }
         .qty-btn { width: 24px; height: 24px; border: 1px solid #ddd; background: #fff; color: #555; border-radius: 4px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-weight: bold; transition: all 0.2s; font-size: 1.1em; padding: 0; }
@@ -576,12 +491,11 @@
                     </ul>
                 </div>
 
-                <div class="copyright-text">Copyright © 2026 美鳳的家 版權所有</div>
-
+                <div class="copyright-text" style="font-size:0.9em; color:#888; border-top:1px solid #eee; padding-top:10px; margin-top:10px;">Copyright © 2026 美鳳的家 版權所有</div>
                 
-            </div>
+                </div>
             
-            </div>
+        </div>
 
         <div class="product-list" id="productList"></div>
         
@@ -692,9 +606,10 @@
     </div>
 
     <script>
-        <script>
-        // ▼▼▼ 妳的 Google 部署網址 ▼▼▼
+        // ▼▼▼ 請務必將下方的網址換成您「新增部署」後產生的新網址 (以/exec結尾) ▼▼▼
         const googleScriptUrl = "https://script.google.com/macros/s/AKfycbypW7qpaMZnwz03tUGOLgsGX3s83W54K_lAh3fKilsx3nretGGIz_Eu4bNi8-ym9SVi/exec";
+        // ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+
         const CART_STORAGE_KEY = 'meifeng_cart_v2026';
 
         const products = [
@@ -742,14 +657,14 @@
         let cart = [];
 
         // ==========================================
-        // 🔥 1. 網頁一讀取完畢，立刻執行以下動作
+        // 🔥 1. 網頁讀取完畢，立刻載入菜單並彈出公告
         // ==========================================
         document.addEventListener("DOMContentLoaded", function() {
             
-            // 瞬間印出商品，不用等影片載入！
+            // 瞬間印出商品
             renderProducts('全部'); 
             
-            // 設定日期與讀取購物車
+            // 設定日期與購物車
             const dateInput = document.getElementById('custDate');
             if(dateInput) {
                 const minDate = new Date(); minDate.setDate(minDate.getDate() + 3); 
@@ -762,7 +677,7 @@
             updateAddressInput(); 
             updatePaymentInput();
 
-            // 🔥 完美復活的公告彈窗
+            // 🔥 彈出內用公告視窗
             Swal.fire({
                 title: '📢 內用公告',
                 html: `
@@ -799,28 +714,26 @@
         });
 
         // ==========================================
-        // 🔥 2. 滑動變色魔法 (妳要的半透明色塊包覆按鈕)
+        // 🔥 2. 滑動變色魔法 (半透明色塊包覆按鈕)
         // ==========================================
         window.addEventListener("scroll", function() {
-            // 控制右下角「回到頂部」按鈕顯示
             const backTopBtn = document.getElementById("backTopBtn");
             if(backTopBtn) {
                 backTopBtn.style.display = window.scrollY > 300 ? "flex" : "none";
             }
             
-            // 🌟 分類按鈕的背景變色觸發器
             const catWrapper = document.getElementById("catWrapper");
             if (catWrapper) {
                 if (window.scrollY > 50) { 
-                    catWrapper.classList.add("scrolled"); // 加上深紅色塊
+                    catWrapper.classList.add("scrolled"); 
                 } else { 
-                    catWrapper.classList.remove("scrolled"); // 恢復透明漂浮
+                    catWrapper.classList.remove("scrolled"); 
                 }
             }
         });
 
         // ==========================================
-        // 其他原本的運作功能 (保持不變)
+        // 其餘功能設定
         // ==========================================
         function topFunction() { window.scrollTo({top: 0, behavior: 'smooth'}); }
 
@@ -942,9 +855,9 @@
             if (existingItem) { existingItem.quantity += 1; } else { cart.push({ ...product, quantity: 1 }); }
             saveCart(); renderCart();
             const cartSection = document.getElementById('cartSection'); const floatBar = document.getElementById('floatBar');
-            cartSection.classList.remove('cart-animate'); void cartSection.offsetWidth; cartSection.classList.add('cart-animate');
+            if(cartSection) { cartSection.classList.remove('cart-animate'); void cartSection.offsetWidth; cartSection.classList.add('cart-animate'); }
             if(floatBar && floatBar.style.display !== 'none') { floatBar.classList.remove('cart-animate'); void floatBar.offsetWidth; floatBar.classList.add('cart-animate'); }
-            setTimeout(() => { cartSection.classList.remove('cart-animate'); if(floatBar) floatBar.classList.remove('cart-animate'); }, 300);
+            setTimeout(() => { if(cartSection) cartSection.classList.remove('cart-animate'); if(floatBar) floatBar.classList.remove('cart-animate'); }, 300);
         }
 
         function renderCart() {
@@ -992,7 +905,8 @@
                 });
             }
 
-            totalEl.innerText = total; countEl.innerText = count;
+            if(totalEl) totalEl.innerText = total; 
+            if(countEl) countEl.innerText = count;
             if(floatTotal) floatTotal.innerText = total;
 
             let progress711 = (total / 2000) * 100; if (progress711 > 100) progress711 = 100;
@@ -1104,16 +1018,10 @@
             });
         }
 
-        // 新春休假圖片自動彈出邏輯 (目前關閉)
-        window.addEventListener('load', function() {
-            // setTimeout(() => { document.getElementById('holiday-modal-overlay').style.display = 'flex'; }, 600); 
-        });
-        function closeHolidayModal() { document.getElementById('holiday-modal-overlay').style.display = 'none'; }
-    </script>    </script>
+        function closeHolidayModal() { 
+            const modal = document.getElementById('holiday-modal-overlay');
+            if(modal) modal.style.display = 'none'; 
+        }
+    </script>
 </body>
 </html>
-
-
-
-
-
