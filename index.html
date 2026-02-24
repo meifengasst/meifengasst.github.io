@@ -257,10 +257,51 @@
         @keyframes shakeCart { 0% { transform: scale(1); border-color: var(--primary-color); } 50% { transform: scale(1.02); border-color: #FFD700; box-shadow: 0 0 15px #FFD700; } 100% { transform: scale(1); border-color: var(--primary-color); } }
         .cart-animate { animation: shakeCart 0.3s ease-in-out; }
 
-        .shipping-progress-container { margin-bottom: 20px; background: #fff8f8; padding: 15px; border-radius: 8px; border: 1px dashed #eecaca; }
-        .progress-text { font-size: 0.9rem; color: #555; margin-bottom: 5px; display: flex; justify-content: space-between; align-items: center; }
-        .progress-bar-bg { width: 100%; height: 10px; background-color: #eee; border-radius: 10px; overflow: hidden; }
-        .progress-bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #FFD700, #ffae00); transition: width 0.5s ease-out; }
+        /* =======================================
+           ✨ 雙重免運進度條 (質感加深版)
+        ======================================= */
+        .shipping-progress-container { 
+            margin-bottom: 25px; /* 稍微拉開與下方「您的點餐單」的距離 */
+            background: rgba(255, 248, 225, 0.6); /* 🔥 換上極有質感的半透明淺象牙色底 */
+            padding: 18px; /* 內距稍微加大，看起來更舒適 */
+            border-radius: 12px; 
+            border: 2px dashed #D4AF37; /* 換上招牌金色的虛線外框 */
+            box-shadow: inset 0 2px 8px rgba(0,0,0,0.02); /* 微微的內陰影，像是嵌在卡片上的小視窗 */
+        }
+        
+        .progress-text { 
+            font-size: 1rem; /* 字體稍微放大 */
+            color: #222; /* 🔥 顏色加到極深，不再是淺灰 */
+            font-weight: bold; /* 🔥 字體加粗，讓資訊更清晰 */
+            margin-bottom: 8px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+        }
+        
+        /* 讓括號裡面的 (滿$2000免運) 不要那麼搶戲 */
+        .progress-text small {
+            color: #666;
+            font-weight: normal;
+            font-size: 0.85em;
+            margin-left: 5px;
+        }
+
+        .progress-bar-bg { 
+            width: 100%; 
+            height: 12px; /* 進度條稍微加厚一點點 */
+            background-color: #e0e0e0; /* 底色稍微加深，對比更明顯 */
+            border-radius: 10px; 
+            overflow: hidden; 
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1); /* 進度條溝槽感 */
+        }
+        
+        .progress-bar-fill { 
+            height: 100%; 
+            width: 0%; 
+            background: linear-gradient(90deg, #FFD700, #ffae00); 
+            transition: width 0.5s cubic-bezier(0.25, 0.8, 0.25, 1); /* 動畫更平滑流暢 */
+        }
 
         .social-area { margin-top: 25px; padding-top: 20px; border-top: 2px dashed #eee; display: flex; flex-direction: column; gap: 10px; }
         .social-btn { display: flex; align-items: center; justify-content: center; text-decoration: none; color: white; padding: 12px; border-radius: 8px; font-weight: bold; font-size: 1.1em; transition: transform 0.2s, filter 0.2s; box-shadow: 0 3px 6px rgba(0,0,0,0.15); width: 100%; box-sizing: border-box; }
@@ -1107,3 +1148,4 @@
     </script>
 </body>
 </html>
+
