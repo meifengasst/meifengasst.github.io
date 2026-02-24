@@ -59,7 +59,9 @@
 
         .header-main-container {
             display: flex; align-items: center; justify-content: space-between; 
-            gap: 20px; width: 98%; max-width: 1600px; margin: 0 auto 30px auto; height: 380px; 
+            gap: 20px; 
+            width: 98%; max-width: 1800px; /* 🔥 撐開頂部寬度 */
+            margin: 0 auto 30px auto; height: 380px; 
         }
 
         .side-media-group { display: flex; align-items: center; gap: 20px; height: 100%; }
@@ -100,7 +102,9 @@
 
         /* 🔥 放大 Banner 寬度，撐滿中間空間 */
         .banner-frame {
-            width: 100%; max-width: 850px; padding: 8px; background: #8E1E20; border-radius: 15px; 
+            width: 100%; 
+            max-width: 900px; /* 🔥 放大Banner！恢復霸氣大小 */
+            padding: 8px; background: #8E1E20; border-radius: 15px; 
             border: 2px solid #D4AF37; animation: goldenGlow 3s ease-in-out infinite alternate;
         }
         @keyframes goldenGlow {
@@ -164,8 +168,11 @@
         /* =======================================
            ✨ 主要排版黃金比例
         ======================================= */
-        /* 🔥 放大總容器，向外擴張，消除左右多餘空白 */
-        .container { max-width: 1650px; width: 98%; margin: 0 auto; display: flex; gap: 30px; position: relative; align-items: flex-start; }
+        /* --- 主要內容佈局 --- */
+        .container { 
+            width: 98%; max-width: 1800px; /* 🔥 強制跟頂部寬度一模一樣，消除多餘空白！ */
+            margin: 0 auto; display: flex; gap: 30px; position: relative; align-items: flex-start; 
+        }
         
         /* 🔥 左側欄位稍微加寬，讓字體排版更順暢 */
         .left-column { flex: 0 0 300px; display: flex; flex-direction: column; position: sticky; top: 80px; max-height: 85vh; z-index: 30; overflow-y: auto; padding-right: 5px; }
@@ -1278,6 +1285,7 @@
     </script>
 </body>
 </html>
+
 
 
 
