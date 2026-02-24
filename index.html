@@ -175,8 +175,16 @@
         }
         
         /* 🔥 左側欄位稍微加寬，讓字體排版更順暢 */
-        .left-column { flex: 0 0 300px; display: flex; flex-direction: column; position: sticky; top: 80px; max-height: 85vh; z-index: 30; overflow-y: auto; padding-right: 5px; }
-        .cart-section { flex: 0 0 340px; background: rgba(255, 255, 255, 0.95); padding: 25px; border-radius: 15px; border: 3px solid #D4AF37; align-self: flex-start; position: sticky; top: 80px; max-height: 85vh; overflow-y: auto; z-index: 30; box-shadow: 0 8px 20px rgba(0,0,0,0.2); transition: all 0.3s ease; }
+        .left-column { 
+            flex: 0 0 300px; /* 🔥 固定左邊評價區的寬度 */
+            display: flex; flex-direction: column; position: sticky; top: 80px; max-height: 85vh; z-index: 40; overflow-y: auto; padding-right: 5px; 
+        }
+        .cart-section { 
+            flex: 0 0 340px; /* 🔥 固定右邊購物車寬度，強制靠右！ */
+            background: rgba(255, 255, 255, 0.95); padding: 25px; border-radius: 15px; border: 3px solid #D4AF37; 
+            align-self: flex-start; position: sticky; top: 80px; max-height: 85vh; overflow-y: auto; z-index: 90; 
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2); transition: all 0.3s ease; 
+        }
         .product-list { flex: 1; min-width: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; align-content: start; }
 
         /* 已刪除小Logo相關CSS */
@@ -1285,6 +1293,7 @@
     </script>
 </body>
 </html>
+
 
 
 
