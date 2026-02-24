@@ -1032,9 +1032,12 @@
         const CART_STORAGE_KEY = 'meifeng_cart_v2026';
 
         const products = [
-            { id: 38, name: "幸福團圓 3800 桌菜組 (約6人份)", price: 3800, category: "桌菜類", image: "3800.jpg" },
+            // 🧨 春節限定先隱藏：明年過年只要把最前面的 // 刪除，就會自動重新上架囉！
+          //{ id: 38, name: "幸福團圓 3800 桌菜組 (約6人份)", price: 3800, category: "桌菜類", image: "3800.jpg" },
+           // 這是平常也有賣的 5500，保留不動它：
             { id: 40, name: "經典傳承 5500 桌菜組 (約10人份)", price: 5500, category: "桌菜類", image: "5500.jpg" },
-            { id: 37, name: "富貴吉祥 6600 桌菜組 (約10人份)", price: 6600, category: "桌菜類", image: "6600.jpg" },
+           // 🧨 春節限定先隱藏：
+         // { id: 37, name: "富貴吉祥 6600 桌菜組 (約10人份)", price: 6600, category: "桌菜類", image: "6600.jpg" },
             { id: 1, name: "櫻花蝦米糕", price: 450, category: "飯類", image: "rice.jpg" },
             { id: 2, name: "客家豬腳", price: 880, category: "肉類", image: "pork.jpg" },
             { id: 3, name: "虎皮蹄膀", price: 750, category: "肉類", image: "meat2.jpg" },
@@ -1455,6 +1458,7 @@ if (filterCat === '全部') {
     </script>
 </body>
 </html>
+
 
 
 
