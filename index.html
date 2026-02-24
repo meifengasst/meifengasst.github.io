@@ -1223,7 +1223,7 @@
             filteredProducts.forEach(product => {
                 const div = document.createElement("div"); 
                 div.className = "product-card";
-                div.innerHTML = `<div class="product-img-box" onclick="openImageModal('${product.image}')" title="點擊放大"><img src="${product.image}" alt="${product.name}" onerror="this.src='https://via.placeholder.com/300?text=圖片準備中'"></div><div class="card-content"><div><span class="product-cat">${product.category}</span><div class="product-name">${product.name}</div></div><div><div class="price">$${product.price}</div><button class="add-btn" onclick="addToCart(${product.id})">＋ 加入訂單</button></div></div>`;
+                div.innerHTML = `<div class="product-img-box" onclick="openImageModal('${product.image}')" title="點擊放大"><img src="${product.image}" alt="${product.name}" loading="lazy" onerror="this.src='https://via.placeholder.com/300?text=圖片準備中'"></div><div class="card-content"><div><span class="product-cat">${product.category}</span><div class="product-name">${product.name}</div></div><div><div class="price">$${product.price}</div><button class="add-btn" onclick="addToCart(${product.id})">＋ 加入訂單</button></div></div>`;
                 productListEl.appendChild(div);
             });
             
@@ -1434,6 +1434,7 @@
     </script>
 </body>
 </html>
+
 
 
 
