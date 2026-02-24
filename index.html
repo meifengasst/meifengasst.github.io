@@ -474,6 +474,119 @@
         .holiday-close-btn:hover { background: #d63031; transform: scale(1.1); }
         @keyframes popIn { 0% { transform: scale(0.8); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
 
+/* =================================================================
+   ✨ 皇家輕奢華美編升級包 (請貼在 <style> 最下方)
+================================================================= */
+
+/* --- 1. 全域質感提升 --- */
+/* 讓所有白色背景的區塊，都帶上一點點米黃色和紙張紋理，減少刺眼感 */
+.google-reviews-container, 
+.shop-info, 
+.cart-section, 
+.product-card,
+.modal-content {
+    background-color: #fffdf9 !important; /* 極淺的米白色 */
+    /* 加上 subtle 的紙張紋理 (如果沒有網路，會自動降級為純色) */
+    background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png') !important;
+    /* 讓邊框變成更有質感的「雙線金邊」 */
+    border: 4px double #D4AF37 !important;
+    /* 增加內部金色微光暈，看起來更立體 */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3), inset 0 0 30px rgba(212, 175, 55, 0.15) !important;
+}
+
+/* 各區塊標題的美化 (評價、店家資訊、購物車) */
+.reviews-header, 
+.shop-info h3, 
+.cart-section h2,
+.notice-section h3 {
+    border-bottom: none !important;
+    /* 用漸層金線取代原本的虛線 */
+    background-image: linear-gradient(to right, transparent, #D4AF37, #D4AF37, transparent);
+    background-size: 100% 2px;
+    background-repeat: no-repeat;
+    background-position: bottom center;
+    padding-bottom: 15px !important;
+    text-shadow: 1px 1px 2px rgba(212, 175, 55, 0.3); /* 文字微微發金光 */
+}
+
+/* --- 2. 左側 Google 評價區精修 --- */
+/* 評價卡片美化 */
+.review-card {
+    background: #fffcec !important; /* 比底色再暖一點 */
+    border: 1px solid rgba(212, 175, 55, 0.3) !important; /* 微弱金邊 */
+    border-left: 5px solid #D4AF37 !important; /* 左側加粗金條 */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.08) !important;
+    transition: all 0.3s ease;
+}
+/* 滑鼠移過去時，卡片微微浮起發光 */
+.review-card:hover {
+    transform: translateY(-2px) translateX(3px);
+    background: #fff8dc !important;
+    box-shadow: 0 6px 12px rgba(212, 175, 55, 0.2) !important;
+}
+
+/* --- 3. 中間商品卡片精修 --- */
+.product-card {
+    /* 讓商品卡片有一點點漸層光澤 */
+    background: linear-gradient(to bottom right, #fffdf9, #fefbee) !important;
+    border: 2px solid #D4AF37 !important; /* 改回單線金邊，比較俐落 */
+}
+/* 圖片區域增加內陰影，讓照片看起來像是嵌進去的 */
+.product-img-box {
+    box-shadow: inset 0 -5px 15px rgba(0,0,0,0.15);
+    border-bottom: 3px solid #D4AF37 !important;
+}
+/* 價格標示加強 */
+.price {
+    text-shadow: 1px 1px 2px rgba(142, 30, 32, 0.2);
+    background: linear-gradient(to right, var(--primary-color), #c0392b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+}
+
+/* --- 4. 右側購物車精修 --- */
+/* 免運進度條區塊美化 */
+.shipping-progress-container {
+    background: rgba(255, 248, 220, 0.7) !important;
+    border: 2px solid #D4AF37 !important; /* 實線框 */
+    box-shadow: inset 0 0 15px rgba(212, 175, 55, 0.2) !important;
+}
+/* 進度條軌道 */
+.progress-bar-bg {
+    border: 1px solid #d4af376b;
+    background: #f3f0e6;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
+}
+/* 進度條本身增加紋理和閃光 */
+.progress-bar-fill {
+    background: linear-gradient(90deg, #FFD700, #ffae00, #FFD700) !important;
+    background-size: 200% auto !important;
+    animation: shine 3s linear infinite; /* 讓進度條閃閃發光 */
+}
+@keyframes shine {
+    to { background-position: 200% center; }
+}
+
+/* 總計金額區塊強調 */
+.total {
+    background: rgba(142, 30, 32, 0.05);
+    padding: 15px;
+    border-radius: 10px;
+    border: 2px solid #D4AF37;
+    text-align: center !important;
+    box-shadow: inset 0 0 10px rgba(212, 175, 55, 0.2);
+}
+.total span {
+    font-size: 1.3em;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+
+/* 購物車項目分隔線美化 */
+.cart-item {
+    border-bottom: 1px dashed #D4AF37 !important;
+}
+        
     </style>
 </head>
 <body>
@@ -1293,6 +1406,7 @@
     </script>
 </body>
 </html>
+
 
 
 
