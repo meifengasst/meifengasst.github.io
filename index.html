@@ -98,8 +98,9 @@
 
         .center-content-section { flex: 1; display: flex; align-items: center; justify-content: center; gap: 20px; }
 
+        /* 🔥 放大 Banner 寬度，撐滿中間空間 */
         .banner-frame {
-            width: 100%; max-width: 650px; padding: 8px; background: #8E1E20; border-radius: 15px; 
+            width: 100%; max-width: 850px; padding: 8px; background: #8E1E20; border-radius: 15px; 
             border: 2px solid #D4AF37; animation: goldenGlow 3s ease-in-out infinite alternate;
         }
         @keyframes goldenGlow {
@@ -163,13 +164,11 @@
         /* =======================================
            ✨ 主要排版黃金比例
         ======================================= */
-        .container { 
-            max-width: 1500px;
-            width: 98%;
-            margin: 0 auto; display: flex; gap: 25px; position: relative; align-items: flex-start; 
-        }
+        /* 🔥 放大總容器，向外擴張，消除左右多餘空白 */
+        .container { max-width: 1650px; width: 98%; margin: 0 auto; display: flex; gap: 30px; position: relative; align-items: flex-start; }
         
-        .left-column { flex: 0 0 280px; display: flex; flex-direction: column; position: sticky; top: 80px; max-height: 85vh; z-index: 30; overflow-y: auto; padding-right: 5px; }
+        /* 🔥 左側欄位稍微加寬，讓字體排版更順暢 */
+        .left-column { flex: 0 0 300px; display: flex; flex-direction: column; position: sticky; top: 80px; max-height: 85vh; z-index: 30; overflow-y: auto; padding-right: 5px; }
         .cart-section { flex: 0 0 340px; background: rgba(255, 255, 255, 0.95); padding: 25px; border-radius: 15px; border: 3px solid #D4AF37; align-self: flex-start; position: sticky; top: 80px; max-height: 85vh; overflow-y: auto; z-index: 30; box-shadow: 0 8px 20px rgba(0,0,0,0.2); transition: all 0.3s ease; }
         .product-list { flex: 1; min-width: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; align-content: start; }
 
@@ -1279,5 +1278,6 @@
     </script>
 </body>
 </html>
+
 
 
