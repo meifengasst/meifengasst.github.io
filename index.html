@@ -713,7 +713,7 @@
     <div class="category-wrapper" id="catWrapper">
         <div class="category-bar">
             <button class="cat-btn active" onclick="filterCategory('全部')">全部</button>
-            <button class="cat-btn" onclick="filterCategory('5500桌菜')">5500桌菜</button>
+            <button class="cat-btn" onclick="filterCategory('桌菜類')">桌菜類</button>
             <button class="cat-btn" onclick="filterCategory('飯類')">飯類</button>
             <button class="cat-btn" onclick="filterCategory('肉類')">肉類</button>
             <button class="cat-btn" onclick="filterCategory('湯類')">湯類</button>
@@ -1032,10 +1032,9 @@
         const CART_STORAGE_KEY = 'meifeng_cart_v2026';
 
         const products = [
-            // 建議給它一個新的 ID 40，並設定分類為 "5500桌菜"
-            { id: 40, name: "經典傳承 5500 桌菜組 (約10人份)", price: 5500, category: "5500桌菜", image: "5500.jpg" },
-            { id: 37, name: "富貴吉祥 6600 桌菜組 (約10人份)", price: 6600, category: "6600桌菜", image: "6600.jpg" },
-            { id: 38, name: "幸福團圓 3800 桌菜組 (約6人份)", price: 3800, category: "3800桌菜", image: "3800.jpg" },
+            { id: 38, name: "幸福團圓 3800 桌菜組 (約6人份)", price: 3800, category: "桌菜類", image: "3800.jpg" },
+            { id: 40, name: "經典傳承 5500 桌菜組 (約10人份)", price: 5500, category: "桌菜類", image: "5500.jpg" },
+            { id: 37, name: "富貴吉祥 6600 桌菜組 (約10人份)", price: 6600, category: "桌菜類", image: "6600.jpg" },
             { id: 1, name: "櫻花蝦米糕", price: 450, category: "飯類", image: "rice.jpg" },
             { id: 2, name: "客家豬腳", price: 880, category: "肉類", image: "pork.jpg" },
             { id: 3, name: "虎皮蹄膀", price: 750, category: "肉類", image: "meat2.jpg" },
@@ -1233,12 +1232,14 @@
             productListEl.innerHTML = ""; 
             
             let filteredProducts = [];
-            if (filterCat === '全部') {
-                // 加入 '5500桌菜'，讓單點區不會看到大桌菜
-                filteredProducts = products.filter(p => p.category !== '6600桌菜' && p.category !== '3800桌菜' && p.category !== '5500桌菜');
-            } else {
-                filteredProducts = products.filter(p => p.category === filterCat);
-            }
+if (filterCat === '全部') {
+    // 老闆說點擊「全部」時也要看到桌菜組！
+    // 所以我們直接把所有商品 (products) 倒進去，不做任何隱藏
+    filteredProducts = products;
+} else {
+    // 點擊其他分類時，才去篩選對應的商品
+    filteredProducts = products.filter(p => p.category === filterCat);
+}
 
             filteredProducts.forEach(product => {
                 const div = document.createElement("div"); 
@@ -1454,6 +1455,7 @@
     </script>
 </body>
 </html>
+
 
 
 
