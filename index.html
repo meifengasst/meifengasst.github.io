@@ -55,11 +55,11 @@
         }
 
         h1, .sub-title, .site-logo-container { display: none !important; }
-        .left-column .site-logo-container { display: block !important; }
+        /* .left-column .site-logo-container { display: block !important; }  <-- 已刪除小Logo設定 */
 
         .header-main-container {
             display: flex; align-items: center; justify-content: space-between; 
-            gap: 20px; width: 96%; margin: 0 auto 30px auto; height: 380px; 
+            gap: 20px; width: 98%; max-width: 1600px; margin: 0 auto 30px auto; height: 380px; 
         }
 
         .side-media-group { display: flex; align-items: center; gap: 20px; height: 100%; }
@@ -127,11 +127,11 @@
         }
         
         /* =======================================
-           ✨ 修正 1：分類列 (圖層降級，不再蓋住彈窗)
+           ✨ 分類列
         ======================================= */
         .category-wrapper { 
             position: sticky; top: 15px; 
-            z-index: 10; /* 🔥 圖層降到最低，保證絕對不會蓋住任何視窗！ */
+            z-index: 10; 
             width: 100%; margin-bottom: 25px; background: transparent; 
             border-bottom: 2px solid transparent; box-shadow: none; backdrop-filter: none;
             transition: all 0.4s ease; pointer-events: none; 
@@ -139,9 +139,10 @@
         
         .category-bar { 
             display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; 
-            max-width: 1200px; margin: 0 auto; pointer-events: auto; transition: padding 0.4s ease; 
+            max-width: 1400px; margin: 0 auto; pointer-events: auto; transition: padding 0.4s ease; 
         }
 
+        /* 🔥 下滑時滿版深紅背景 */
         .category-wrapper.scrolled {
             top: 0; background: rgba(142, 30, 32, 0.95); backdrop-filter: blur(8px); 
             box-shadow: 0 4px 15px rgba(0,0,0,0.4); border-bottom: 2px solid #D4AF37; pointer-events: auto;
@@ -159,73 +160,24 @@
             border-color: transparent; transform: translateY(-3px); box-shadow: 0 6px 18px rgba(212, 175, 55, 0.45); 
         }
 
-        /* --- 主要內容佈局 --- */
-        .container { max-width: 96%; margin: 0 auto; display: flex; gap: 25px; position: relative; align-items: flex-start; }
-        .left-column { flex: 0.8; display: flex; flex-direction: column; position: sticky; top: 80px; max-height: 85vh; z-index: 40; min-width: 270px; overflow-y: auto; padding-right: 5px; }
-
-        .site-logo-container { text-align: center; margin-bottom: 20px; width: 100%; }
-        .site-logo { width: 160px; height: auto; border-radius: 50%; border: 4px solid var(--accent-color); box-shadow: 0 5px 15px rgba(0,0,0,0.2); object-fit: cover; background-color: #fff; }
-
-        /* 影片跑馬燈按鈕 */
-        .video-ticker-btn {
-            width: 100%; background: linear-gradient(135deg, #b71c1c 0%, #8E1E20 100%); 
-            border: 2px solid #FFD700; border-radius: 8px; margin-bottom: 20px; overflow: hidden; cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2); position: relative; height: 50px; display: flex; align-items: center; transition: transform 0.2s; flex-shrink: 0; 
-        }
-        .video-ticker-btn:hover { transform: scale(1.02); box-shadow: 0 0 15px rgba(255, 215, 0, 0.6); }
-        .ticker-icon { background: #FFD700; color: #8E1E20; width: 40px; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; z-index: 2; font-weight: bold; }
-        .ticker-wrapper { flex: 1; overflow: hidden; white-space: nowrap; position: relative; mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); }
-        .ticker-text { display: inline-block; padding-left: 100%; animation: scroll-left 12s linear infinite; color: #FFF; font-weight: bold; font-size: 1rem; letter-spacing: 1px; }
-        @keyframes scroll-left { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
-        
         /* =======================================
-           ✨ 側邊欄：店家資訊 & 公告區塊 (皇家金邊版)
+           ✨ 主要排版黃金比例
         ======================================= */
-        .shop-info { 
-            width: 100%; border-radius: 15px; font-size: 1.05rem; line-height: 1.6; 
-            border: 3px solid #D4AF37; box-shadow: 0 8px 20px rgba(0,0,0,0.2); transition: all 0.3s ease; 
-            margin-bottom: 20px; color: #333; text-align: center; background: rgba(255, 255, 255, 0.95); padding: 20px 15px; 
+        .container { 
+            max-width: 1500px;
+            width: 98%;
+            margin: 0 auto; display: flex; gap: 25px; position: relative; align-items: flex-start; 
         }
-        .shop-info:hover { box-shadow: 0 12px 25px rgba(0,0,0,0.3), 0 0 15px rgba(212, 175, 55, 0.3); border-color: #FFD700; }
         
-        .shop-info h3 { 
-            font-family: 'Noto Serif TC', serif; border-bottom: 2px dashed #ccc; padding-bottom: 12px; margin-top: 0; margin-bottom: 15px;
-            font-size: 1.15rem; font-weight: 900; color: #111; letter-spacing: 1px; line-height: 1.4; white-space: normal; word-break: keep-all; 
-        }
+        .left-column { flex: 0 0 280px; display: flex; flex-direction: column; position: sticky; top: 80px; max-height: 85vh; z-index: 30; overflow-y: auto; padding-right: 5px; }
+        .cart-section { flex: 0 0 340px; background: rgba(255, 255, 255, 0.95); padding: 25px; border-radius: 15px; border: 3px solid #D4AF37; align-self: flex-start; position: sticky; top: 80px; max-height: 85vh; overflow-y: auto; z-index: 30; box-shadow: 0 8px 20px rgba(0,0,0,0.2); transition: all 0.3s ease; }
+        .product-list { flex: 1; min-width: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; align-content: start; }
 
-        .info-item { margin-bottom: 18px; text-align: left; }
-        .shop-info .info-item { border-bottom: 1px solid #f0f0f0; padding-bottom: 12px; }
-        .shop-info .info-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-
-        .warning-box { margin-top: 10px; padding: 10px 12px; background: #fff5f5; border-left: 4px solid #d63031; border-radius: 6px; font-size: 0.95rem; line-height: 1.5; color: #333; box-shadow: 0 2px 5px rgba(214, 48, 49, 0.05); }
-        .highlight-red { color: #d63031; font-weight: bold; }
+        /* 已刪除小Logo相關CSS */
+        /* .site-logo-container { text-align: center; margin-bottom: 20px; width: 100%; } */
+        /* .site-logo { width: 160px; height: auto; border-radius: 50%; border: 4px solid var(--accent-color); box-shadow: 0 5px 15px rgba(0,0,0,0.2); object-fit: cover; background-color: #fff; } */
 
         /* =======================================
-           ✨ 完整商品列表區塊 (皇家金邊 + 精緻美編)
-        ======================================= */
-        .product-list { flex: 3; display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; align-content: start; }
-        
-        .product-card { 
-            background: rgba(255, 255, 255, 0.95); border-radius: 15px; border: 3px solid #D4AF37; 
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2); overflow: hidden; display: flex; flex-direction: column; transition: all 0.3s ease; 
-        }
-        .product-card:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(0,0,0,0.3), 0 0 20px rgba(212, 175, 55, 0.4); border-color: #FFD700; }
-        
-        .product-img-box { width: 100%; height: 280px; background-color: #eee; overflow: hidden; cursor: zoom-in; position: relative; border-bottom: 2px solid #D4AF37; }
-        .product-img-box img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
-        .product-card:hover .product-img-box img { transform: scale(1.1); }
-        .product-img-box::after { content: "🔍"; position: absolute; bottom: 10px; right: 10px; background: rgba(255,255,255,0.8); padding: 5px; border-radius: 50%; opacity: 0; transition: 0.3s; }
-        .product-card:hover .product-img-box::after { opacity: 1; }
-
-        .card-content { padding: 20px 25px 25px 25px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; position: relative; }
-        .product-cat { display: inline-block; font-size: 0.85em; color: #8E1E20; font-weight: bold; background: #fff8e1; border: 1px solid #D4AF37; padding: 4px 12px; border-radius: 20px; margin-bottom: 12px; letter-spacing: 1px; }
-        .product-name { font-size: 1.5em; font-family: 'Noto Serif TC', serif; font-weight: 900; color: #222; line-height: 1.3; margin: 0 0 15px 0; padding-bottom: 15px; border-bottom: 1px dashed #dcdcdc; }
-        .price { color: var(--primary-color); font-weight: 900; font-size: 1.7em; margin-bottom: 15px; letter-spacing: 0.5px; }
-        .price::first-letter { font-size: 0.75em; color: #666; margin-right: 2px; }
-
-        button.add-btn { width: 100%; background: linear-gradient(135deg, #8E1E20 0%, #6B1315 100%); color: white; border: 2px solid #D4AF37; padding: 12px 15px; border-radius: 50px; cursor: pointer; font-weight: bold; font-size: 1.15em; letter-spacing: 1px; box-shadow: 0 4px 10px rgba(142, 30, 32, 0.25); transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }
-        button.add-btn:hover { transform: translateY(-3px); box-shadow: 0 6px 15px rgba(212, 175, 55, 0.4); filter: brightness(1.1); }
-/* =======================================
            ✨ 新增：Google 真實好評捲動區塊 (皇家金邊版)
         ======================================= */
         .google-reviews-container {
@@ -298,13 +250,68 @@
         .review-stars { color: #FFD700; font-size: 1.1rem; margin-bottom: 4px; letter-spacing: 2px;}
         .review-text { color: #333; line-height: 1.5; margin-bottom: 6px; text-align: left;}
         .review-author { font-size: 0.85em; color: #888; text-align: right; font-weight: bold;}
-        
-        /* --- 購物車與側邊欄 (皇家金邊版) --- */
-        .cart-section { 
-            flex: 0.7; background: rgba(255, 255, 255, 0.95); padding: 25px; border-radius: 15px; border: 3px solid #D4AF37; 
-            align-self: flex-start; position: sticky; top: 80px; max-height: 85vh; overflow-y: auto; z-index: 90; 
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2); min-width: 250px; transition: all 0.3s ease; 
+
+        /* 影片跑馬燈按鈕 */
+        .video-ticker-btn {
+            width: 100%; background: linear-gradient(135deg, #b71c1c 0%, #8E1E20 100%); 
+            border: 2px solid #FFD700; border-radius: 8px; margin-bottom: 20px; overflow: hidden; cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2); position: relative; height: 50px; display: flex; align-items: center; transition: transform 0.2s; flex-shrink: 0; 
         }
+        .video-ticker-btn:hover { transform: scale(1.02); box-shadow: 0 0 15px rgba(255, 215, 0, 0.6); }
+        .ticker-icon { background: #FFD700; color: #8E1E20; width: 40px; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; z-index: 2; font-weight: bold; }
+        .ticker-wrapper { flex: 1; overflow: hidden; white-space: nowrap; position: relative; mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); }
+        .ticker-text { display: inline-block; padding-left: 100%; animation: scroll-left 12s linear infinite; color: #FFF; font-weight: bold; font-size: 1rem; letter-spacing: 1px; }
+        @keyframes scroll-left { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
+        
+        /* =======================================
+           ✨ 側邊欄：店家資訊 & 公告區塊 
+        ======================================= */
+        .shop-info { 
+            width: 100%; border-radius: 15px; font-size: 1.05rem; line-height: 1.6; 
+            border: 3px solid #D4AF37; box-shadow: 0 8px 20px rgba(0,0,0,0.2); transition: all 0.3s ease; 
+            margin-bottom: 20px; color: #333; text-align: center; background: rgba(255, 255, 255, 0.95); padding: 20px 15px; 
+        }
+        .shop-info:hover { box-shadow: 0 12px 25px rgba(0,0,0,0.3), 0 0 15px rgba(212, 175, 55, 0.3); border-color: #FFD700; }
+        
+        .shop-info h3 { 
+            font-family: 'Noto Serif TC', serif; border-bottom: 2px dashed #ccc; padding-bottom: 12px; margin-top: 0; margin-bottom: 15px;
+            font-size: 1.15rem; font-weight: 900; color: #111; letter-spacing: 1px; line-height: 1.4; white-space: normal; word-break: keep-all; 
+        }
+
+        .info-item { margin-bottom: 18px; text-align: left; }
+        .shop-info .info-item { border-bottom: 1px solid #f0f0f0; padding-bottom: 12px; }
+        .shop-info .info-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+        .warning-box { margin-top: 10px; padding: 10px 12px; background: #fff5f5; border-left: 4px solid #d63031; border-radius: 6px; font-size: 0.95rem; line-height: 1.5; color: #333; box-shadow: 0 2px 5px rgba(214, 48, 49, 0.05); }
+        .highlight-red { color: #d63031; font-weight: bold; }
+
+        /* =======================================
+           ✨ 完整商品列表區塊 
+        ======================================= */
+        .product-card { 
+            background: rgba(255, 255, 255, 0.95); border-radius: 15px; border: 3px solid #D4AF37; 
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2); overflow: hidden; display: flex; flex-direction: column; transition: all 0.3s ease; 
+        }
+        .product-card:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(0,0,0,0.3), 0 0 20px rgba(212, 175, 55, 0.4); border-color: #FFD700; }
+        
+        .product-img-box { width: 100%; height: 250px; background-color: #eee; overflow: hidden; cursor: zoom-in; position: relative; border-bottom: 2px solid #D4AF37; }
+        .product-img-box img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+        .product-card:hover .product-img-box img { transform: scale(1.1); }
+        .product-img-box::after { content: "🔍 點擊放大"; position: absolute; bottom: 10px; right: 10px; background: rgba(0,0,0,0.7); color: white; padding: 5px 12px; border-radius: 20px; font-size: 0.85rem; opacity: 0; transition: 0.3s; }
+        .product-card:hover .product-img-box::after { opacity: 1; }
+
+        .card-content { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; position: relative; }
+        .product-cat { display: inline-block; font-size: 0.85em; color: #8E1E20; font-weight: bold; background: #fff8e1; border: 1px solid #D4AF37; padding: 4px 12px; border-radius: 20px; margin-bottom: 12px; letter-spacing: 1px; }
+        .product-name { font-size: 1.4em; font-family: 'Noto Serif TC', serif; font-weight: 900; color: #222; line-height: 1.3; margin: 0 0 15px 0; padding-bottom: 15px; border-bottom: 1px dashed #dcdcdc; }
+        .price { color: var(--primary-color); font-weight: 900; font-size: 1.6em; margin-bottom: 15px; letter-spacing: 0.5px; }
+        .price::first-letter { font-size: 0.75em; color: #666; margin-right: 2px; }
+
+        button.add-btn { width: 100%; background: linear-gradient(135deg, #8E1E20 0%, #6B1315 100%); color: white; border: 2px solid #D4AF37; padding: 12px 10px; border-radius: 50px; cursor: pointer; font-weight: bold; font-size: 1.1em; letter-spacing: 1px; box-shadow: 0 4px 10px rgba(142, 30, 32, 0.25); transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }
+        button.add-btn:hover { transform: translateY(-3px); box-shadow: 0 6px 15px rgba(212, 175, 55, 0.4); filter: brightness(1.1); }
+
+        /* =======================================
+           ✨ 購物車與側邊欄
+        ======================================= */
         .cart-section:hover { box-shadow: 0 12px 25px rgba(0,0,0,0.3), 0 0 15px rgba(212, 175, 55, 0.3); border-color: #FFD700; }
         .cart-section h2 { font-family: 'Noto Serif TC', serif; color: #333; border-bottom: 1px dashed #ccc; padding-bottom: 15px; margin-top: 0; }
         .cart-item { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f0f0f0; padding: 15px 0; font-size: 0.95em; }
@@ -312,27 +319,7 @@
         .checkout-btn { width: 100%; background: linear-gradient(135deg, #2D6A4F 0%, #40916C 100%); color: white; border: none; font-size: 1.2em; padding: 15px; margin-top: 20px; border-radius: 8px; cursor: pointer; font-weight: bold; box-shadow: 0 4px 10px rgba(45, 106, 79, 0.3); transition: 0.3s; }
         .checkout-btn:hover { filter: brightness(1.1); transform: translateY(-2px); }
 
-        /* ✨ 貼心提醒移入購物車後的專屬微調 */
-        .notice-section { width: 100%; background: rgba(255, 248, 220, 0.95); padding: 20px; border-radius: 15px; font-size: 1.05rem; line-height: 1.6; }
-        .notice-section h3 { font-family: 'Noto Serif TC', serif; border-bottom: 2px dashed #ccc; padding-bottom: 12px; margin-top: 0; margin-bottom: 15px; font-size: 1.15rem; font-weight: 900; color: #111; letter-spacing: 1px; }
-        .notice-item { margin-bottom: 18px; text-align: left; }
-        .bank-info { background: #fff; padding: 10px; border-radius: 8px; border: 1px dashed var(--primary-color); font-family: monospace; font-size: 1.1em; color: #333; margin-top: 5px; word-break: break-all; }
-        .cart-section .notice-section { margin-top: 35px; box-shadow: none !important; border: 2px dashed #D4AF37 !important; }
-        .cart-section .notice-section:hover { box-shadow: none !important; border-color: #D4AF37 !important; }
-
-        .qty-control { display: flex; align-items: center; gap: 8px; margin-top: 5px; background: #f9f9f9; padding: 2px 5px; border-radius: 5px; width: fit-content; }
-        .qty-btn { width: 24px; height: 24px; border: 1px solid #ddd; background: #fff; color: #555; border-radius: 4px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-weight: bold; transition: all 0.2s; font-size: 1.1em; padding: 0; }
-        .qty-btn:hover { background: #e0e0e0; color: #333; }
-        .qty-btn.minus { color: #d63031; border-color: #fab1a0; }
-        .qty-btn.plus { color: #2D6A4F; border-color: #b8e994; }
-        .qty-display { font-weight: bold; font-family: monospace; font-size: 1.1em; color: #333; min-width: 20px; text-align: center; }
-
-        @keyframes shakeCart { 0% { transform: scale(1); border-color: var(--primary-color); } 50% { transform: scale(1.02); border-color: #FFD700; box-shadow: 0 0 15px #FFD700; } 100% { transform: scale(1); border-color: var(--primary-color); } }
-        .cart-animate { animation: shakeCart 0.3s ease-in-out; }
-
-        /* =======================================
-           ✨ 修正 2：免運進度條排版 (強制不換行)
-        ======================================= */
+        /* 🔥 雙重免運進度條 (允許優雅換行，絕不吃字) */
         .shipping-progress-container { 
             margin-bottom: 25px; 
             background: rgba(255, 248, 225, 0.6); /* 半透明底色 */
@@ -342,9 +329,6 @@
             box-shadow: inset 0 2px 8px rgba(0,0,0,0.02); 
         }
         
-        /* =======================================
-           ✨ 修正：免運進度條排版 (允許優雅換行，絕不吃字)
-        ======================================= */
         .progress-text { 
             font-size: 0.95rem; 
             color: #222; 
@@ -378,6 +362,24 @@
             width: 100%; height: 12px; background-color: #e0e0e0; border-radius: 10px; overflow: hidden; box-shadow: inset 0 1px 3px rgba(0,0,0,0.1); 
         }
         .progress-bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #FFD700, #ffae00); transition: width 0.5s cubic-bezier(0.25, 0.8, 0.25, 1); }
+
+        /* 貼心提醒內嵌微調 */
+        .notice-section { width: 100%; background: rgba(255, 248, 220, 0.95); padding: 20px; border-radius: 15px; font-size: 1.05rem; line-height: 1.6; }
+        .notice-section h3 { font-family: 'Noto Serif TC', serif; border-bottom: 2px dashed #ccc; padding-bottom: 12px; margin-top: 0; margin-bottom: 15px; font-size: 1.15rem; font-weight: 900; color: #111; letter-spacing: 1px; }
+        .notice-item { margin-bottom: 18px; text-align: left; }
+        .bank-info { background: #fff; padding: 10px; border-radius: 8px; border: 1px dashed var(--primary-color); font-family: monospace; font-size: 1.1em; color: #333; margin-top: 5px; word-break: break-all; }
+        .cart-section .notice-section { margin-top: 35px; box-shadow: none !important; border: 2px dashed #D4AF37 !important; }
+        .cart-section .notice-section:hover { box-shadow: none !important; border-color: #D4AF37 !important; }
+
+        .qty-control { display: flex; align-items: center; gap: 8px; margin-top: 5px; background: #f9f9f9; padding: 2px 5px; border-radius: 5px; width: fit-content; }
+        .qty-btn { width: 24px; height: 24px; border: 1px solid #ddd; background: #fff; color: #555; border-radius: 4px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-weight: bold; transition: all 0.2s; font-size: 1.1em; padding: 0; }
+        .qty-btn:hover { background: #e0e0e0; color: #333; }
+        .qty-btn.minus { color: #d63031; border-color: #fab1a0; }
+        .qty-btn.plus { color: #2D6A4F; border-color: #b8e994; }
+        .qty-display { font-weight: bold; font-family: monospace; font-size: 1.1em; color: #333; min-width: 20px; text-align: center; }
+
+        @keyframes shakeCart { 0% { transform: scale(1); border-color: var(--primary-color); } 50% { transform: scale(1.02); border-color: #FFD700; box-shadow: 0 0 15px #FFD700; } 100% { transform: scale(1); border-color: var(--primary-color); } }
+        .cart-animate { animation: shakeCart 0.3s ease-in-out; }
 
         .social-area { margin-top: 25px; padding-top: 20px; border-top: 2px dashed #eee; display: flex; flex-direction: column; gap: 10px; }
         .social-btn { display: flex; align-items: center; justify-content: center; text-decoration: none; color: white; padding: 12px; border-radius: 8px; font-weight: bold; font-size: 1.1em; transition: transform 0.2s, filter 0.2s; box-shadow: 0 3px 6px rgba(0,0,0,0.15); width: 100%; box-sizing: border-box; }
@@ -430,14 +432,18 @@
         .video-desc { font-size: 0.85em; color: #666; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 
         /* --- 手機版響應式設定 --- */
-        @media (max-width: 1200px) { .product-list { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 1400px) { 
+            .product-list { grid-template-columns: repeat(2, 1fr); } 
+            .left-column { flex: 0 0 240px; }
+            .cart-section { flex: 0 0 300px; }
+        }
         @media (max-width: 1024px) { 
             .container { flex-direction: column; align-items: stretch; } 
-            .left-column, .cart-section { position: static; margin-bottom: 20px; max-height: none; }
+            .left-column, .cart-section { flex: auto; position: static; margin-bottom: 20px; max-height: none; width: 100%; }
             .site-logo { width: 140px; margin-bottom: 15px; }
             .mobile-floating-bar { display: flex; } 
             .category-wrapper { top: 10px; }
-            .category-wrapper.scrolled { top: 0; }
+            .category-wrapper.scrolled { top: 0; width: 100%; }
             .category-bar { justify-content: flex-start; flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; padding: 5px 15px 15px 15px; }
             .category-wrapper.scrolled .category-bar { padding: 12px 15px; }
             .category-bar::-webkit-scrollbar { display: none; } 
@@ -595,11 +601,6 @@
                     </div>
                 </div>
             </div>
-            <div class="site-logo-container">
-            <div class="site-logo-container">
-                <img src="image_14.png" alt="美鳳的家 Logo" class="site-logo">
-            </div>
-            
             <div class="video-ticker-btn" onclick="playInterviewVideo()">
                 <div class="ticker-icon">▶</div>
                 <div class="ticker-wrapper">
@@ -659,11 +660,17 @@
         <div class="cart-section" id="cartSection">
             <div class="shipping-progress-container" id="shippingProgressBox">
                 <div style="margin-bottom: 15px;">
-                    <div class="progress-text"><span>🏪 7-11 <small style="color:#888;">(滿$2000免運)</small></span><span id="diff711" style="font-weight:bold; color:#8E1E20;">還差 $2000</span></div>
+                    <div class="progress-text">
+                        <span><span style="font-size: 1.2em;">🏪</span> 7-11 <small>(滿$2000免運)</small></span>
+                        <span id="diff711" style="font-weight:bold; color:#8E1E20;">還差 $2000</span>
+                    </div>
                     <div class="progress-bar-bg"><div class="progress-bar-fill" id="bar711"></div></div>
                 </div>
                 <div>
-                    <div class="progress-text"><span>🚛 黑貓宅配 <small style="color:#888;">(滿$3000免運)</small></span><span id="diffCat" style="font-weight:bold; color:#8E1E20;">還差 $3000</span></div>
+                    <div class="progress-text">
+                        <span><span style="font-size: 1.2em;">🚛</span> 黑貓宅配 <small>(滿$3000免運)</small></span>
+                        <span id="diffCat" style="font-weight:bold; color:#8E1E20;">還差 $3000</span>
+                    </div>
                     <div class="progress-bar-bg"><div class="progress-bar-fill" id="barCat"></div></div>
                 </div>
             </div>
@@ -1272,8 +1279,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-
