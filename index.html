@@ -225,7 +225,80 @@
 
         button.add-btn { width: 100%; background: linear-gradient(135deg, #8E1E20 0%, #6B1315 100%); color: white; border: 2px solid #D4AF37; padding: 12px 15px; border-radius: 50px; cursor: pointer; font-weight: bold; font-size: 1.15em; letter-spacing: 1px; box-shadow: 0 4px 10px rgba(142, 30, 32, 0.25); transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }
         button.add-btn:hover { transform: translateY(-3px); box-shadow: 0 6px 15px rgba(212, 175, 55, 0.4); filter: brightness(1.1); }
-
+/* =======================================
+           ✨ 新增：Google 真實好評捲動區塊 (皇家金邊版)
+        ======================================= */
+        .google-reviews-container {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            border: 3px solid #D4AF37; /* 招牌粗金邊 */
+            border-radius: 15px; /* 圓角統一 */
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+            padding: 18px 15px;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+            flex-shrink: 0; /* 確保它不會被擠壓變形 */
+        }
+        .google-reviews-container:hover {
+            box-shadow: 0 12px 25px rgba(0,0,0,0.3), 0 0 15px rgba(212, 175, 55, 0.3);
+            border-color: #FFD700;
+        }
+        
+        .reviews-header {
+            font-family: 'Noto Serif TC', serif;
+            font-size: 1.15rem;
+            font-weight: 900;
+            color: #111;
+            text-align: center;
+            border-bottom: 2px dashed #ccc;
+            padding-bottom: 12px;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+        
+        .reviews-body {
+            height: 220px; /* 🔥 完美控制這個視窗的高度，不多不少 */
+            overflow: hidden; 
+            position: relative;
+            /* 🔥 超級魔法：讓上下兩端有漸層透明消失的感覺！ */
+            -webkit-mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+            mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+        }
+        
+        .reviews-track {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            /* 20秒跑完一輪，linear代表等速平滑輪播 */
+            animation: scrollVertical 20s linear infinite; 
+        }
+        
+        /* 游標移上去的時候暫停，讓客人可以慢慢看 */
+        .google-reviews-container:hover .reviews-track {
+            animation-play-state: paused; 
+        }
+        
+        @keyframes scrollVertical {
+            0% { transform: translateY(0); }
+            /* 因為內容有兩組一模一樣的，往上推 50% 剛好無縫接回起點 */
+            100% { transform: translateY(-50%); } 
+        }
+        
+        .review-card {
+            background: #fffdf5; /* 微黃的暖色底 */
+            border: 1px solid #eee;
+            border-left: 4px solid #D4AF37; /* 左側金線點綴 */
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 0.95rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .review-stars { color: #FFD700; font-size: 1.1rem; margin-bottom: 4px; letter-spacing: 2px;}
+        .review-text { color: #333; line-height: 1.5; margin-bottom: 6px; text-align: left;}
+        .review-author { font-size: 0.85em; color: #888; text-align: right; font-weight: bold;}
+        
         /* --- 購物車與側邊欄 (皇家金邊版) --- */
         .cart-section { 
             flex: 0.7; background: rgba(255, 255, 255, 0.95); padding: 25px; border-radius: 15px; border: 3px solid #D4AF37; 
@@ -475,6 +548,54 @@
     <div class="container">
         
         <div class="left-column">
+            <div class="google-reviews-container">
+                <div class="reviews-header">⭐ 顧客真實評價</div>
+                <div class="reviews-body">
+                    <div class="reviews-track">
+                        <div class="review-card">
+                            <div class="review-stars">★★★★★</div>
+                            <div class="review-text">櫻花蝦米糕超好吃，料多實在！過年必訂的一道菜。</div>
+                            <div class="review-author">- 台北 王**</div>
+                        </div>
+                        <div class="review-card">
+                            <div class="review-stars">★★★★★</div>
+                            <div class="review-text">客家豬腳燉得非常軟爛入味，連長輩都讚不絕口！</div>
+                            <div class="review-author">- 新竹 林**</div>
+                        </div>
+                        <div class="review-card">
+                            <div class="review-stars">★★★★★</div>
+                            <div class="review-text">無菜單料理每道都充滿驚喜，放養土雞肉質超Q彈！</div>
+                            <div class="review-author">- 苗栗 張**</div>
+                        </div>
+                        <div class="review-card">
+                            <div class="review-stars">★★★★★</div>
+                            <div class="review-text">老闆娘很親切，料理吃得出用心，已經回購第三次了。</div>
+                            <div class="review-author">- 台中 陳**</div>
+                        </div>
+                        <div class="review-card">
+                            <div class="review-stars">★★★★★</div>
+                            <div class="review-text">櫻花蝦米糕超好吃，料多實在！過年必訂的一道菜。</div>
+                            <div class="review-author">- 台北 王**</div>
+                        </div>
+                        <div class="review-card">
+                            <div class="review-stars">★★★★★</div>
+                            <div class="review-text">客家豬腳燉得非常軟爛入味，連長輩都讚不絕口！</div>
+                            <div class="review-author">- 新竹 林**</div>
+                        </div>
+                        <div class="review-card">
+                            <div class="review-stars">★★★★★</div>
+                            <div class="review-text">無菜單料理每道都充滿驚喜，放養土雞肉質超Q彈！</div>
+                            <div class="review-author">- 苗栗 張**</div>
+                        </div>
+                        <div class="review-card">
+                            <div class="review-stars">★★★★★</div>
+                            <div class="review-text">老闆娘很親切，料理吃得出用心，已經回購第三次了。</div>
+                            <div class="review-author">- 台中 陳**</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="site-logo-container">
             <div class="site-logo-container">
                 <img src="image_14.png" alt="美鳳的家 Logo" class="site-logo">
             </div>
@@ -1151,6 +1272,7 @@
     </script>
 </body>
 </html>
+
 
 
 
