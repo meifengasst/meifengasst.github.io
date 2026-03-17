@@ -649,6 +649,31 @@
 .cart-item {
     border-bottom: 1px dashed #D4AF37 !important;
 }
+
+/* =================================================================
+           ✨ 靜態質感升級：自訂 SweetAlert2 成功打勾圖示
+        ================================================================= */
+        /* 1. 覆蓋外圈顏色與發光質感 */
+        .swal2-icon.swal2-success {
+            border-color: #D4AF37 !important; /* 經典金邊 */
+            background-color: #fffdf9 !important; /* 配合彈出視窗的米紙色 */
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3), inset 0 0 10px rgba(212, 175, 55, 0.1) !important; /* 內外金光 */
+        }
+        /* 2. 將預設的淺綠色裝飾環改為淡金色 */
+        .swal2-icon.swal2-success .swal2-success-ring {
+            border: 4px solid rgba(212, 175, 55, 0.2) !important; 
+        }
+        /* 3. 將勾勾的線條顏色改為美鳳專屬深紅 */
+        .swal2-icon.swal2-success [class^="swal2-success-line"] {
+            background-color: #8E1E20 !important; 
+        }
+        /* 4. 🔥 魔法按鈕：強制關閉所有預設動畫，保持靜態沉穩 */
+        .swal2-icon.swal2-success.swal2-icon-show,
+        .swal2-icon.swal2-success .swal2-success-line-tip,
+        .swal2-icon.swal2-success .swal2-success-line-long {
+            animation: none !important;
+            -webkit-animation: none !important;
+        }        
         
     </style>
 </head>
@@ -1313,8 +1338,18 @@ if (filterCat === '全部') {
                 const div = document.createElement("div"); 
                 div.className = "product-card";
                 
-// 🔥 新增：判斷是否為柿餅或柑餅 (id: 41, 42)，加入任選促銷標籤
-                let promoTag = (product.id === 41 || product.id === 42) ? `<div style="color: #0088cc; border: 2px solid #0088cc; padding: 2px 8px; border-radius: 6px; font-size: 0.55em; font-weight: bold; background: #e6f7ff; display: inline-block; margin-left: 10px; vertical-align: middle; letter-spacing: 1px;">歡喜價 : 柿/柑餅任選買五送一(6盒$1000)</div>` : "";
+// 🔥 判斷標籤內容：有促銷的顯示促銷，沒促銷的顯示質感靜態小徽章
+                let promoTag = "";
+                if (product.id === 41 || product.id === 42) {
+                    // 柿餅、柑餅的促銷標籤 (靜態、不浮誇的深紅色系)
+                    promoTag = `<div style="color: #8E1E20; border: 1px solid #D4AF37; padding: 2px 8px; border-radius: 4px; font-size: 0.6em; font-weight: bold; background: #fffdf9; box-shadow: 1px 1px 3px rgba(0,0,0,0.1); display: inline-block; margin-left: 10px; vertical-align: middle; letter-spacing: 1px;">🎁 任選買五送一</div>`;
+                } else if (product.category === "桌菜類") {
+                    // 桌菜類顯示專屬標籤
+                    promoTag = `<div style="color: #4A4A4A; border: 1px solid #ccc; padding: 2px 8px; border-radius: 4px; font-size: 0.6em; font-weight: bold; background: #f9f9f9; display: inline-block; margin-left: 10px; vertical-align: middle; letter-spacing: 1px;">👨‍👩‍👧‍👦 聚餐首選</div>`;
+                } else {
+                    // 其他一般商品填補空白的質感小徽章
+                    promoTag = `<div style="color: #D4AF37; border: 1px solid #D4AF37; padding: 2px 8px; border-radius: 4px; font-size: 0.6em; font-weight: bold; background: transparent; display: inline-block; margin-left: 10px; vertical-align: middle; letter-spacing: 1px;">👑 經典美味</div>`;
+                }
 
                 div.innerHTML = `<div class="product-img-box" onclick="openImageModal('${product.image}')" title="點擊放大"><img src="${product.image}" alt="${product.name}" loading="lazy" onerror="this.src='https://via.placeholder.com/300?text=圖片準備中'"></div><div class="card-content"><div><span class="product-cat">${product.category}</span><div class="product-name">${product.name}</div></div><div><div style="display:flex; align-items:center; margin-bottom:15px;"><div class="price" style="margin-bottom:0;">$${product.price}</div>${promoTag}</div><button class="add-btn" onclick="addToCart(${product.id})">＋ 加入訂單</button></div></div>`;
                 productListEl.appendChild(div);
