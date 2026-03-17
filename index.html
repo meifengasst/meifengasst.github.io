@@ -1455,7 +1455,7 @@ let total = 0; let count = 0;
                     cartItemsEl.appendChild(itemEl);
                 });
 
-                // 🔥 第三步：如果有達到折扣條件，在購物車底部自動長出折扣明細列
+// 🔥 第三步：如果有達到折扣條件，在購物車底部自動長出折扣明細列
                 if (promoDiscount > 0) {
                     total -= promoDiscount; // 總金額真正扣掉折扣
                     
@@ -1466,12 +1466,14 @@ let total = 0; let count = 0;
                     discountEl.style.borderRadius = "8px";
                     discountEl.style.border = "2px dashed #d63031"; // 紅色虛線框
                     discountEl.innerHTML = `
-                        <div style="flex-grow:1; text-align: right; color: #d63031;">
-                            <div style="font-weight:bold; font-size:1.05em;">🎁 柿/柑餅 任選買五送一</div>
-                            <div style="font-size:0.85em; margin-top:3px;">已為您自動折抵 ${promoSets} 組優惠</div>
-                        </div>
-                        <div style="margin-left: 15px; font-weight:900; color:#d63031; font-size:1.2em;">
-                            -$${promoDiscount}
+                        <div style="flex-grow:1; display:flex; justify-content:space-between; align-items:center;">
+                            <div style="text-align: left; color: #d63031;">
+                                <div style="font-weight:bold; font-size:1.05em; word-break: keep-all;">🎁 柿/柑餅 買五送一</div>
+                                <div style="font-size:0.85em; margin-top:3px; color: #8E1E20;">已為您折抵 ${promoSets} 組優惠</div>
+                            </div>
+                            <div style="font-weight:900; color:#d63031; font-size:1.2em; text-align: right; white-space: nowrap; margin-left: 10px;">
+                                -$${promoDiscount}
+                            </div>
                         </div>
                         <div style="width: 24px; margin-left:10px;"></div> `;
                     cartItemsEl.appendChild(discountEl);
