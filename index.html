@@ -1341,17 +1341,22 @@ if (filterCat === '全部') {
 // 🔥 判斷標籤內容：有促銷的顯示促銷，沒促銷的顯示質感靜態小徽章
                 let promoTag = "";
                 if (product.id === 41 || product.id === 42) {
-                    // 柿餅、柑餅的促銷標籤 (靜態、不浮誇的深紅色系)
-                    promoTag = `<div style="color: #8E1E20; border: 1px solid #D4AF37; padding: 2px 8px; border-radius: 4px; font-size: 0.6em; font-weight: bold; background: #fffdf9; box-shadow: 1px 1px 3px rgba(0,0,0,0.1); display: inline-block; margin-left: 10px; vertical-align: middle; letter-spacing: 1px;">🎁 柿餅/柑餅可任意混搭 買五送一</div>`;
+                    promoTag = `<div style="color: #8E1E20; border: 1px solid #D4AF37; padding: 2px 8px; border-radius: 4px; font-size: 0.55em; font-weight: bold; background: #fffdf9; box-shadow: 1px 1px 3px rgba(0,0,0,0.1); display: inline-block; margin-left: 10px; vertical-align: middle; letter-spacing: 1px;">🎁 柿餅/柑餅可任意混搭 買五送一</div>`;
                 } else if (product.category === "桌菜類") {
-                    // 桌菜類顯示專屬標籤
                     promoTag = `<div style="color: #4A4A4A; border: 1px solid #ccc; padding: 2px 8px; border-radius: 4px; font-size: 0.6em; font-weight: bold; background: #f9f9f9; display: inline-block; margin-left: 10px; vertical-align: middle; letter-spacing: 1px;">👨‍👩‍👧‍👦 聚餐首選</div>`;
                 } else {
-                    // 其他一般商品填補空白的質感小徽章
                     promoTag = `<div style="color: #D4AF37; border: 1px solid #D4AF37; padding: 2px 8px; border-radius: 4px; font-size: 0.6em; font-weight: bold; background: transparent; display: inline-block; margin-left: 10px; vertical-align: middle; letter-spacing: 1px;">👑 經典美味</div>`;
                 }
 
-                div.innerHTML = `<div class="product-img-box" onclick="openImageModal('${product.image}')" title="點擊放大"><img src="${product.image}" alt="${product.name}" loading="lazy" onerror="this.src='https://via.placeholder.com/300?text=圖片準備中'"></div><div class="card-content"><div><span class="product-cat">${product.category}</span><div class="product-name">${product.name}</div></div><div><div style="display:flex; align-items:center; margin-bottom:15px;"><div class="price" style="margin-bottom:0;">$${product.price}</div>${promoTag}</div><button class="add-btn" onclick="addToCart(${product.id})">＋ 加入訂單</button></div></div>`;
+                // 🔥 新增視覺魔法：讓商品名稱裡的括號自動換行，變成灰色的質感副標題！
+                let displayName = product.name;
+                if (displayName.includes("(")) {
+                    displayName = displayName.replace("(", "<br><span style='font-size: 0.65em; color: #777; font-weight: normal; letter-spacing: 0.5px;'>(");
+                    displayName += "</span>";
+                }
+
+                // 注意：這裡的 ${product.name} 改成了 ${displayName}
+                div.innerHTML = `<div class="product-img-box" onclick="openImageModal('${product.image}')" title="點擊放大"><img src="${product.image}" alt="${product.name}" loading="lazy" onerror="this.src='https://via.placeholder.com/300?text=圖片準備中'"></div><div class="card-content"><div><span class="product-cat">${product.category}</span><div class="product-name">${displayName}</div></div><div><div style="display:flex; align-items:center; margin-bottom:15px;"><div class="price" style="margin-bottom:0;">$${product.price}</div>${promoTag}</div><button class="add-btn" onclick="addToCart(${product.id})">＋ 加入訂單</button></div></div>`;
                 productListEl.appendChild(div);
             });
             
