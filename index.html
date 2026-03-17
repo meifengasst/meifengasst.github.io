@@ -1313,8 +1313,8 @@ if (filterCat === '全部') {
                 const div = document.createElement("div"); 
                 div.className = "product-card";
                 
-                // 🔥 新增：判斷是否為九讚頭柑餅 (id: 42)，加入促銷標籤
-                let promoTag = product.id === 42 ? `<div style="color: #0088cc; border: 2px solid #0088cc; padding: 2px 8px; border-radius: 6px; font-size: 0.55em; font-weight: bold; background: #e6f7ff; display: inline-block; margin-left: 10px; vertical-align: middle; letter-spacing: 1px;">歡喜價 : 買四送一，一盒只要$200</div>` : "";
+// 🔥 新增：判斷是否為柿餅或柑餅 (id: 41, 42)，加入促銷標籤
+                let promoTag = (product.id === 41 || product.id === 42) ? `<div style="color: #0088cc; border: 2px solid #0088cc; padding: 2px 8px; border-radius: 6px; font-size: 0.55em; font-weight: bold; background: #e6f7ff; display: inline-block; margin-left: 10px; vertical-align: middle; letter-spacing: 1px;">歡喜價 : 買五送一，六盒只要$1000</div>` : "";
 
                 div.innerHTML = `<div class="product-img-box" onclick="openImageModal('${product.image}')" title="點擊放大"><img src="${product.image}" alt="${product.name}" loading="lazy" onerror="this.src='https://via.placeholder.com/300?text=圖片準備中'"></div><div class="card-content"><div><span class="product-cat">${product.category}</span><div class="product-name">${product.name}</div></div><div><div style="display:flex; align-items:center; margin-bottom:15px;"><div class="price" style="margin-bottom:0;">$${product.price}</div>${promoTag}</div><button class="add-btn" onclick="addToCart(${product.id})">＋ 加入訂單</button></div></div>`;
                 productListEl.appendChild(div);
@@ -1381,13 +1381,13 @@ if (filterCat === '全部') {
                     let itemTotal = item.price * item.quantity;
                     let discountMsg = "";
                     
-                    if (item.id === 42) {
-                        let sets = Math.floor(item.quantity / 5); // 滿5件算1組
-                        let remainder = item.quantity % 5;        // 剩下的散裝
-                        itemTotal = (sets * 1000) + (remainder * 250);
+                    if (item.id === 41 || item.id === 42) {
+                        let sets = Math.floor(item.quantity / 6); // 買五送一是拿 6 盒為一組
+                        let remainder = item.quantity % 6;        // 剩下的散裝
+                        itemTotal = (sets * 1000) + (remainder * 240);
                         
                         if (sets > 0) {
-                            let saved = (item.quantity * 250) - itemTotal;
+                            let saved = (item.quantity * 240) - itemTotal;
                             discountMsg = `<div style="color:#d63031; font-size:0.85em; font-weight:bold; margin-top:3px;">🎉 已折抵 $${saved}</div>`;
                         }
                     }
@@ -1516,11 +1516,11 @@ if (filterCat === '全部') {
                 let promoNote = "";
                 
                 // 🔥 確保傳給後台的金額有套用折扣
-                if (item.id === 42) {
-                    let sets = Math.floor(item.quantity / 5);
-                    let remainder = item.quantity % 5;
-                    itemTotal = (sets * 1000) + (remainder * 250);
-                    if (sets > 0) promoNote = " (已享買四送一)";
+                if (item.id === 41 || item.id === 42) {
+                    let sets = Math.floor(item.quantity / 6);
+                    let remainder = item.quantity % 6;
+                    itemTotal = (sets * 1000) + (remainder * 240);
+                    if (sets > 0) promoNote = " (已享買五送一)";
                 }
                 
                 orderDetails += `${item.name}${promoNote} x ${item.quantity} = $${itemTotal}\n`; 
