@@ -1312,7 +1312,11 @@ if (filterCat === '全部') {
             filteredProducts.forEach(product => {
                 const div = document.createElement("div"); 
                 div.className = "product-card";
-                div.innerHTML = `<div class="product-img-box" onclick="openImageModal('${product.image}')" title="點擊放大"><img src="${product.image}" alt="${product.name}" loading="lazy" onerror="this.src='https://via.placeholder.com/300?text=圖片準備中'"></div><div class="card-content"><div><span class="product-cat">${product.category}</span><div class="product-name">${product.name}</div></div><div><div class="price">$${product.price}</div><button class="add-btn" onclick="addToCart(${product.id})">＋ 加入訂單</button></div></div>`;
+                
+                // 🔥 新增：判斷是否為九讚頭柑餅 (id: 42)，加入促銷標籤
+                let promoTag = product.id === 42 ? `<div style="color: #0088cc; border: 2px solid #0088cc; padding: 2px 8px; border-radius: 6px; font-size: 0.55em; font-weight: bold; background: #e6f7ff; display: inline-block; margin-left: 10px; vertical-align: middle; letter-spacing: 1px;">歡喜價 : 買四送一，一盒只要$200</div>` : "";
+
+                div.innerHTML = `<div class="product-img-box" onclick="openImageModal('${product.image}')" title="點擊放大"><img src="${product.image}" alt="${product.name}" loading="lazy" onerror="this.src='https://via.placeholder.com/300?text=圖片準備中'"></div><div class="card-content"><div><span class="product-cat">${product.category}</span><div class="product-name">${product.name}</div></div><div><div style="display:flex; align-items:center; margin-bottom:15px;"><div class="price" style="margin-bottom:0;">$${product.price}</div>${promoTag}</div><button class="add-btn" onclick="addToCart(${product.id})">＋ 加入訂單</button></div></div>`;
                 productListEl.appendChild(div);
             });
             
@@ -1371,8 +1375,24 @@ if (filterCat === '全部') {
                 if(floatBar) floatBar.classList.remove("show");
             } else {
                 if(floatBar) floatBar.classList.add("show");
+                
                 cart.forEach((item, index) => {
-                    total += item.price * item.quantity; count += item.quantity;
+                    // 🔥 新增：買四送一折扣計算邏輯
+                    let itemTotal = item.price * item.quantity;
+                    let discountMsg = "";
+                    
+                    if (item.id === 42) {
+                        let sets = Math.floor(item.quantity / 5); // 滿5件算1組
+                        let remainder = item.quantity % 5;        // 剩下的散裝
+                        itemTotal = (sets * 1000) + (remainder * 250);
+                        
+                        if (sets > 0) {
+                            let saved = (item.quantity * 250) - itemTotal;
+                            discountMsg = `<div style="color:#d63031; font-size:0.85em; font-weight:bold; margin-top:3px;">🎉 已折抵 $${saved}</div>`;
+                        }
+                    }
+
+                    total += itemTotal; count += item.quantity;
                     const itemEl = document.createElement("div");
                     itemEl.className = "cart-item";
                     itemEl.innerHTML = `
@@ -1386,8 +1406,15 @@ if (filterCat === '全部') {
                                 </div>
                                 <div style="text-align:right;">
                                     <div style="color:#888; font-size:0.85em;">單價 $${item.price}</div>
-                                    <div style="font-weight:bold; color:var(--primary-color); font-size:1.1em;">$${item.price * item.quantity}</div>
+                                    <div style="font-weight:bold; color:var(--primary-color); font-size:1.1em;">$${itemTotal}</div>
+                                    ${discountMsg}
                                 </div>
+                            </div>
+                        </div>
+                        <button style="background:transparent; border:none; margin-left:10px; cursor:pointer; color:#bbb; font-size:1.5em; line-height:1;" onclick="removeFromCart(${index})" title="刪除此項目">×</button>
+                    `;
+                    cartItemsEl.appendChild(itemEl);
+                });
                             </div>
                         </div>
                         <button style="background:transparent; border:none; margin-left:10px; cursor:pointer; color:#bbb; font-size:1.5em; line-height:1;" onclick="removeFromCart(${index})" title="刪除此項目">×</button>
@@ -1490,9 +1517,21 @@ if (filterCat === '全部') {
             const finalTotal = document.getElementById("checkoutTotal").innerText;
             
             let orderDetails = "🛒 購買清單：\n"; 
-            cart.forEach(item => { orderDetails += `${item.name} x ${item.quantity} = $${item.price * item.quantity}\n`; });
-            orderDetails += `------------------\n`;
-            if(note && note.trim() !== "") { orderDetails += `📝 備註：${note}\n------------------\n`; }
+            cart.forEach(item => { 
+                let itemTotal = item.price * item.quantity;
+                let promoNote = "";
+                
+                // 🔥 確保傳給後台的金額有套用折扣
+                if (item.id === 42) {
+                    let sets = Math.floor(item.quantity / 5);
+                    let remainder = item.quantity % 5;
+                    itemTotal = (sets * 1000) + (remainder * 250);
+                    if (sets > 0) promoNote = " (已享買四送一)";
+                }
+                
+                orderDetails += `${item.name}${promoNote} x ${item.quantity} = $${itemTotal}\n`; 
+            });
+            orderDetails += `------------------\n`;            if(note && note.trim() !== "") { orderDetails += `📝 備註：${note}\n------------------\n`; }
             orderDetails += `商品小計：$${subtotal}\n運費：$${shipping}\n💰 總金額：$${finalTotal}`;
             
             const payload = { message: orderDetails, customer: { name, mobile, phone, address, delivery, payment, last5, date, note, total: finalTotal } };
